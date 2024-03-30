@@ -1,0 +1,51 @@
+/* ProductList.module.css */
+.productList {
+  list-style-type: none;
+  margin: 2rem 0rem;;
+}
+
+.productItem {
+  display: flex;
+  margin-bottom: 1.4rem;
+}
+
+.productImage {
+  width: 150px; /* Adjust as needed */
+  height: 150px; /* Adjust as needed */
+  object-fit: cover;
+  margin-right: 1.5rem;
+  border: 1.3rem solid rgba(212, 229, 255, 1);
+}
+.productImage img {
+  max-width: 100%; /* Make the image fill the container horizontally */
+  max-height: 100%; /* Make the image fill the container vertically */
+  object-fit: cover;
+}
+
+.productInfo {
+  flex-grow: 1; margin-top: 1rem; 
+}
+
+.productName {
+  margin: 0;
+  font-size: 2rem;
+  color: #333;
+  font-weight: 500;
+}
+.productNameSpace {
+   margin: 0 0.5rem; /* Adjust the margin value as needed */
+}
+
+.productPrice {
+  font-weight: bold;
+}
+
+.itemDetail, .productColor {
+  color: rgba(0, 0, 0, 1);
+  font-weight: 450;
+}
+.itemDetail {
+  height: auto;
+  width: 90%;
+  box-sizing: border-box;
+}
