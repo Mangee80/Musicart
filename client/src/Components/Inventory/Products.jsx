@@ -8,6 +8,7 @@ import banner from '../../assets/banner.png';
 import banner2 from '../../assets/banner2.png';
 import { BsGridFill } from "react-icons/bs";
 import { TfiViewListAlt } from "react-icons/tfi";
+import { CiSearch } from "react-icons/ci";
 
 function ProductSection() {
   
@@ -120,6 +121,7 @@ function ProductSection() {
       </div>
       <p className='bannerDetail'>Grab upto 50% off on Selected headphones</p>
       {/* Searchbar */}
+      <CiSearch size={25} className="icon"/>
       <input 
         type="text" 
         placeholder="Search by Product Name"

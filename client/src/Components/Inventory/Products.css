@@ -30,11 +30,15 @@
     line-height: 1.08;
     color: rgba(46, 0, 82, 1);
     position: absolute;
-
-    top: 7.9rem;
+  top: 7.9rem;
     left: 7rem;
   }
-
+  .icon {
+      color: rgba(102, 102, 102, 1);
+      position: relative;
+      left: 8.4%;
+      background-color: white;
+  }
 
    /* Searchbar styles */
   .product-section input[type="text"] {

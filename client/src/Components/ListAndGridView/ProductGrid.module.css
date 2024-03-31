@@ -3,8 +3,8 @@
 /* Base styles */
 .productGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 4rem;
+  grid-template-columns: repeat(4, minmax(250px, 1fr));
+  gap: 3.4rem;
   row-gap: 0.8rem;
   padding: 2rem 0rem ;
   box-sizing: border-box;
@@ -13,11 +13,12 @@
 .productCard {
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
 .productImage {
-  width: 17rem;
-  height: 17rem; /* Adjust as needed */
+  width: 18rem;
+  height: 18rem; /* Adjust as needed */
   object-fit: cover;
   border: 1.3rem solid rgba(212, 229, 255, 1);
   box-sizing: border-box;
@@ -58,9 +59,9 @@
 }
 
 .addToCart {
-  position: relative;
-  bottom: 8.8rem;
-  left: 13rem;
+  position: absolute;
+  bottom: 8.7rem;
+  left: 13.3rem;
   z-index: 5;
 }
 
@@ -69,9 +70,11 @@
   .productGrid {
     grid-template-columns: repeat(2, minmax(150px, 1fr)); /* Two items per row */
     gap: 1rem; /* Adjust gap between grid items */
+    row-gap: 1rem;
     padding: 1.5rem 0;
   }
   .productCard {
+    position: relative;
     display: flex;
     flex-direction: column;
     border: 1px solid rgba(206, 206, 206, 1);
@@ -85,9 +88,7 @@
   .productInfo {
     padding: 8px; /* Adjust padding for smaller screens */
   }
-  .productName {
-    width: 1.rem;
-  }
+  
   .productName span {
     font-size: 1.1rem;
   }
@@ -95,9 +96,9 @@
     margin: 0px 3px;
   }
   .addToCart {
-    position: relative;
-    bottom: 10rem; /* Adjust as needed */
-    left: 7rem; /* Adjust as needed */
+    position: absolute;
+    bottom: 7rem; /* Adjust as needed */
+    left: 7.8rem; /* Adjust as needed */
     z-index: 5;
   }
 }

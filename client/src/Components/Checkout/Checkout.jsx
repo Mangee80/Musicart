@@ -27,6 +27,7 @@ function CheckoutPage() {
         if (!response.ok) throw new Error('Failed to fetch');
         const data = await response.json();
         setCartItems(data);
+        console.log(cartItems);
       } catch (error) {
         setError('Failed to load cart items');
       }
@@ -70,68 +71,70 @@ function CheckoutPage() {
 
   return (
     <div className={styles.container}>
+      <button className={styles.backtoProduct}>Back to products</button>
+      <p className={styles.myCartHeading}>My Cart</p>
+      <div>
+        <h1 className={styles.header}>Welcome, {localStorage.getItem('MusicCartUsername')}</h1>
         <div>
-            <h1 className={styles.header}>Welcome, {localStorage.getItem('MusicCartUsername')}</h1>
-            <div>
-                <p></p>
-                <textarea
-                className={styles.textareaSelect}
-                value={deliveryAddress}
-                onChange={(e) => setDeliveryAddress(e.target.value)}
-                placeholder="Enter your delivery address"
-                />
-            </div>
-            <div>
-                <p></p>
-                <select
-                className={styles.textareaSelect}
-                value={paymentOption}
-                onChange={(e) => setPaymentOption(e.target.value)}
-                >
-                    <option value="payOnDelivery">Pay on Delivery</option>
-                    <option value="upi">UPI</option>
-                    <option value="card">Card</option>
-                </select>
-            </div>
-            <div>
-                <p></p>
-                <div className={styles.gridContainer}>
-                    {cartItems.map((item, index) => (
-                        <img
-                        key={index}
-                        src={item.imageUrl}
-                        alt={item.name}
-                        onClick={() => handleItemClick(item)}
-                        className={styles.gridContainerImg}
-                        />
-                    ))}
-                </div>
-                <div>
-                    {selectedItem && (
-                        <div className={styles.itemDetails}>
-                            <h3>{selectedItem.name}</h3>
-                            <p>{selectedItem.description}</p>
-                            <p>Price: {selectedItem.price}</p>
-                            {/* Add other product details */}
-                        </div>
-                    )}
-                </div>
-                <div>
-                  <button
-                    className={styles.button}
-                    onClick={handlePlaceOrder}
-                    disabled={loading}
-                  >
-                    {loading ? 'Placing Order...' : 'Place Order'}
-                  </button>
-                    {error && <p className={styles.error}>{error}</p>}
-                </div>
-            </div>
-            
-            <div>
-                
-            </div>  
+            <p></p>
+            <textarea
+            className={styles.textareaSelect}
+            value={deliveryAddress}
+            onChange={(e) => setDeliveryAddress(e.target.value)}
+            placeholder="Enter your delivery address"
+            />
         </div>
+        <div>
+            <p></p>
+            <select
+            className={styles.textareaSelect}
+            value={paymentOption}
+            onChange={(e) => setPaymentOption(e.target.value)}
+            >
+                <option value="payOnDelivery">Pay on Delivery</option>
+                <option value="upi">UPI</option>
+                <option value="card">Card</option>
+            </select>
+        </div>
+        <div>
+            <p></p>
+            <div className={styles.gridContainer}>
+                {cartItems.map((item, index) => (
+                    <img
+                    key={index}
+                    src={item.imageUrl}
+                    alt={item.name}
+                    onClick={() => handleItemClick(item)}
+                    className={styles.gridContainerImg}
+                    />
+                ))}
+            </div>
+            <div>
+                {selectedItem && (
+                    <div className={styles.itemDetails}>
+                        <h3>{selectedItem.name}</h3>
+                        <p>{selectedItem.description}</p>
+                        <p>Price: {selectedItem.price}</p>
+                        {/* Add other product details */}
+                    </div>
+                )}
+            </div>
+            <div>
+              <button
+                className={styles.button}
+                onClick={handlePlaceOrder}
+                disabled={loading}
+              >
+                {loading ? 'Placing Order...' : 'Place Order'}
+              </button>
+                {error && <p className={styles.error}>{error}</p>}
+            </div>
+        </div>
+        
+        <div>
+          Product 
+        </div>  
+      </div>
     </div>
   );
 }

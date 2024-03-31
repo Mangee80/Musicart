@@ -9,30 +9,41 @@ const CartItem = ({ item, onUpdateQuantity }) => {
 
   return (
     <div className={styles.cartItem}>
-      {/* Access properties of productId object */}
       <img src={item.productId.imageUrl} alt={item.productId.model} className={styles.cartItemImage} />
       <div className={styles.cartItemDetails}>
-        {/* Access properties of productId object */}
-        <h3>{item.productId.model}</h3>
-        {/* Access properties of productId object */}
-        <p>Price: ₹{item.productId.Price}</p>
-        <p>In Stock</p>
-        <div>
-          Quantity:
-          <select
-            value={item.quantity}
-            onChange={handleQuantityChange}
-            className={styles.quantitySelect}
-          >
-            {[1, 2, 3, 4, 5].map((num) => (
-              <option key={num} value={num}>
-                {num}
-              </option>
-            ))}
-          </select>
+        <div style={{display: 'flex', gap: '10px', marginBottom: '0.88rem'}}>
+          <p style={{fontSize: '1.5rem', fontWeight: '500'}}>{item.productId.Company}</p>
+          <h3 style={{fontSize: '1.5rem', fontWeight: '500'}}>{item.productId.model}</h3>
         </div>
-        {/* Calculate total based on item quantity and product price */}
-        <div>Total: ₹{item.productId.Price * item.quantity}</div>
+        <p style={{fontSize: '1rem', color: 'rgba(162, 162, 162, 1)', marginBottom: '0.4rem'}}>Colour : {item.productId.Colour}</p>
+        
+        
+        
+        <p style={{fontSize: '1rem', color: 'rgba(162, 162, 162, 1)'}}>In Stock</p>
+      </div>
+      <div>
+        <p style={{fontSize: '1.3rem', fontWeight: '500', marginBottom: '1rem'}}>Price</p> 
+        
+        
+        <p style={{fontSize: '1rem'}}>₹{item.productId.Price}</p>
+      </div>
+      <div className={styles.select}>
+        <p style={{fontSize: '1.3rem', fontWeight: '500', marginBottom: '1rem'}}>Quantity</p>
+        <select
+          value={item.quantity}
+          onChange={handleQuantityChange}
+          className={styles.quantitySelect}
+        >
+          {[1, 2, 3, 4, 5].map((num) => (
+            <option key={num} value={num}>
+              {num}
+            </option>
+          ))}
+        </select>
+      </div>
+      <div>
+        <p style={{fontSize: '1.3rem', fontWeight: '500', marginBottom: '1rem'}}>Total</p>
+        <p style={{fontSize: '1rem'}}>₹{item.productId.Price * item.quantity}</p>
       </div>
     </div>
   );
@@ -52,7 +63,13 @@ const Cart = () => {
     })
       .then(response => response.json())
       .then(data => {
-        setItems(data);
+        if (data) {
+          setItems(data); // Set the items if the response contains an 'items' array
+        } else {
+          // Handle unexpected format or empty response
+          console.error('Unexpected response format:', data);
+          setItems([]); // Ensure items is set to an empty array to avoid errors in rendering
+        }
         setLoading(false);
       })
       .catch(error => {
@@ -110,30 +127,39 @@ const Cart = () => {
         <p>My Cart</p>
       </div>
       <div style={{display: 'flex'}}>
-        <div className={`${styles.cartItems} ${items.length === 1 ? styles.cartItemsSingle : ''}`}>
-          {items.map((item) => (
-            <CartItem key={item.productId._id} item={item} onUpdateQuantity={onUpdateQuantity} />
-          ))}
+        <div>
+          <div className={`${styles.cartItems} ${items.length === 1 ? styles.cartItemsSingle : ''}`}>
+            {items.map((item) => (
+              <CartItem key={item.productId._id} item={item} onUpdateQuantity={onUpdateQuantity} />
+            ))}
+          </div>
+          <div style={{display: 'flex'}}>
+            <p>totalItems</p>
+
+            <p>totalSum</p>
+          </div>
         </div>
-        <div className={styles.border}></div>
-        <div className={styles.cartTotalPrice}>
-          <p>PRICE DETAILS</p>
-          
-          <div style={{display: 'flex', gap: '2rem'}}>
-            <div style={{display: 'flex', flexDirection:'column', gap: '10px'}}>
-              <p>Total MRP</p><p>Discount on MRP</p><p>Convenience Fee</p>
+        <div className={`${styles.border} ${items.length === 1 ? styles.borderSingle : ''}`}></div>
+        <div style={{display: 'flex', flexDirection: 'column'}}>
+          <div className={styles.cartTotalPrice}>
+            <p>PRICE DETAILS</p>
+            
+            <div style={{display: 'flex', gap: '2rem'}}>
+              <div style={{display: 'flex', flexDirection:'column', gap: '10px'}}>
+                <p>Total MRP</p><p>Discount on MRP</p><p>Convenience Fee</p>
+              </div>
+              <div style={{display: 'flex', flexDirection:'column', gap: '10px'}}>
+                <p>3500</p><p>0</p><p>50</p>
+              </div>
             </div>
-            <div style={{display: 'flex', flexDirection:'column', gap: '10px'}}>
-              <p>3500</p><p>0</p><p>50</p>
-            </div>
+          </div>
+          <div className={styles.cartTotal}>
+            Total Amount: ₹{totalPrice}
+            <button className={styles.checkoutButton}>Checkout</button>
           </div>
         </div>
       </div>
       
-      <div className={styles.cartTotal}>
-        Total Amount: ₹{totalPrice}
-        <button className={styles.checkoutButton}>Checkout</button>
-      </div>
     </div>
   );
 };
