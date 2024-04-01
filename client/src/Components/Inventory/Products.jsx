@@ -5,17 +5,19 @@ import { useNavigate } from 'react-router-dom';
 import './Products.css'
 
 import banner from '../../assets/banner.png';
+import FeedbackForm from '../ListAndGridView/FeedbackForm';
 import banner2 from '../../assets/banner2.png';
 import { BsGridFill } from "react-icons/bs";
 import { TfiViewListAlt } from "react-icons/tfi";
 import { CiSearch } from "react-icons/ci";
-
+import feedback from "../../assets/feedback.png"
 function ProductSection() {
   
   const [selectedFilters, setSelectedFilters] = useState({});
   const [selectedSortOption, setSelectedSortOption] = useState('');
   const [products, setProducts] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
+  const [showForm, setShowForm] = useState(false);
   const navigate = useNavigate();
 
   // Function to handle search query change
@@ -67,8 +69,11 @@ function ProductSection() {
     .catch(error => {
       console.error('Error:', error);
     });
-};
- 
+  };
+
+  const toggleForm = () => {
+    setShowForm(!showForm);
+  };
 
 
   // Function to fetch sorted products based on sort option
@@ -162,6 +167,10 @@ function ProductSection() {
 
 
       </div> 
+      <div className="feedback" onClick={toggleForm}>
+        <img src={feedback} alt="feedback" />
+        {showForm && <FeedbackForm onClose={toggleForm} />}
+      </div>
 
       {/* Product Listing based on view mode */}
       <div className="product-list">

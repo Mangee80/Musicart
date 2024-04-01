@@ -73,7 +73,7 @@ const RegisterForm = () => {
       
       <div className={styles.formContainer}>
         
-        <h2 className={styles.h2}>Sign in</h2>
+        <h2 className={styles.h2}>Create Account</h2>
 
         <p className={styles.label}>Your name</p>
         <input 
@@ -101,12 +101,11 @@ const RegisterForm = () => {
         name="email" 
         value={formData.email}  
         onChange={handleChange} 
-        type="email" 
-        placeholder="Email"
+        type="email"
         />
         {errors.email && <p className={styles.error}>{errors.email}</p>}
 
-        <p className={styles.label}>Enter your email or mobile number</p>
+        <p className={styles.label}>Password</p>
         <input 
         className={styles.input} 
         name="password" 
@@ -118,12 +117,11 @@ const RegisterForm = () => {
 
         <p className={styles.instruction1}>By enrolling your mobile phone number, you consent to receive automated security notifications via text message from Musicart. Message and data rates may apply.</p>
 
-        <button onClick={handleSubmit}  className={styles.button}>Register</button>
+        <button onClick={handleSubmit}  className={styles.signinButton}>Continue</button>
 
         <p className={styles.instruction2}>By continuing, you agree to Musicart privacy notice and conditions of use.</p>
       </div>
-
-      <button onClick={() => navigate("/login")}  className={styles.regbutton}>Log In</button>
+      <p className={styles.signin}>Already have an account? <span onClick={() => navigate("/login")}>Sign in</span></p>
     </div>
   )
 };

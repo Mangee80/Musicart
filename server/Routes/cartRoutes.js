@@ -8,7 +8,7 @@ router.get('/user-cart', async (req, res) => {
     if (!userID) {
       return res.status(400).json({ error: 'User ID is required' });
     }
-  
+    
     // Fetch cart items associated with the user ID
     const cart = await Cart.findOne({ user: userID }).populate('items.productId');
     res.json(cart.items);

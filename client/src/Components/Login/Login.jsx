@@ -95,7 +95,7 @@ const LoginForm = () => {
             <img src={Line} alt="line" />
           </div>
           <div className={styles.new}>New to Musicart?</div>
-          <button onClick={() => navigate("/register")}  className={styles.regbutton}>Register</button>
+          <button onClick={() => navigate("/register")}  className={styles.regbutton}>Create your Musicart account</button>
         </div>
 
       </div>

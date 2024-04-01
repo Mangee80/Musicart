@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import styles from './CheckoutPage.module.css';
+import styles from './Checkout.module.css';
 
 function CheckoutPage() {
   const [cartItems, setCartItems] = useState([]); // State to store cart items
@@ -18,7 +18,7 @@ function CheckoutPage() {
 
     const fetchCartItems = async () => {
       try {
-        const response = await fetch('/api/user-cart', {
+        const response = await fetch('http://localhost:5000/api/cart/user-cart', {
           method: 'GET',
           headers: {
             'x-user-id': userID, // Include the user ID in the request headers
@@ -27,7 +27,6 @@ function CheckoutPage() {
         if (!response.ok) throw new Error('Failed to fetch');
         const data = await response.json();
         setCartItems(data);
-        console.log(cartItems);
       } catch (error) {
         setError('Failed to load cart items');
       }
@@ -36,10 +35,17 @@ function CheckoutPage() {
 
     fetchCartItems();
   }, []);
+  
+  
+  
 
+  
   const handleItemClick = (item) => {
     setSelectedItem(item);
   };
+  useEffect(() => {
+    console.log(cartItems); // Log the updated value of cartItems
+  }, [cartItems]);
 
   const handlePlaceOrder = async () => {
     setLoading(true);
@@ -71,69 +77,90 @@ function CheckoutPage() {
 
   return (
     <div className={styles.container}>
-      <button className={styles.backtoProduct}>Back to products</button>
-      <p className={styles.myCartHeading}>My Cart</p>
-      <div>
-        <h1 className={styles.header}>Welcome, {localStorage.getItem('MusicCartUsername')}</h1>
-        <div>
-            <p></p>
-            <textarea
-            className={styles.textareaSelect}
-            value={deliveryAddress}
-            onChange={(e) => setDeliveryAddress(e.target.value)}
-            placeholder="Enter your delivery address"
-            />
-        </div>
-        <div>
-            <p></p>
-            <select
-            className={styles.textareaSelect}
-            value={paymentOption}
-            onChange={(e) => setPaymentOption(e.target.value)}
-            >
+      <button className={styles.backtoProduct}>Back to cart</button>
+      <p className={styles.myCartHeading}>Checkout</p>
+      <div style={{display:'flex'}}>
+        <div className={styles.checkoutForm}>
+          <div style={{display:'flex', margin: '0.3rem 0rem', borderBottom: '2px solid rgba(225, 225, 225, 1)'}}>
+            <p className={styles.fieldLabel}>1. Delivery address</p>
+            <div className={styles.fields}>
+              <p style={{marginBottom: '4px',marginLeft: '0.7rem', fontSize: '0.85rem', color: 'rgba(121, 121, 121, 1)'}}>{localStorage.getItem('MusicCartUsername')}</p>
+              <textarea
+                className={styles.textareaSelect}
+                value={deliveryAddress}
+                onChange={(e) => setDeliveryAddress(e.target.value)}
+                placeholder="Enter your delivery address"
+              />
+            </div>
+          </div>
+          <div style={{display:'flex', margin: '0.3rem 0rem', borderBottom: '2px solid rgba(225, 225, 225, 1)'}}>
+            <p className={styles.fieldLabel}>2. Payment method</p>
+            <div className={styles.fields}>
+              <select
+                className={styles.Select}
+                value={paymentOption}
+                onChange={(e) => setPaymentOption(e.target.value)}
+              >
+                <option value="" disabled selected hidden>Mode of payment</option>
                 <option value="payOnDelivery">Pay on Delivery</option>
                 <option value="upi">UPI</option>
                 <option value="card">Card</option>
-            </select>
-        </div>
-        <div>
-            <p></p>
-            <div className={styles.gridContainer}>
+              </select>
+            </div>
+          </div>
+          <div style={{display:'flex', margin: '0.5rem 0rem', paddingBottom: '1.3rem', borderBottom: '2px solid rgba(225, 225, 225, 1)'}}>
+            <p className={styles.fieldLabel}>3. Review items and delivery</p>
+            <div className={styles.fields} style={{display:'flex', flexDirection: 'column'}}>
+              <div className={styles.gridContainer}>
                 {cartItems.map((item, index) => (
-                    <img
+                  <img
                     key={index}
-                    src={item.imageUrl}
-                    alt={item.name}
+                    src={item.productId.imageUrl} // Access imageUrl from productId
+                    alt={item.productId.model} // Access model from productId
                     onClick={() => handleItemClick(item)}
                     className={styles.gridContainerImg}
-                    />
+                  />
                 ))}
-            </div>
-            <div>
+              </div>
+              <div>
                 {selectedItem && (
-                    <div className={styles.itemDetails}>
-                        <h3>{selectedItem.name}</h3>
-                        <p>{selectedItem.description}</p>
-                        <p>Price: {selectedItem.price}</p>
-                        {/* Add other product details */}
+                  <div className={styles.itemDetails}>
+                    
+                    <div style={{display: 'flex', gap: '10px', marginBottom: '0.3rem'}}>
+                      <p style={{fontSize: '1.3rem', fontWeight: '500'}}>{selectedItem.productId.Company}</p>
+                      <h3 style={{fontSize: '1.3rem', fontWeight: '500'}}>{selectedItem.productId.model}</h3>
                     </div>
+                    <p style={{fontSize: '17px', color: 'rgba(162, 162, 162, 1)', marginBottom: '0.4rem'}}>Colour : {selectedItem.productId.Colour}</p>
+                    <p style={{fontSize: '1rem', color: 'rgba(0, 0, 0, 1)'}}>Estimated delivery : <br/>Monday — FREE Standard Delivery</p>
+                  </div>
                 )}
+              </div>
             </div>
-            <div>
-              <button
-                className={styles.button}
+          </div>
+          
+          <div className={styles.bottomTotal}>
+             <button 
                 onClick={handlePlaceOrder}
                 disabled={loading}
               >
-                {loading ? 'Placing Order...' : 'Place Order'}
+              Place your order 
               </button>
-                {error && <p className={styles.error}>{error}</p>}
-            </div>
+             <div>
+                <p style={{fontSize: '1rem', color: 'rgba(181, 43, 0, 1)'}}>Order Total : ₹3545.00 </p>
+                <p style={{fontSize: '13px', color: 'rgba(0, 0, 0, 1)'}}>By placing your order, you agree to Musicart privacy notice and conditions of use.</p>
+             </div>
+          </div>  
         </div>
-        
         <div>
-          Product 
-        </div>  
+          <button
+            className={styles.button}
+            onClick={handlePlaceOrder}
+            disabled={loading}
+          >
+            {loading ? 'Placing Order...' : 'Place Order'}
+          </button>
+            {error && <p className={styles.error}>{error}</p>}
+        </div>
       </div>
     </div>
   );

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate, useLocation } from "react-router"
+import { useNavigate} from "react-router"
 import { MdOutlineAddShoppingCart } from "react-icons/md";
 import { GrHomeRounded } from "react-icons/gr";
 import { FaRegUser } from "react-icons/fa6";
@@ -82,10 +82,17 @@ const Footer = ({ currentPage = 'home' }) => {
                         <MdOutlineAddShoppingCart />
                         <p>Cart</p>
                     </div>
-                    <div onClick={() => handleClick('/invoice')}>
-                        <MdOutlineAddShoppingCart />
-                        <p>Invoice</p>
-                    </div>
+                    {isLoggedIn ? (
+                        <div style={{display: 'flex', flexDirection: 'column',gap: '2px', alignItems:'center'}} onClick={() => handleClick('/home')} onClick={handleLogout}>
+                            <FaRegUser size={23} color='rgba(46, 0, 82, 1)' style={{ fontWeight: 'bold' }}/>
+                            <p>Logout</p>
+                        </div>
+                    ) : (
+                        <div style={{display: 'flex', flexDirection: 'column',gap: '2px', alignItems:'center'}} onClick={() => handleClick('/home')} onClick={() => handleClick('/login')}>
+                            <FaRegUser size={23} color='rgba(46, 0, 82, 1)' style={{ fontWeight: 'bold' }}/>
+                            <p>Login</p>
+                        </div>
+                    )}
                 </React.Fragment>
             );
             break;
@@ -94,9 +101,14 @@ const Footer = ({ currentPage = 'home' }) => {
     }
 
     return (
-        <div className={`mobileFooter ${currentPage}-footer`}>
-            {footerContent}
-        </div>
+        <>
+            <div className="footerSection">
+                <p>Musicart | All rights reserved</p>
+            </div>
+            <div className={`mobileFooter ${currentPage}-footer`}>
+                {footerContent}
+            </div>
+        </>
     );
 }
 
