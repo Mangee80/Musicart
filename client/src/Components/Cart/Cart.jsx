@@ -53,6 +53,8 @@ const CartItem = ({ item, onUpdateQuantity }) => {
 const Cart = () => {
   const [loading, setLoading] = useState(true);
   const [items, setItems] = useState([]);
+  const [totalPrice, setTotalPrice] = useState(0); // Define totalPrice state
+  const [totalQuantity, setTotalQuantity] = useState(0);
 
   useEffect(() => {
     // Fetch items from the backend and setItems
@@ -77,7 +79,7 @@ const Cart = () => {
         setLoading(false);
       });
   }, []);
-
+  
   const onUpdateQuantity = async (productId, newQuantity) => {
     try {
       const userID = localStorage.getItem('userID');
@@ -110,8 +112,17 @@ const Cart = () => {
       console.error('Error updating cart item quantity:', error);
     }
   };
-
-  const totalPrice = items.reduce((total, item) => total + item.productId.Price * item.quantity, 0);
+  
+  // Calculate total quantity and total amount dynamically whenever items change
+  useEffect(() => {
+    const calculatedTotalQuantity = items.reduce((total, item) => total + item.quantity, 0);
+    const calculatedTotalPrice = items.reduce((total, item) => total + (item.productId.Price * item.quantity), 0);
+    setTotalPrice(calculatedTotalPrice); // Update totalPrice state
+    
+    setTotalQuantity(calculatedTotalQuantity);
+    // Do something with totalQuantity and totalPrice
+  }, [items]); // Trigger the effect whenever items change
+  
 
   // Render loading indicator if loading is true
   if (loading) {
@@ -133,29 +144,28 @@ const Cart = () => {
               <CartItem key={item.productId._id} item={item} onUpdateQuantity={onUpdateQuantity} />
             ))}
           </div>
-          <div style={{display: 'flex'}}>
-            <p>totalItems</p>
-
-            <p>totalSum</p>
+          <div style={{display: 'flex', gap:'30rem', marginLeft: '20rem', marginTop: '1rem'}}>
+            <p style={{fontWeight: 'bold'}}>{totalQuantity} item</p>
+            <p style={{fontWeight: 'bold'}}>{totalPrice}</p>
           </div>
         </div>
         <div className={`${styles.border} ${items.length === 1 ? styles.borderSingle : ''}`}></div>
         <div style={{display: 'flex', flexDirection: 'column'}}>
           <div className={styles.cartTotalPrice}>
-            <p>PRICE DETAILS</p>
+            <p style={{fontSize: '1.3rem', fontWeight: '500', marginBottom: '1.7rem'}}>PRICE DETAILS</p>
             
-            <div style={{display: 'flex', gap: '2rem'}}>
-              <div style={{display: 'flex', flexDirection:'column', gap: '10px'}}>
+            <div style={{display: 'flex', gap: '5.5rem'}}>
+              <div style={{display: 'flex', flexDirection:'column', gap: '1rem'}}>
                 <p>Total MRP</p><p>Discount on MRP</p><p>Convenience Fee</p>
               </div>
-              <div style={{display: 'flex', flexDirection:'column', gap: '10px'}}>
-                <p>3500</p><p>0</p><p>50</p>
+              <div style={{display: 'flex', flexDirection:'column', gap: '1rem'}}>
+                <p>{totalPrice}</p><p>0</p><p>50</p>
               </div>
             </div>
           </div>
           <div className={styles.cartTotal}>
-            Total Amount: ₹{totalPrice}
-            <button className={styles.checkoutButton}>Checkout</button>
+            <p>Total Amount <span style={{marginLeft: '5rem'}}>₹{totalPrice + 50}</span></p>
+            <button className={styles.checkoutButton}>PLACE ORDER</button>
           </div>
         </div>
       </div>

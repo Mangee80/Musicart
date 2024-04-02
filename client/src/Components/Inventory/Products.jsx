@@ -45,13 +45,13 @@ function ProductSection() {
     let method;
     
     if (searchQuery) {
-      url = `http://localhost:5000/api/products/search/${encodeURIComponent(searchQuery)}`;
+      url = `https://musicart-9bam.vercel.app/api/products/search/${encodeURIComponent(searchQuery)}`;
       method = 'GET';
     } else if (Object.keys(filters).length > 0) {
-      url = 'http://localhost:5000/api/products/filter';
+      url = 'https://musicart-9bam.vercel.app/api/products/filter';
       method = 'POST';
     } else {
-      url = 'http://localhost:5000/api/products/all';
+      url = 'https://musicart-9bam.vercel.app/api/products/all';
       method = 'GET';
     }
 
@@ -78,7 +78,7 @@ function ProductSection() {
 
   // Function to fetch sorted products based on sort option
   const fetchSortedProducts = (products, sortOption) => {
-    fetch('http://localhost:5000/api/products/sort', {
+    fetch('https://musicart-9bam.vercel.app/api/products/sort', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

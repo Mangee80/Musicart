@@ -100,6 +100,10 @@
     right: 2.5rem;
   }
   
+  .product-list {
+    height: auto;
+    width: 100%;
+  }
   .sort-by select {
     width: auto;
     text-indent: 1px;
@@ -123,11 +127,17 @@
     height: 100%; /* Make the image fill the container vertically */
     object-fit: cover;
   }
-  @media screen and (max-width: 360px) {
+  @media screen and (max-width: 600px) {
     .product-section {
       padding: 0.5rem; /* Adjust padding for smaller screens */
     }
-    
+    .icon {
+      display: none;
+    }
+    .feedback {
+
+      right: 2rem;
+    }
     .container1 {
       height: 6rem; /* Reduce height of container1 */
     }

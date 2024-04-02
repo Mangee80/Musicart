@@ -7,7 +7,7 @@ import { FaRegUser } from "react-icons/fa6";
 import './footer.css'
 import { LiaFileInvoiceSolid } from "react-icons/lia";
 
-const Footer = ({ currentPage = 'home' }) => {
+const Footer = ({ currentPage }) => {
     const navigate = useNavigate();
 
     // Function to handle logout

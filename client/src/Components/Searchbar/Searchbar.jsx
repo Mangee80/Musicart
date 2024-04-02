@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CiSearch } from "react-icons/ci";
 import styles from './Search.module.css';
+import musicart from '../../assets/musicart.png'
 
 function SearchBar({ currentRoute }) {
   const navigate = useNavigate();
@@ -18,22 +19,23 @@ function SearchBar({ currentRoute }) {
 
   return (
     <div>
-      {currentRoute === '/login' || currentRoute === '/cart' ? (
-        <div className="divA">
-          {/* Content for divA */}
+      {currentRoute === '/login' || currentRoute === '/cart' ||  currentRoute === '/checkout' ? (
+        <div className={styles.header}>
+            <div className={styles.img_container}>
+                <img src={musicart} alt="musicartlogo" />
+            </div>
+            <h1 className={styles.h1}>Musicart</h1>
         </div>
       ) : (
-        <div className="divB">
-          <div className={styles.searchBar}>
-            <CiSearch size={25} className={styles.icon} />
-            <input
-              type="text"
-              placeholder="Search Musicart"
-              onFocus={handleSearchBarFocus}
-              onChange={handleSearchChange}
-              value={searchQuery}
-            />
-          </div>
+        <div className={styles.searchBar}>
+          <CiSearch size={25} className={styles.icon} />
+          <input
+            type="text"
+            placeholder="Search Musicart"
+            onFocus={handleSearchBarFocus}
+            onChange={handleSearchChange}
+            value={searchQuery}
+          />
         </div>
       )}
     </div>

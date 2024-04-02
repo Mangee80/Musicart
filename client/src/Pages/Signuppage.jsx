@@ -4,11 +4,13 @@ import RegisterForm from '../Components/Signup/Signup';
 import Footer from '../Components/Footer/footer'
 
 export const Signuppage = () => {
+  const currentroute = 'signup';
   return (
     <div style={{display: 'flex', flexDirection: 'column'}}>
         <Header />
         <RegisterForm />
-        <Footer />
+        
+        <Footer currentPage={currentroute}/>
     </div>
   )
 }

@@ -74,7 +74,6 @@ function CheckoutPage() {
       setLoading(false);
     }
   };
-  const totalPrice = cartItems.reduce((total, item) => total + item.productId.Price, 0);
 
   return (
     <div className={styles.container}>
@@ -82,10 +81,10 @@ function CheckoutPage() {
       <p className={styles.myCartHeading}>Checkout</p>
       <div style={{display:'flex'}}>
         <div className={styles.checkoutForm}>
-          <div className={styles.labelField} style={{display:'flex', margin: '0.3rem 0rem', borderBottom: '2px solid rgba(225, 225, 225, 1)'}}>
+          <div style={{display:'flex', margin: '0.3rem 0rem', borderBottom: '2px solid rgba(225, 225, 225, 1)'}}>
             <p className={styles.fieldLabel}>1. Delivery address</p>
             <div className={styles.fields}>
-              <p className={styles.userName} >{localStorage.getItem('MusicCartUsername')}</p>
+              <p style={{marginBottom: '4px',marginLeft: '0.7rem', fontSize: '0.85rem', color: 'rgba(121, 121, 121, 1)'}}>{localStorage.getItem('MusicCartUsername')}</p>
               <textarea
                 className={styles.textareaSelect}
                 value={deliveryAddress}
@@ -94,7 +93,7 @@ function CheckoutPage() {
               />
             </div>
           </div>
-          <div className={styles.labelField} style={{display:'flex', margin: '0.3rem 0rem', borderBottom: '2px solid rgba(225, 225, 225, 1)'}}>
+          <div style={{display:'flex', margin: '0.3rem 0rem', borderBottom: '2px solid rgba(225, 225, 225, 1)'}}>
             <p className={styles.fieldLabel}>2. Payment method</p>
             <div className={styles.fields}>
               <select
@@ -109,7 +108,7 @@ function CheckoutPage() {
               </select>
             </div>
           </div>
-          <div className={styles.labelField} style={{display:'flex', margin: '0.5rem 0rem', paddingBottom: '1.3rem', borderBottom: '2px solid rgba(225, 225, 225, 1)'}}>
+          <div style={{display:'flex', margin: '0.5rem 0rem', paddingBottom: '1.3rem', borderBottom: '2px solid rgba(225, 225, 225, 1)'}}>
             <p className={styles.fieldLabel}>3. Review items and delivery</p>
             <div className={styles.fields} style={{display:'flex', flexDirection: 'column'}}>
               <div className={styles.gridContainer}>
@@ -139,7 +138,7 @@ function CheckoutPage() {
             </div>
           </div>
           
-          <div className={styles.bottomPlaceOrder}>
+          <div className={styles.bottomTotal}>
              <button 
                 onClick={handlePlaceOrder}
                 disabled={loading}
@@ -147,35 +146,20 @@ function CheckoutPage() {
               Place your order 
               </button>
              <div>
-                <p style={{fontSize: '1rem', color: 'rgba(181, 43, 0, 1)'}}>Order Total : ₹{totalPrice} </p>
+                <p style={{fontSize: '1rem', color: 'rgba(181, 43, 0, 1)'}}>Order Total : ₹3545.00 </p>
                 <p style={{fontSize: '13px', color: 'rgba(0, 0, 0, 1)'}}>By placing your order, you agree to Musicart privacy notice and conditions of use.</p>
              </div>
           </div>  
         </div>
-        <div className={styles.sidePlaceOrder} style={{padding: '0.3rem', paddingTop: '0rem' , border: '2px solid rgba(225, 225, 225, 1)', borderRadius: '0.5rem', height: '43vh', marginTop: '1rem'}}>
-          <div style={{padding: '1rem',borderBottom: '1.5px solid rgba(225, 225, 225, 1)'}}>
-            <button
-              className={styles.button}
-              onClick={handlePlaceOrder}
-              disabled={loading}
-            >
-              {loading ? 'Placing Order...' : 'Place your order'}
-            </button>
+        <div>
+          <button
+            className={styles.button}
+            onClick={handlePlaceOrder}
+            disabled={loading}
+          >
+            {loading ? 'Placing Order...' : 'Place Order'}
+          </button>
             {error && <p className={styles.error}>{error}</p>}
-            <p align="center" style={{fontSize: '13px', fontWeight: '500' , margin: '0.7rem 1rem', marginBottom: '0rem'}}>By placing your order, you agree to Musicart privacy notice and conditions of use.</p>
-          </div>
-          <div style={{ padding: '1rem', borderBottom: '1.5px solid rgba(225, 225, 225, 1)'}}>
-            <p style={{fontSize: '1.3rem', fontWeight: '500',  marginBottom: '1.3rem'}}>Order Summary</p>
-            <div style={{display: 'flex', gap: '8rem'}}>
-              <div>
-                <p style={{marginBottom: '0.5rem', width: '5rem', color: 'rgba(121, 121, 121, 1)'}}>Items :</p><p style={{width: '5rem' , color: 'rgba(121, 121, 121, 1)'}}>Delivery :</p>
-              </div>
-              <div>
-                <p style={{marginBottom: '0.5rem', color: 'rgba(121, 121, 121, 1)'}}>₹{totalPrice}</p><p style={{color: 'rgba(121, 121, 121, 1)'}}>₹45.00</p>
-              </div>
-            </div>
-          </div>
-          <p  style={{ marginBottom: '1rem', padding: '1rem'}}>Order Total : <span  style={{ marginLeft: '1rem'}}>₹{totalPrice + 45}</span></p>
         </div>
       </div>
     </div>

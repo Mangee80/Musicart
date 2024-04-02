@@ -35,14 +35,6 @@
     font-weight: 500;
     color: rgba(181, 43, 0, 1);
   }
-  
-  .userName {
-    margin-bottom: 4px;
-
-    margin-left: 0.7rem;
-    font-size: 0.85rem;
-    color: rgba(121, 121, 121, 1);
-  }
   .gridContainer {
     height: auto;
     width: 80%;
@@ -92,24 +84,25 @@
   
   .button {
     width: 100%;
-    padding: 8px;
-    font-size: 1rem;
-    background-color: rgba(255, 214, 0, 1);
-    color: rgba(0, 0, 0, 1);
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    margin-bottom: 0.3rem;
   }
   
-  .bottomPlaceOrder {
+  .button:hover {
+    background-color: #0056b3;
+  }
+  .bottomTotal {
     display: flex;
     border: 2px solid rgba(225, 225, 225, 1);
     margin: 0.7rem 0rem;
     padding: 10px;
     border-radius: 10px;
   }
-  .bottomPlaceOrder button {
+  .bottomTotal button {
     padding: 7px 15px;
     background-color: rgba(255, 214, 0, 1);
     color: rgba(0, 0, 0, 1);
@@ -123,60 +116,6 @@
     color: red;
     text-align: center;
   }
+  
   /* Add responsive styles as needed */
-  @media only screen and (max-width: 600px) {
-    .sidePlaceOrder {
-      display: none;
-    }
-
-    .container {
-      margin: 0px 0rem;
-    }
-    .labelField {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .checkoutForm {
-      padding: 0px;
-      width: 100%;
-    }
-    .myCartHeading {
-      display: flex;
-      justify-content: left;
-      text-decoration: none;
-      margin-left: 1rem;
-      font-size: 1.8rem;
-    }
-
-    .fieldLabel {
-      width: 100%;
-      margin-left: 1rem;
-      padding: 0.3rem;
-      font-size: 1.3rem;
-      margin-bottom: 0.7rem;
-    }
-    .gridContainer {
-      margin-top: 0.3rem;
-      width: 70%;
-      display: grid;
-      grid-template-columns: repeat(3,minmax(3rem, 1fr));
-      gap: 1.3rem;
-      margin-bottom: 0.3rem;
-    }
-
-    .fields {
-      width: 100%;
-      margin-left: 2.3rem;
-      margin-bottom: 0.7rem;
-    }
-    .userName {
-      font-size: 1rem;
-    }
-    .fields .textareaSelect {
-      font-size: 1rem;
-      height: 3rem;
-      width: 70%;
-    }
-  }
   

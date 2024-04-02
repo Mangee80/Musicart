@@ -2,8 +2,8 @@
 
 .productGrid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(20rem, 1fr));
-  gap: 3.4rem;
+  grid-template-columns: repeat(4, minmax(20%, 1fr));
+  gap: 40px;
   row-gap: 0.8rem;
   padding: 2rem 0rem ;
   box-sizing: border-box;
@@ -16,8 +16,8 @@
 }
 
 .productImage {
-  width: 20rem;
-  height: 20rem; /* Adjust as needed */
+  width: 18rem;
+  height: 18rem; /* Adjust as needed */
   object-fit: cover;
   border: 1.3rem solid rgba(212, 229, 255, 1);
   box-sizing: border-box;
@@ -59,13 +59,13 @@
 
 .addToCart {
   position: absolute;
-  bottom: 8.7rem;
-  left: 16rem;
+  bottom: 7rem;
+  left: 13.3rem;
   z-index: 5;
 }
 
 /* Media query for 360px * 800px */
-@media screen and (max-width: 360px) {
+@media screen and (max-width: 600px) {
   .productGrid {
     grid-template-columns: repeat(2, minmax(150px, 1fr)); /* Two items per row */
     gap: 1rem; /* Adjust gap between grid items */
