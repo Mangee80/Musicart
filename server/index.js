@@ -36,10 +36,15 @@ app.use((err, req, res, next) => {
     console.error(err.stack);
     res.status(500).json({ error: 'Internal Server Error' });
 })
-
-app.listen(process.env.PORT, () => {
-  mongoose.connect(process.env.MONGODB_URL, { useNewUrlParser: true, useUnifiedTopology: true })
-    .then(() =>  console.log(`Server running on http://localhost:${process.env.PORT}`))
-    .catch((error) => console.log(error))
+mongoose.connect(process.env.MONGODB_URL, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => {
+    console.log("MongoDB Connected");
+})
+  .catch(err => {
+    console.error('Failed to connect to MongoDB:', err);
+});
+const PORT = process.env.PORT || 9000;
+app.listen(PORT, () => {
+  console.log(`Server running on http://localhost:${process.env.PORT}`);
 });
 
