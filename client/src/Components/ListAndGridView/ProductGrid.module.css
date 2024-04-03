@@ -97,7 +97,7 @@
   .addToCart {
     position: absolute;
     bottom: 7rem; /* Adjust as needed */
-    left: 7.8rem; /* Adjust as needed */
+    left: 7rem; /* Adjust as needed */
     z-index: 5;
   }
 }

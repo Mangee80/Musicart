@@ -9,7 +9,7 @@ export const Checkoutpage = () => {
   const currentRoute = '/Checkout';
   return (
     <div style={{display: 'flex', flexDirection: 'column'}}>
-      <SearchBar />
+      <SearchBar currentRoute={currentroute}/>
       <Header currentRoute={currentRoute}/>
       <CheckoutPage />
       <Footer currentPage={currentroute}/>

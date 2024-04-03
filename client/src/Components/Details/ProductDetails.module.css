@@ -4,7 +4,17 @@
   .imageInfoContainer {
     display: flex;
   }
+  .backtoProduct {
 
+    margin: 0.5rem 0rem;
+    margin-top: 3px;
+    font-size: 0.85rem;
+    padding: 4px 10px;
+    border-radius: 0.5rem;
+    background-color: rgba(46, 0, 82, 1);
+    border: none;
+    color: rgba(255, 255, 255, 1);
+  }
   .productMainImage {
     width: 22.8rem;
     height: 21rem;
@@ -59,9 +69,9 @@
     margin: 5px 0;
   }
   .featureHeading {
-    font-size: 1.2rem;
+    font-size: 1.13rem;
     font-weight: bold;
-    margin-bottom: 10px;
+    margin-bottom: 1rem;
   }
   
   .detailsList {
@@ -72,3 +82,20 @@
     margin: 4px;
     font-size: 16px;
   }
+
+
+  .buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    margin-top: 3rem;
+  }
+.buttons button {
+  width: 18rem;
+  padding: 0.4rem;
+  font-weight: bold;
+  font-size: 1rem;
+  border-radius: 20px;
+  border: none;
+  background-color: rgba(255, 214, 0, 1);
+}

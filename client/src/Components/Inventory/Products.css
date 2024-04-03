@@ -146,15 +146,26 @@
       border-bottom: 2px solid rgba(187, 186, 186, 1);
     }
     .container2 {
-      display: none; /* Hide container2 for smaller screens */
+      width: 7rem; /* Your specific width */
+      height: 7rem; /* Your specific height */
+      overflow: hidden; /* Hide any overflow */
+      z-index: 5;
+      position: absolute;
+      right: 2rem;
+      top: 4.35rem;
+    }
+    .bannerDetail {
+      height: auto;
+      width: 13rem;
+      font-size: 1.3rem;
+      line-height: 1.08;
+      color: rgba(46, 0, 82, 1);
+      position: absolute;
+      top: 7rem;
+      left: 1.5rem;
+      font-weight: 500;
     }
     
-    .bannerDetail {
-      font-size: 1.5rem; /* Reduce font size for smaller screens */
-      width: 90%; /* Adjust width for smaller screens */
-      left: 0.5rem; /* Adjust left position for smaller screens */
-      top: 6.5rem; /* Adjust top position for smaller screens */
-    }
     .view-buttons {
       display: none;
     }

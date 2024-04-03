@@ -8,44 +8,61 @@ const CartItem = ({ item, onUpdateQuantity }) => {
   };
 
   return (
-    <div className={styles.cartItem}>
-      <img src={item.productId.imageUrl} alt={item.productId.model} className={styles.cartItemImage} />
-      <div className={styles.cartItemDetails}>
-        <div style={{display: 'flex', gap: '10px', marginBottom: '0.88rem'}}>
-          <p style={{fontSize: '1.5rem', fontWeight: '500'}}>{item.productId.Company}</p>
-          <h3 style={{fontSize: '1.5rem', fontWeight: '500'}}>{item.productId.model}</h3>
+    <>
+    
+      <div className={styles.cartItem}>
+        <img src={item.productId.imageUrl} alt={item.productId.model} className={styles.cartItemImage} />
+        <div className={styles.cartItemDetails}>
+          <div style={{display: 'flex', gap: '10px', marginBottom: '0.88rem', width: '15rem'}}>
+            <p style={{fontSize: '1.5rem', fontWeight: '500'}}>{item.productId.Company}</p>
+            <h3 style={{fontSize: '1.5rem', fontWeight: '500'}}>{item.productId.model}</h3>
+          </div>
+          <p style={{fontSize: '1rem', color: 'rgba(162, 162, 162, 1)', marginBottom: '0.4rem'}}>Colour : {item.productId.Colour}</p>
+          
+          
+          
+          <p style={{fontSize: '1rem', color: 'rgba(162, 162, 162, 1)'}}>In Stock</p>
         </div>
-        <p style={{fontSize: '1rem', color: 'rgba(162, 162, 162, 1)', marginBottom: '0.4rem'}}>Colour : {item.productId.Colour}</p>
-        
-        
-        
-        <p style={{fontSize: '1rem', color: 'rgba(162, 162, 162, 1)'}}>In Stock</p>
+        <div>
+          <p style={{fontSize: '1.3rem', fontWeight: '500', marginBottom: '1rem'}}>Price</p> 
+          
+          
+          <p style={{fontSize: '1rem'}}>₹{item.productId.Price}</p>
+        </div>
+        <div className={styles.select}>
+          <p style={{fontSize: '1.3rem', fontWeight: '500', marginBottom: '1rem'}}>Quantity</p>
+          <select
+            value={item.quantity}
+            onChange={handleQuantityChange}
+            className={styles.quantitySelect}
+          >
+            {[1, 2, 3, 4, 5].map((num) => (
+              <option key={num} value={num}>
+                {num}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div>
+          <p style={{fontSize: '1.3rem', fontWeight: '500', marginBottom: '1rem'}}>Total</p>
+          <p style={{fontSize: '1rem'}}>₹{item.productId.Price * item.quantity}</p>
+        </div>
       </div>
-      <div>
-        <p style={{fontSize: '1.3rem', fontWeight: '500', marginBottom: '1rem'}}>Price</p> 
-        
-        
-        <p style={{fontSize: '1rem'}}>₹{item.productId.Price}</p>
+
+      <div className={styles.responsiveCartItem}>
+        <img src={item.productId.imageUrl} alt={item.productId.model} className={styles.cartItemImage} />
+        <div className={styles.cartItemDetails}>
+          <div style={{display: 'flex', gap: '5px', marginBottom: '0.7rem', width: '15rem'}}>
+            <p style={{fontSize: '1.3rem', fontWeight: '400'}}>{item.productId.Company}</p>
+            <h3 style={{fontSize: '1.3rem', fontWeight: '400'}}>{item.productId.model}</h3>
+          </div>
+          <p style={{fontSize: '1.6rem', fontWeight: '500', marginBottom: '0.54rem'}}>₹{item.productId.Price}</p>
+          <p style={{fontSize:  '1rem', color: 'rgba(0, 0, 0, 1)', marginBottom: '0.11rem'}}>Colour : {item.productId.Colour}</p>
+          <p style={{fontSize: '1rem', color: 'rgba(0, 0, 0, 1)', marginBottom: '0.4rem'}}>In Stock</p>
+          <p>Convenience Fee <span style={{marginLeft: '0.8rem'}}>₹45</span></p>
+        </div>
       </div>
-      <div className={styles.select}>
-        <p style={{fontSize: '1.3rem', fontWeight: '500', marginBottom: '1rem'}}>Quantity</p>
-        <select
-          value={item.quantity}
-          onChange={handleQuantityChange}
-          className={styles.quantitySelect}
-        >
-          {[1, 2, 3, 4, 5].map((num) => (
-            <option key={num} value={num}>
-              {num}
-            </option>
-          ))}
-        </select>
-      </div>
-      <div>
-        <p style={{fontSize: '1.3rem', fontWeight: '500', marginBottom: '1rem'}}>Total</p>
-        <p style={{fontSize: '1rem'}}>₹{item.productId.Price * item.quantity}</p>
-      </div>
-    </div>
+    </>
   );
 };
 
@@ -131,46 +148,62 @@ const Cart = () => {
 
   // Render cart items when loading is false
   return (
-    <div className={styles.cartContainer}>
-      <button className={styles.backtoProduct}>Back to products</button>
-      <div className={styles.myCartHeading}>
-        <BiShoppingBag size={50}/>
-        <p>My Cart</p>
+    <>
+      <div className={styles.cartContainer}>
+        <button className={styles.backtoProduct}>Back to products</button>
+        <div className={styles.myCartHeading}>
+          <BiShoppingBag size={50}/>
+          <p>My Cart</p>
+        </div>
+        <div style={{display: 'flex'}}>
+          <div>
+            <div className={`${styles.cartItems} ${items.length === 1 ? styles.cartItemsSingle : ''}`}>
+              {items.map((item) => (
+                <CartItem key={item.productId._id} item={item} onUpdateQuantity={onUpdateQuantity} />
+              ))}
+            </div>
+            <div style={{display: 'flex', gap:'30rem', marginLeft: '20rem', marginTop: '1rem'}}>
+              <p style={{fontWeight: 'bold'}}>{totalQuantity} item</p>
+              <p style={{fontWeight: 'bold'}}>{totalPrice}</p>
+            </div>
+          </div>
+          <div className={`${styles.border} ${items.length === 1 ? styles.borderSingle : ''}`}></div>
+          <div style={{display: 'flex', flexDirection: 'column'}}>
+            <div className={styles.cartTotalPrice}>
+              <p style={{fontSize: '1.3rem', fontWeight: '500', marginBottom: '1.7rem'}}>PRICE DETAILS</p>
+              
+              <div style={{display: 'flex', gap: '5.5rem'}}>
+                <div style={{display: 'flex', flexDirection:'column', gap: '1rem'}}>
+                  <p>Total MRP</p><p>Discount on MRP</p><p>Convenience Fee</p>
+                </div>
+                <div style={{display: 'flex', flexDirection:'column', gap: '1rem'}}>
+                  <p>{totalPrice}</p><p>0</p><p>50</p>
+                </div>
+              </div>
+            </div>
+            <div className={styles.cartTotal}>
+              <p>Total Amount <span style={{marginLeft: '5rem'}}>₹{totalPrice + 50}</span></p>
+              <button className={styles.checkoutButton}>PLACE ORDER</button>
+            </div>
+          </div>
+        </div>
       </div>
-      <div style={{display: 'flex'}}>
-        <div>
-          <div className={`${styles.cartItems} ${items.length === 1 ? styles.cartItemsSingle : ''}`}>
+      <div className={styles.responsiveContainer}>
+        <div style={{backgroundColor: 'rgba(219, 219, 219, 1)'}}>
+          <div className={styles.cartItems}>
             {items.map((item) => (
               <CartItem key={item.productId._id} item={item} onUpdateQuantity={onUpdateQuantity} />
             ))}
           </div>
-          <div style={{display: 'flex', gap:'30rem', marginLeft: '20rem', marginTop: '1rem'}}>
-            <p style={{fontWeight: 'bold'}}>{totalQuantity} item</p>
-            <p style={{fontWeight: 'bold'}}>{totalPrice}</p>
-          </div>
+          <p style={{marginLeft: '10rem', marginTop: '0.5rem', padding: '0.8rem 1rem', width: '10rem', fontSize: '1.3rem'}}>Total : <span style={{marginLeft: '1.7rem',fontWeight: 'bold'}}>{totalPrice}</span></p>
         </div>
-        <div className={`${styles.border} ${items.length === 1 ? styles.borderSingle : ''}`}></div>
-        <div style={{display: 'flex', flexDirection: 'column'}}>
-          <div className={styles.cartTotalPrice}>
-            <p style={{fontSize: '1.3rem', fontWeight: '500', marginBottom: '1.7rem'}}>PRICE DETAILS</p>
-            
-            <div style={{display: 'flex', gap: '5.5rem'}}>
-              <div style={{display: 'flex', flexDirection:'column', gap: '1rem'}}>
-                <p>Total MRP</p><p>Discount on MRP</p><p>Convenience Fee</p>
-              </div>
-              <div style={{display: 'flex', flexDirection:'column', gap: '1rem'}}>
-                <p>{totalPrice}</p><p>0</p><p>50</p>
-              </div>
-            </div>
-          </div>
-          <div className={styles.cartTotal}>
-            <p>Total Amount <span style={{marginLeft: '5rem'}}>₹{totalPrice + 50}</span></p>
-            <button className={styles.checkoutButton}>PLACE ORDER</button>
-          </div>
+        <div className={styles.cartTotal}>
+          
+          <p style={{fontSize: '1.6rem', fontWeight: '400', marginTop: '0.8rem'}}>Total Amount <span style={{marginLeft: '1rem', fontWeight: 'bold'}}>₹{totalPrice + 45}</span></p>
+          <button className={styles.checkoutButton}>PLACE ORDER</button>
         </div>
       </div>
-      
-    </div>
+    </>
   );
 };
 

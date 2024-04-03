@@ -4,6 +4,8 @@ import styles from './ProductDetails.module.css';
 import { IoStar } from "react-icons/io5";
 import { IoStarHalf } from "react-icons/io5";
 
+import { Carousel } from 'react-responsive-carousel';
+import 'react-responsive-carousel/lib/styles/carousel.min.css';
 const ProductDetail = () => {
   // const { productId } = useParams();
   const [product, setProduct] = useState(null);
@@ -52,7 +54,7 @@ const ProductDetail = () => {
 
   return (
     <div className={styles.productDetailsContainer}>
-      <button>xyz</button>
+      <button className={styles.backtoProduct}>Back to products</button>
 
       <p className={styles.featureHeading}>{product.featureHeading}</p>
       <div className={styles.imageInfoContainer}>
@@ -91,9 +93,9 @@ const ProductDetail = () => {
           </ul>
           <p style={{fontSize: '1.1rem', marginTop: '2rem',marginBottom: '5px'}}><span style={{fontWeight: '500'}}>Available</span> - In Stock</p>
           <p style={{fontSize: '1.1rem', marginTop: '7px'}}><span style={{fontWeight: '500'}}>Brand</span> - {product.Company}</p>
-          <div style={{display: 'flex', gap: '0.5rem', flexDirection: 'column'}}>
-            <button>yzx</button>
-            <button>zxy</button>            
+          <div className={styles.buttons}>
+            <button>Add to cart</button>
+            <button style={{backgroundColor: 'rgba(255, 184, 0, 1)'}}>Buy Now</button>            
           </div>
         </div>
       </div>

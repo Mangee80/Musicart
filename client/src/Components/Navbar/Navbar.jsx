@@ -18,8 +18,42 @@ function Header({ currentRoute }) {
     }
   }, []);
 
+
+  const [totalItems, setTotalItems] = useState(0);
+
+  useEffect(() => {
+    const fetchCartItems = async () => {
+      try {
+        const userID = localStorage.getItem('userID');
+        if (!userID) {
+          console.error('User ID not found');
+          return;
+        }
+
+        const response = await fetch('http://localhost:5000/api/cart/user-cart', {
+          headers: {
+            'x-user-id': userID,
+          }
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to fetch cart items');
+        }
+
+        const items = await response.json();
+        const totalItemsCount = items.reduce((total, item) => total + item.quantity, 0);
+        setTotalItems(totalItemsCount);
+      } catch (error) {
+        console.error('Error fetching cart items:', error);
+      }
+    };
+
+    const interval = setInterval(fetchCartItems, 1000); // Fetch cart items every second
+
+    return () => clearInterval(interval); // Clear interval on component unmount
+  }, []);
+
   const isLoggedIn = userData !== null;
-  const cartValue = 0;
   // Function to handle logout
   const handleLogout = () => {
     // Clearing values from localStorage on logout
@@ -70,7 +104,7 @@ function Header({ currentRoute }) {
           {isLoggedIn && currentRoute === '' && (
             <>
               <div className={`${styles.viewCartButton}`} onClick={() => navigate('/cart')}>
-                <MdOutlineAddShoppingCart size={18}/> <p style={{marginLeft: '5px', marginTop: '3px'}}>View Cart <span>{cartValue}</span></p>
+                <MdOutlineAddShoppingCart size={18}/> <p style={{marginLeft: '5px', marginTop: '3px'}}>View Cart <span>{totalItems}</span></p>
               </div>
               <div className={styles.userAvatar} onClick={() => setShowDropdown(!showDropdown)}>
                 {getUserInitials()}
@@ -86,13 +120,13 @@ function Header({ currentRoute }) {
 
           {!isLoggedIn && currentRoute !== '' && (
             <div className={`${styles.viewCartButton} ${styles.visible}`} onClick={() => navigate('/login')}>
-              <MdOutlineAddShoppingCart size={18}/> <p style={{marginLeft: '5px', marginTop: '3px'}}>View Cart <span>{cartValue}</span></p>
+              <MdOutlineAddShoppingCart size={18}/> <p style={{marginLeft: '5px', marginTop: '3px'}}>View Cart <span>{totalItems}</span></p>
             </div>
           )}
 
           {!['Invoice',''].includes(currentRoute) && (
             <div className={`${styles.viewCartButton} ${styles.visible}`} onClick={() => navigate('/cart')}>
-              <MdOutlineAddShoppingCart size={18}/> <p style={{marginLeft: '5px', marginTop: '3px'}}>View Cart <span>{cartValue}</span></p>
+              <MdOutlineAddShoppingCart size={18}/> <p style={{marginLeft: '5px', marginTop: '3px'}}>View Cart <span>{totalItems}</span></p>
             </div>
           )}
         </div>

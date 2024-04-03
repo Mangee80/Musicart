@@ -43,9 +43,7 @@ function CheckoutPage() {
   const handleItemClick = (item) => {
     setSelectedItem(item);
   };
-  useEffect(() => {
-    console.log(cartItems); // Log the updated value of cartItems
-  }, [cartItems]);
+  
 
   const handlePlaceOrder = async () => {
     setLoading(true);
@@ -80,7 +78,7 @@ function CheckoutPage() {
     <div className={styles.container}>
       <button className={styles.backtoProduct}>Back to cart</button>
       <p className={styles.myCartHeading}>Checkout</p>
-      <div style={{display:'flex'}}>
+      <div className={styles.checkoutContainer}>
         <div className={styles.checkoutForm}>
           <div className={styles.labelField} style={{display:'flex', margin: '0.3rem 0rem', borderBottom: '2px solid rgba(225, 225, 225, 1)'}}>
             <p className={styles.fieldLabel}>1. Delivery address</p>
@@ -131,7 +129,8 @@ function CheckoutPage() {
                       <p style={{fontSize: '1.3rem', fontWeight: '500'}}>{selectedItem.productId.Company}</p>
                       <h3 style={{fontSize: '1.3rem', fontWeight: '500'}}>{selectedItem.productId.model}</h3>
                     </div>
-                    <p style={{fontSize: '17px', color: 'rgba(162, 162, 162, 1)', marginBottom: '0.4rem'}}>Colour : {selectedItem.productId.Colour}</p>
+                    <p style={{fontSize: '17px', color: 'rgba(162, 162, 162, 1)', marginTop: '0.4rem'}}>Colour : {selectedItem.productId.Colour}</p>
+                    <p className={styles.inStock}style={{fontSize: '17px', color: 'rgba(162, 162, 162, 1)', marginBottom: '0.4rem'}}>In Stock</p>
                     <p style={{fontSize: '1rem', color: 'rgba(0, 0, 0, 1)'}}>Estimated delivery : <br/>Monday — FREE Standard Delivery</p>
                   </div>
                 )}
@@ -152,8 +151,9 @@ function CheckoutPage() {
              </div>
           </div>  
         </div>
-        <div className={styles.sidePlaceOrder} style={{padding: '0.3rem', paddingTop: '0rem' , border: '2px solid rgba(225, 225, 225, 1)', borderRadius: '0.5rem', height: '43vh', marginTop: '1rem'}}>
+        <div className={styles.sidePlaceOrder} style={{borderRadius: '0.5rem', height: 'auto', maxHeight: '43vh'}}>
           <div style={{padding: '1rem',borderBottom: '1.5px solid rgba(225, 225, 225, 1)'}}>
+            <p className={styles.orderSummary} style={{ marginBottom: '1rem', padding: '1rem', color: 'rgba(181, 43, 0, 1)'}}>Order Total : <span  style={{ marginLeft: '1rem'}}>₹{totalPrice + 45}</span></p>
             <button
               className={styles.button}
               onClick={handlePlaceOrder}
@@ -162,6 +162,7 @@ function CheckoutPage() {
               {loading ? 'Placing Order...' : 'Place your order'}
             </button>
             {error && <p className={styles.error}>{error}</p>}
+            
             <p align="center" style={{fontSize: '13px', fontWeight: '500' , margin: '0.7rem 1rem', marginBottom: '0rem'}}>By placing your order, you agree to Musicart privacy notice and conditions of use.</p>
           </div>
           <div style={{ padding: '1rem', borderBottom: '1.5px solid rgba(225, 225, 225, 1)'}}>
@@ -175,7 +176,7 @@ function CheckoutPage() {
               </div>
             </div>
           </div>
-          <p  style={{ marginBottom: '1rem', padding: '1rem'}}>Order Total : <span  style={{ marginLeft: '1rem'}}>₹{totalPrice + 45}</span></p>
+          <p className={styles.orderTotal} style={{ marginBottom: '1rem', padding: '1rem', color: 'rgba(181, 43, 0, 1)'}}>Order Total : <span  style={{ marginLeft: '1rem'}}>₹{totalPrice + 45}</span></p>
         </div>
       </div>
     </div>

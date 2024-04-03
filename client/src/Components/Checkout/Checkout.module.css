@@ -67,10 +67,17 @@
   
   .gridContainer img:hover,
   .gridContainer img:focus {
-    border-color: #007bff;
+    border: 3px solid rgba(46, 0, 82, 1);
   }
-  
-  
+  .checkoutContainer{
+    display: flex;
+  }
+  .sidePlaceOrder{
+    border: 2px solid rgba(225, 225, 225, 1);
+    padding: 0.3rem;
+    padding-top: 0rem;
+    margin-top: 1rem;
+  }
   .textareaSelect {
     padding: 0.23rem 0.5rem;
     width: 21.3vw;
@@ -90,14 +97,15 @@
     color: rgba(121, 121, 121, 1);
   }
   
+  .inStock {display: none;}
   .button {
     width: 100%;
-    padding: 8px;
+    padding: 10px;
     font-size: 1rem;
     background-color: rgba(255, 214, 0, 1);
     color: rgba(0, 0, 0, 1);
     border: none;
-    border-radius: 5px;
+    border-radius: 7px;
     cursor: pointer;
     margin-bottom: 0.3rem;
   }
@@ -118,17 +126,32 @@
     cursor: pointer;
     margin-right: 2rem;
   }
-  
+  .orderSummary {
+    display: none;
+  }
   .error {
     color: red;
     text-align: center;
   }
+  .itemDetails {
+    margin-top: 0.5rem;
+  }
   /* Add responsive styles as needed */
   @media only screen and (max-width: 600px) {
     .sidePlaceOrder {
-      display: none;
+      display: flex;
+      flex-direction: column-reverse;
+      border: none;
+      margin-top: 4rem;
+    }
+    .checkoutContainer {
+      flex-direction: column;
+      gap: 0rem;
     }
 
+    .orderTotal {
+      display: none;
+    }
     .container {
       margin: 0px 0rem;
     }
@@ -137,6 +160,7 @@
       flex-direction: column;
     }
 
+    .inStock {display: flex;}
     .checkoutForm {
       padding: 0px;
       width: 100%;
@@ -148,7 +172,11 @@
       margin-left: 1rem;
       font-size: 1.8rem;
     }
-
+    .orderSummary {
+      display: flex;
+      font-size: 1.3rem;
+      gap: 2.3rem;
+    }
     .fieldLabel {
       width: 100%;
       margin-left: 1rem;
@@ -177,6 +205,16 @@
       font-size: 1rem;
       height: 3rem;
       width: 70%;
+    }
+
+    .bottomPlaceOrder {
+      display: none;
+    }
+    .Select {
+      width: 75%;
+      font-size: 1rem;
+      
+      padding: 0.5rem;
     }
   }
   
