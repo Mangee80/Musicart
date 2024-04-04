@@ -44,7 +44,7 @@
     color: rgba(121, 121, 121, 1);
   }
   .gridContainer {
-    height: 30vh;
+    height: auto;
     overflow-y: scroll;
     width: 80%;
     display: grid;
@@ -192,6 +192,7 @@
     .gridContainer {
       margin-top: 0.3rem;
       width: 70%;
+      height: auto;
       display: grid;
       grid-template-columns: repeat(3,minmax(3rem, 1fr));
       gap: 1.3rem;

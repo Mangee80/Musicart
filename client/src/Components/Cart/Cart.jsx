@@ -82,8 +82,9 @@ const Cart = () => {
     })
       .then(response => response.json())
       .then(data => {
-        if (data) {
-          setItems(data); // Set the items if the response contains an 'items' array
+        console.log('Fetched data:', data);
+        if (Array.isArray(data)) { // Check if the data is an array
+          setItems(data); // Set the items if the response contains an array
         } else {
           // Handle unexpected format or empty response
           console.error('Unexpected response format:', data);

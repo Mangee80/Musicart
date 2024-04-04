@@ -16,9 +16,9 @@ router.get('/all', async (req, res) => {
 });
 
 // Assuming you're using Express for your backend
-router.get('/product/:productId', async (req, res) => {
+router.get('/product/:id', async (req, res) => {
   try {
-      const productId = req.params.productId;
+      const productId = req.params.id;
       // Fetch product details by ID
       const product = await Product.findById(productId);
       if (!product) {

@@ -36,10 +36,15 @@ const ProductGrid = ({ musicGadgets }) => {
     }
   };
 
+   // Function to navigate to product detail page
+   const goToProductDetail = (id) => {
+    navigate(`/detail/${id}`);
+  };
+
   return (
     <div className={styles.productGrid}>
       {musicGadgets.map((gadget) => (
-        <div key={gadget.id} className={styles.productCard}>
+        <div key={gadget.id} className={styles.productCard} onClick={() => goToProductDetail(gadget._id)}>
           <div className={styles.productImage}>
             <img src={gadget.imageUrl} alt={`${gadget.Company} ${gadget.model}`} />
           </div>

@@ -60,5 +60,16 @@ router.get('/invoice/:id', async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
-
-  module.exports = router;  
+// GET endpoint to fetch all checkouts for a specific user
+router.get('/checkouts/:userID', async (req, res) => {
+  try {
+    const userID = req.params.userID;
+    // Removed the populate for products as per requirement
+    const checkouts = await Checkout.find({ user: userID }).select('deliveryAddress');
+    res.json(checkouts);
+  } catch (error) {
+    console.error('Error fetching checkouts:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+module.exports = router;  

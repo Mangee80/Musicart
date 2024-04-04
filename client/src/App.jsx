@@ -5,6 +5,9 @@ import { Productdetailpage } from './Pages/ProductDetailPage'
 import { Home } from './Pages/Homepage'
 import { Cartpage } from './Pages/Cartpage'
 import { Checkoutpage } from './Pages/Checkoutpage'
+import { Invoicepage } from './Pages/InvoicePage'
+
+import { Invoicedetailpage } from './Pages/InvoiceDetailPage'
 import './App.css'
 function App() {
   return (
@@ -13,8 +16,10 @@ function App() {
       <Route path="/register" element={<Signuppage />} />
       <Route path="/" element={<Home />}/>
       <Route path="/cart" element={<Cartpage />}/>
-      <Route path="/detail" element={<Productdetailpage />}/>
+      <Route path="/detail/:id" element={<Productdetailpage />}/>
+      <Route path="/invoice" element={<Invoicepage />}/>
       <Route path="/checkout" element={<Checkoutpage />}/>
+      <Route path="/invoice/:id" element={<Invoicedetailpage />} />
     </Routes>
   );
 }

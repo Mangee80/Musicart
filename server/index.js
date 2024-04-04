@@ -8,6 +8,7 @@ dotenv.config();
 const authRoutes = require('./Routes/userRoutes');
 const productRoutes = require('./Routes/productRoutes');
 const cartRoutes = require('./Routes/cartRoutes');
+const checkoutRoutes = require('./Routes/checkoutRoutes');
 const app = express();
 
 app.use(cors());
@@ -19,6 +20,7 @@ app.use(bodyParser.json());
 app.use('/api/auth', authRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/cart', cartRoutes);
+app.use('/api/checkout', checkoutRoutes);
 app.get('/health', (req, res) => {
     res.json({
         serverName: 'Ecom Server',

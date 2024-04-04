@@ -1,121 +1,61 @@
-/* CheckoutPage.module.css */
 .container {
-    margin: 0px 3rem;
-  }
-  .backtoProduct {
-
-    margin: 0.2rem 0rem;
-    font-size: 0.85rem;
-    padding: 4px 23px;
-    border-radius: 0.5rem;
-    background-color: rgba(46, 0, 82, 1);
-    border: none;
-    color: rgba(255, 255, 255, 1);
-  }
-
-.myCartHeading {
-    display: flex;
-    text-decoration: underline;
-    justify-content: center;
-    font-size: 1.6rem;
-    font-weight: 500;
-  }
-  .checkoutForm {
-    display: flex; flex-direction: column;
-    
-    width: 70%;
-    height: 70vh;
-    padding:  0.2rem 2rem 1rem 1rem;
-    margin-top: 0.8rem;
-  }
-
-  .fieldLabel {
-    width: 40vw;
-    font-size: 1.5rem;
-    font-weight: 500;
-    color: rgba(181, 43, 0, 1);
-  }
-  .gridContainer {
-    height: auto;
-    width: 80%;
-    display: grid;
-    grid-template-columns: repeat(3,minmax(3.5rem, 1fr));
-    gap: 3rem;
-    margin-bottom: 0.8rem;
-    row-gap: 1rem;
+  margin: 0rem 3rem;
 }
-  .fields {
-    width: 30vw;
-  }
-  .gridContainer img {
-    
-    width: 100%; /* Make image width responsive to the container's width */
-    height: auto;
-    object-fit: cover;
-    cursor: pointer;
-    border: 2px solid rgba(46, 0, 82, 1);
-    border-radius: 3px;
-  }
+.backtoProduct {
+
+  margin: 0.7rem 0rem;
+  font-size: 0.85rem;
+  padding: 4px 10px;
+  border-radius: 0.5rem;
+  background-color: rgba(46, 0, 82, 1);
+  border: none;
+  color: rgba(255, 255, 255, 1);
+}
+
+
+.invoiceHeading {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  font-size: 1.6rem;
   
-  .gridContainer img:hover,
-  .gridContainer img:focus {
-    border-color: #007bff;
-  }
-  
-  
-  .textareaSelect {
-    padding: 0.23rem 0.5rem;
-    width: 21.3vw;
-    resize: none;
-    margin-bottom: 0.5rem;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 13px;
-  }
-  .Select {
-    padding: 0.35rem 0.5rem;
-    width: 22.5vw;
-    margin-bottom: 0.5rem;
-    border: 1px solid #ccc;
-    border-radius: 2px;
-    font-size: 0.8rem;
-    color: rgba(121, 121, 121, 1);
-  }
-  
-  .button {
-    width: 100%;
-    padding: 10px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .button:hover {
-    background-color: #0056b3;
-  }
-  .bottomTotal {
-    display: flex;
-    border: 2px solid rgba(225, 225, 225, 1);
-    margin: 0.7rem 0rem;
-    padding: 10px;
-    border-radius: 10px;
-  }
-  .bottomTotal button {
-    padding: 7px 15px;
-    background-color: rgba(255, 214, 0, 1);
-    color: rgba(0, 0, 0, 1);
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    margin-right: 2rem;
-  }
-  
-  .error {
-    color: red;
-    text-align: center;
-  }
-  
-  /* Add responsive styles as needed */
-  
+  font-weight: 500;
+  margin: 0.5rem 0rem;
+}
+.checkoutsContainer {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+.checkout {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.3rem 1.5rem;
+  padding-bottom: 1.3rem;
+  border-bottom: 2px solid rgba(225, 225, 225, 1);
+}
+.checkout p {
+  color: rgba(121, 121, 121, 1);
+}
+.imgIconContainer {
+  width: 50px;
+  height: 50px;
+  display: none;
+}
+.imgIconContainer
+.imgContainer img {
+  max-width: 100%; 
+  max-height: 100%; 
+  object-fit: contain;
+}
+
+
+.viewInvoiceButton {
+  margin: 0.3rem 0rem;
+  font-size: 0.85rem;
+  padding: 5px 2rem;
+  border-radius: 0.5rem;
+  background-color: rgba(46, 0, 82, 1);
+  color: rgba(255, 255, 255, 1);
+}

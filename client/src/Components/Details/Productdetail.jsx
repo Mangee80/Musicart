@@ -7,16 +7,16 @@ import { IoStarHalf } from "react-icons/io5";
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 const ProductDetail = () => {
-  // const { productId } = useParams();
+  const { id } = useParams();
   const [product, setProduct] = useState(null);
   const [selectedImage, setSelectedImage] = useState(null); // Set initial selectedImage to null
 
   const handleImageClick = (imageUrl) => {
     setSelectedImage(imageUrl);
   };  
-  const productId = '6605d6ebb0a5937dd5f8bc62';
+  
   useEffect(() => {
-    fetch(`http://localhost:5000/api/products/product/${productId}`)
+    fetch(`http://localhost:5000/api/products/product/${id}`)
           .then(response => {
               if (!response.ok) {
                   throw new Error('Network response was not ok');
@@ -30,7 +30,7 @@ const ProductDetail = () => {
           .catch(error => {
               console.error('There was a problem with the fetch operation:', error);
           });
-  }, [productId]);
+  }, [id]);
 
   if (!product) {
       return <div>Loading...</div>;

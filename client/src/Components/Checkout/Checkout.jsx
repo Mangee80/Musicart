@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styles from './Checkout.module.css';
+import { useNavigate } from 'react-router-dom';
 
 function CheckoutPage() {
   const [cartItems, setCartItems] = useState([]); // State to store cart items
@@ -9,6 +10,7 @@ function CheckoutPage() {
   const [loading, setLoading] = useState(false); // State to manage loading status
   const [error, setError] = useState(null); // State to manage error messages
 
+  const navigate = useNavigate();
   useEffect(() => {
     const userID = localStorage.getItem('userID'); // Retrieve the user ID from localStorage
     if (!userID) {
@@ -51,7 +53,7 @@ function CheckoutPage() {
     const userId = localStorage.getItem('userID');
 
     try {
-      const response = await fetch('/api/checkout', {
+      const response = await fetch('http://localhost:5000/api/checkout/checkout', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -65,6 +67,9 @@ function CheckoutPage() {
 
       if (!response.ok) throw new Error('Failed to place order');
       const data = await response.json();
+      if(data) { 
+        navigate('/thanks');
+      }
       // Handle success (e.g., redirect to a thank you page)
     } catch (error) {
       setError('An error occurred while placing your order');
