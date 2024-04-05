@@ -50,10 +50,17 @@ const FeedbackForm = ({ onClose }) => {
     return (
         <form onSubmit={handleSubmit}
               style={{
-                    maxWidth: '100%',
+                    width: '18vw',
+                    height: '33vh',
                     margin: 'auto',
                     position: 'absolute',
-                    bottom: '10vh', backgroundColor: 'white',
+                    bottom: '11vh',
+                    right: '-7vw',
+                    backgroundColor: 'white',
+                    borderRadius: '20px',
+                    boxShadow: '0px 0px 20px black',
+                    padding: '1.3rem',
+                    boxSizing: 'border-box'
               }}
             >
             <label>

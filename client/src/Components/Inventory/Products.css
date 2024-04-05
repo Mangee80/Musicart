@@ -118,6 +118,19 @@
     padding: 3px; 
     border-radius: 8rem;
   }
+
+  .feedback {
+    position: fixed;
+    bottom: 3rem;
+    right: 7rem;
+    z-index: 10;
+    height: 2rem;
+    width: 2rem;
+    padding: 1.1rem 1.1rem;
+    background-color: white;
+    box-shadow: 0px 0px 20px rgb(0, 0, 0.1);
+    border-radius: 50%;
+  }
   .feedback .imgcontainer {
     position: fixed;
     bottom: 3rem;
