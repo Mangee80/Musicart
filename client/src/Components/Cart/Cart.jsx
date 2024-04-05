@@ -190,7 +190,7 @@ const Cart = () => {
             </div>
             <div className={styles.cartTotal}>
               <p>Total Amount <span style={{marginLeft: '5rem'}}>₹{totalPrice + 50}</span></p>
-              <button className={styles.checkoutButton}>PLACE ORDER</button>
+              <button className={styles.checkoutButton} onClick={() => navigate('/checkout')}>PLACE ORDER</button>
             </div>
           </div>
         </div>
@@ -207,7 +207,7 @@ const Cart = () => {
         <div className={styles.cartTotal}>
           
           <p style={{fontSize: '1.6rem', fontWeight: '400', marginTop: '0.8rem'}}>Total Amount <span style={{marginLeft: '1rem', fontWeight: 'bold'}}>₹{totalPrice + 45}</span></p>
-          <button className={styles.checkoutButton}>PLACE ORDER</button>
+          <button className={styles.checkoutButton} onClick={() => navigate('/checkout')}>PLACE ORDER</button>
         </div>
       </div>
     </>

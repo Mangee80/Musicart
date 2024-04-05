@@ -10,7 +10,7 @@ export const Productdetailpage = () => {
   return (
     <div style={{display: 'flex', flexDirection: 'column'}}>
         <SearchBar currentRoute={currentRoute}/>
-        <Header />
+        <Header currentRoute={currentRoute}/>
         <ProductDetail />
         <Footer currentPage={currentroute}/>
     </div>
