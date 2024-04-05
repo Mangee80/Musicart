@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styles from './Checkout.module.css';
 import { useNavigate } from 'react-router-dom';
-
+import { IoArrowBack } from "react-icons/io5";
 function CheckoutPage() {
   const [cartItems, setCartItems] = useState([]); // State to store cart items
   const [selectedItem, setSelectedItem] = useState(null); // State to store the selected item for details
@@ -20,7 +20,7 @@ function CheckoutPage() {
 
     const fetchCartItems = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/cart/user-cart', {
+        const response = await fetch('https://musicart-9bam.vercel.app/api/cart/user-cart', {
           method: 'GET',
           headers: {
             'x-user-id': userID, // Include the user ID in the request headers
@@ -53,7 +53,7 @@ function CheckoutPage() {
     const userId = localStorage.getItem('userID');
 
     try {
-      const response = await fetch('http://localhost:5000/api/checkout/checkout', {
+      const response = await fetch('https://musicart-9bam.vercel.app/api/checkout/checkout', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -79,9 +79,14 @@ function CheckoutPage() {
   };
   const totalPrice = cartItems.reduce((total, item) => total + item.productId.Price, 0);
 
+  const handleBack = () => {
+    navigate('/cart');
+  };
+
   return (
     <div className={styles.container}>
-      <button className={styles.backtoProduct}>Back to cart</button>
+      <button onClick= {handleBack} className={styles.backtoProduct}>Back to cart</button>
+      <IoArrowBack onClick= {handleBack} className={styles.backbutton}/>
       <p className={styles.myCartHeading}>Checkout</p>
       <div className={styles.checkoutContainer}>
         <div className={styles.checkoutForm}>

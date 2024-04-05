@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import styles from './Cart.module.css';
 import { BiShoppingBag } from "react-icons/bi";
+import { IoArrowBack } from "react-icons/io5";
+import { useNavigate } from 'react-router-dom';
 
 const CartItem = ({ item, onUpdateQuantity }) => {
   const handleQuantityChange = (event) => {
@@ -72,10 +74,13 @@ const Cart = () => {
   const [items, setItems] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0); // Define totalPrice state
   const [totalQuantity, setTotalQuantity] = useState(0);
-
+  const navigate = useNavigate();
+  const handleBack = () => {
+    navigate('/');
+  };
   useEffect(() => {
     // Fetch items from the backend and setItems
-    fetch('http://localhost:5000/api/cart/user-cart', {
+    fetch('https://musicart-9bam.vercel.app/api/cart/user-cart', {
       headers: {
         'x-user-id': localStorage.getItem('userID')
       }
@@ -106,7 +111,7 @@ const Cart = () => {
         return;
       }
   
-      const response = await fetch('http://localhost:5000/api/cart/update-cart-item', {
+      const response = await fetch('https://musicart-9bam.vercel.app/api/cart/update-cart-item', {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -151,7 +156,8 @@ const Cart = () => {
   return (
     <>
       <div className={styles.cartContainer}>
-        <button className={styles.backtoProduct}>Back to products</button>
+        <button onClick= {handleBack} className={styles.backtoProduct}>Back to products</button>
+        <IoArrowBack onClick= {handleBack} className={styles.backbutton}/>
         <div className={styles.myCartHeading}>
           <BiShoppingBag size={50}/>
           <p>My Cart</p>

@@ -17,7 +17,7 @@ function InvoiceDetails() {
   useEffect(() => {
     const fetchInvoice = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/api/checkout/invoice/${id}`);
+        const response = await fetch(`https://musicart-9bam.vercel.app/api/checkout/invoice/${id}`);
         if (!response.ok) {
           throw new Error('Failed to fetch invoice');
         }

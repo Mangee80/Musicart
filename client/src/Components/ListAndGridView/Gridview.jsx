@@ -16,7 +16,7 @@ const ProductGrid = ({ musicGadgets }) => {
       }
 
       // Construct the fetch request
-      const response = await fetch('http://localhost:5000/api/cart/add-to-cart', {
+      const response = await fetch('https://musicart-9bam.vercel.app/api/cart/add-to-cart', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -61,7 +61,7 @@ const ProductGrid = ({ musicGadgets }) => {
         </div>
       ))}
     </div>
-  );
+  )
 };
 
 export default ProductGrid;

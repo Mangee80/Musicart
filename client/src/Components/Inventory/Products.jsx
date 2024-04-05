@@ -102,8 +102,7 @@ function ProductSection() {
     } else {
       fetchProducts(selectedFilters);
     }
-  }, [selectedFilters, selectedSortOption]); // Run effect whenever selectedFilters or selectedSortOption changes
-
+  }, [selectedFilters, selectedSortOption, searchQuery]); // Run effect whenever selectedFilters or selectedSortOption changes
 
   // Define arrays for filter options
   const filters = [
@@ -167,8 +166,10 @@ function ProductSection() {
 
 
       </div> 
-      <div className="feedback" onClick={toggleForm}>
-        <img src={feedback} alt="feedback" />
+      <div className="feedback" >
+        <div className="imgcontainer" onClick={toggleForm}>
+          <img src={feedback} alt="feedback" />
+        </div>
         {showForm && <FeedbackForm onClose={toggleForm} />}
       </div>
 

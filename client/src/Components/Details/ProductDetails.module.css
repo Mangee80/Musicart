@@ -106,9 +106,11 @@
   background-color: rgba(255, 214, 0, 1);
 }
 
-.responsivefeatureHeading {
+
+.responsiveproductDetailsContainer, .responsivefeatureHeading {
   display: none;
 }
+
 @media only screen and (max-width: 600px) {
   .imageInfoContainer {
     flex-direction: column;
@@ -130,6 +132,7 @@
   .productInfo {
     margin-left: 0rem; margin-top: 2rem;
   }
+  .responsiveproductDetailsContainer {display: block}
 .backbutton {
   display: flex;
   margin-bottom: 1rem;

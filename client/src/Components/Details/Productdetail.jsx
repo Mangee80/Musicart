@@ -20,7 +20,7 @@ const ProductDetail = () => {
   };  
   
   useEffect(() => {
-    fetch(`http://localhost:5000/api/products/product/${id}`)
+    fetch(`https://musicart-9bam.vercel.app/api/products/product/${id}`)
           .then(response => {
               if (!response.ok) {
                   throw new Error('Network response was not ok');
@@ -55,7 +55,42 @@ const ProductDetail = () => {
     return stars;
   };
 
+  const addToCart = async () => {
+    try {
+      const userId = localStorage.getItem('userID');
+      if (!userId) {
+        // If user is not logged in, navigate to the login route
+        navigate('/login');
+        return;
+      }
 
+      // Construct the fetch request to add item to cart
+      const response = await fetch('https://musicart-9bam.vercel.app/api/cart/add-to-cart', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ productId: product._id, quantity: 1, userId }),
+      });
+
+      if (response.ok) {
+        // If item added to cart successfully, you can provide feedback to the user
+        console.log('Item added to cart successfully');
+      } else {
+        console.error('Failed to add product to cart');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+
+  const handleBuyNow = () => {
+    // Call addToCart function to add item to cart
+    addToCart();
+
+    // After adding item to cart, navigate to the cart page
+    navigate('/cart');
+  };
   const handleBack = () => {
     navigate('/');
   };
@@ -84,7 +119,7 @@ const ProductDetail = () => {
           <div className={styles.responsiveproductDetailsContainer}>
             {/* Carousel Component */}
             <Carousel
-              showArrows={true}
+              showArrows={false}
               dynamicHeight={true}
               showStatus={false} // Hides the current image counter
               showIndicators={true} // Shows the dots at the bottom
@@ -123,8 +158,8 @@ const ProductDetail = () => {
           <p style={{fontSize: '1.1rem', marginTop: '2rem',marginBottom: '5px'}}><span style={{fontWeight: '500'}}>Available</span> - In Stock</p>
           <p style={{fontSize: '1.1rem', marginTop: '7px'}}><span style={{fontWeight: '500'}}>Brand</span> - {product.Company}</p>
           <div className={styles.buttons}>
-            <button>Add to cart</button>
-            <button style={{backgroundColor: 'rgba(255, 184, 0, 1)'}}>Buy Now</button>            
+            <button onClick={addToCart}>Add to cart</button>
+            <button style={{ backgroundColor: 'rgba(255, 184, 0, 1)' }} onClick={handleBuyNow}>Buy Now</button>            
           </div>
         </div>
       </div>

@@ -56,7 +56,7 @@
     flex-direction: column;
     align-items: center;
   }
-  
+  .backbutton {display: none;}
   .quantitySelect {
     width: 7rem; /* Adjust as needed */
     text-align-last: center; /* Centers the selected option text */
@@ -153,6 +153,13 @@
       padding-top: 2px;
     }
 
+
+    .backtoProduct {display: none;}
+    .Select {
+      width: 75%;
+      font-size: 1rem;
+      padding: 0.5rem;
+    }
     .checkoutButton{
       font-size: 1.3rem;
       padding: 0.7rem;

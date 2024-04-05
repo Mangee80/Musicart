@@ -133,6 +133,8 @@
   }
   .orderSummary {
     display: none;
+  } .backbutton {
+    display: none;
   }
   .error {
     color: red;
@@ -215,6 +217,15 @@
     .bottomPlaceOrder {
       display: none;
     }
+    .backbutton {
+      display: flex;
+      margin-bottom: 1rem;
+      padding: 5px;
+      border-radius: 50%;
+      box-shadow: 0px 0px 5px rgba(0, 0, 0, 1)
+    }
+    
+    .backtoProduct {display: none;}
     .Select {
       width: 75%;
       font-size: 1rem;

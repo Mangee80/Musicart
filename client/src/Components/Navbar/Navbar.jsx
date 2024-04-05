@@ -30,7 +30,7 @@ function Header({ currentRoute }) {
           return;
         }
 
-        const response = await fetch('http://localhost:5000/api/cart/user-cart', {
+        const response = await fetch('https://musicart-9bam.vercel.app/api/cart/user-cart', {
           headers: {
             'x-user-id': userID,
           }

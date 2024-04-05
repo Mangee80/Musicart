@@ -71,7 +71,7 @@
   /* Filter section styles */
   .filter-section {
     display: flex;
-    gap: 0.7rem;
+    gap: 1rem;
     margin-left: 4rem;
     margin-top: 0px;
   }
@@ -84,6 +84,14 @@
     background-color: rgba(217, 217, 217, 1);
   }
 
+  .company select {
+    width: 7rem;
+    text-indent:0.5rem;
+  }
+  .price select {
+    width: 5rem;
+    text-indent: 0.7rem;
+  }
   .filter-section select option {
     background-color: rgba(255, 255, 255, 1); /* Change this to the desired background color for options */
     color: #333; /* Change this to the desired text color for options */
@@ -110,7 +118,7 @@
     padding: 3px; 
     border-radius: 8rem;
   }
-  .feedback {
+  .feedback .imgcontainer {
     position: fixed;
     bottom: 3rem;
     right: 7rem;

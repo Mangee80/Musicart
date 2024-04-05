@@ -14,7 +14,7 @@ function InvoiceList() {
     const fetchCheckouts = async () => {
       try {
         const userID = localStorage.getItem('userID'); // Get the user ID from localStorage
-        const response = await fetch(`http://localhost:5000/api/checkout/checkouts/${userID}`);
+        const response = await fetch(`https://musicart-9bam.vercel.app/api/checkout/checkouts/${userID}`);
         if (!response.ok) {
           throw new Error('Failed to fetch checkouts');
         }

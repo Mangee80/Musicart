@@ -48,7 +48,14 @@ const FeedbackForm = ({ onClose }) => {
     
 
     return (
-        <form onSubmit={handleSubmit} style={{ maxWidth: '500px', margin: 'auto' }}>
+        <form onSubmit={handleSubmit}
+              style={{
+                    maxWidth: '100%',
+                    margin: 'auto',
+                    position: 'absolute',
+                    bottom: '10vh', backgroundColor: 'white',
+              }}
+            >
             <label>
                 Type of Feedback
                 <select
