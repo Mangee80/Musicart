@@ -6,7 +6,11 @@ import { IoStarHalf } from "react-icons/io5";
 
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
+
+import { IoArrowBack } from "react-icons/io5";
+import { useNavigate } from 'react-router-dom';
 const ProductDetail = () => {
+  const navigate = useNavigate();
   const { id } = useParams();
   const [product, setProduct] = useState(null);
   const [selectedImage, setSelectedImage] = useState(null); // Set initial selectedImage to null
@@ -52,10 +56,14 @@ const ProductDetail = () => {
   };
 
 
+  const handleBack = () => {
+    navigate('/');
+  };
+
   return (
     <div className={styles.productDetailsContainer}>
-      <button className={styles.backtoProduct}>Back to products</button>
-
+      <button onClick= {handleBack} className={styles.backtoProduct}>Back to products</button>
+      <IoArrowBack onClick= {handleBack} className={styles.backbutton}/>
       <p className={styles.featureHeading}>{product.featureHeading}</p>
       <div className={styles.imageInfoContainer}>
         <div>
@@ -73,6 +81,26 @@ const ProductDetail = () => {
               />
             ))}
           </div>
+          <div className={styles.responsiveproductDetailsContainer}>
+            {/* Carousel Component */}
+            <Carousel
+              showArrows={true}
+              dynamicHeight={true}
+              showStatus={false} // Hides the current image counter
+              showIndicators={true} // Shows the dots at the bottom
+              showThumbs={false} // Hides thumbnail strip at the bottom
+              selectedItem={0} // Index of the image to start with
+              useKeyboardArrows={true} // Allows arrow key navigation
+              swipeable={true} // Allows swipe action on touch devices
+              emulateTouch={true} // Allows swipe action on mouse click and drag
+            >
+              {product.images.map((image, index) => (
+                <div key={index}>
+                  <img src={image} alt={product.model} />
+                </div>
+              ))}
+            </Carousel>
+          </div>
         </div>
         <div className={styles.productInfo}>
           <p className={styles.productName}>{product.Company}<span>{product.model}</span></p>
@@ -81,7 +109,8 @@ const ProductDetail = () => {
               {renderStars(product.reviews.overallRating)}
             </div>
             <p style={{marginTop: '1px', marginLeft: '10px'}}>({product.reviews.totalReviews} Customer reviews)</p>
-          </div>          
+          </div> 
+          <p className={styles.responsivefeatureHeading}>{product.featureHeading}</p>         
           <p style={{fontSize: '1.1rem', fontWeight: '500', marginTop: '5px',marginBottom: '5px'}}><strong>Price:</strong> {product.Price}</p>
           <p style={{fontSize: '1.1rem', fontWeight: '300', marginTop: '5px',marginBottom: '10px'}}>{product.Colour}<span style={{ margin: '0rem 0.5rem' }}>|</span>{product.HeadphoneType}</p>
                     

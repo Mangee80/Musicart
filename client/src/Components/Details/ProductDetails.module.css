@@ -15,6 +15,12 @@
     border: none;
     color: rgba(255, 255, 255, 1);
   }
+  .backbutton {
+    display: none;
+  }
+  
+
+
   .productMainImage {
     width: 22.8rem;
     height: 21rem;
@@ -100,10 +106,36 @@
   background-color: rgba(255, 214, 0, 1);
 }
 
+.responsivefeatureHeading {
+  display: none;
+}
 @media only screen and (max-width: 600px) {
   .imageInfoContainer {
     flex-direction: column;
     width: 100%;
-    padding: 1rem;
   }
+
+  .responsivefeatureHeading {
+    display: flex;
+    font-size: 1.13rem;
+    font-weight: 400;
+    margin-bottom: 1rem;
+  }
+  .featureHeading {
+    display: none;
+  }
+  .productMainImage, .productImagesContainer {
+    display: none;
+  }.productDetailsContainer {padding: 0px; margin: 1rem;margin-bottom: 4rem;}
+  .productInfo {
+    margin-left: 0rem; margin-top: 2rem;
+  }
+.backbutton {
+  display: flex;
+  margin-bottom: 1rem;
+  padding: 5px;
+  border-radius: 50%;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 1)
+}
+.backtoProduct {display: none;}
 }

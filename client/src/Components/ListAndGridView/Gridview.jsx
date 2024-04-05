@@ -56,7 +56,7 @@ const ProductGrid = ({ musicGadgets }) => {
             </h3>
             <p className={styles.productPrice}><span style={{marginRight: '0.3rem'}}>Price -</span><span>₹ </span> {gadget.Price}</p>
             <p className={styles.productColor}>{gadget.Colour}<span style={{ margin: '0rem 0.5rem' }}>|</span>{gadget.HeadphoneType}</p>
-            <div className={styles.addToCart}onClick={() => addToCart(gadget._id)}><MdOutlineAddShoppingCart size={34} style={{ color: 'rgba(29, 112, 0, 1)', borderRadius: '50%', boxShadow: '0px 0px 10px black', padding: '7px'}} /></div>
+            <div className={styles.addToCart}onClick={() => addToCart(gadget._id)}><MdOutlineAddShoppingCart size={34} style={{ color: 'rgba(29, 112, 0, 1)', borderRadius: '50%', boxShadow: '0px 0px 10px black', padding: '7px', backgroundColor: 'white'}} /></div>
           </div>
         </div>
       ))}
