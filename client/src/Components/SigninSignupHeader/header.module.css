@@ -20,4 +20,4 @@
     font-weight: 600;
     line-height: 51.71px;
     color: rgba(46, 0, 82, 1);
-}
+}   @media screen and (max-width: 600px) { .header {display: none;}}

@@ -91,3 +91,23 @@
     font-weight: 500;
   }
   .signin span { text-decoration-line: underline;}
+
+
+
+  .responsiveHeader {display: none;}
+  @media screen and (max-width: 600px) {
+    .container {
+      padding: 10px;
+      width: 100%;
+      height: 100%;
+      position: relative;
+      top: 0vh;
+      left: 0vw;
+    }
+    .responsiveHeader {
+      display: flex;
+      font-size: large;
+      font-weight: 500;
+      color: rgba(46, 0, 82, 1);
+    }
+  }

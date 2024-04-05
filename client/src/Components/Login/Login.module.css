@@ -107,10 +107,20 @@
     margin-top: 1rem;
   }
   
+  .responsiveHeader {display: none;}
   /* Media Query for Small Screens */
   @media screen and (max-width: 600px) {
+    
+    .responsiveHeader {
+      display: flex;
+      font-size: large;
+      font-weight: 500;
+      color: rgba(46, 0, 82, 1);
+      text-align: left;
+    }
     .container {
       padding: 10px;
+      width: 100%;
     }
     .input {
       width: 100%;

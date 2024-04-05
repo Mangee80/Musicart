@@ -70,7 +70,7 @@ const RegisterForm = () => {
   
   return (
     <div className={styles.container}>
-      
+      <p className={styles.responsiveHeader}>Welcome</p>
       <div className={styles.formContainer}>
         
         <h2 className={styles.h2}>Create Account</h2>

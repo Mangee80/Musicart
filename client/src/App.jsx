@@ -7,6 +7,8 @@ import { Cartpage } from './Pages/Cartpage'
 import { Checkoutpage } from './Pages/Checkoutpage'
 import { Invoicepage } from './Pages/InvoicePage'
 
+import {} from './Pages/Signuppage'
+
 import { Invoicedetailpage } from './Pages/InvoiceDetailPage'
 import './App.css'
 function App() {

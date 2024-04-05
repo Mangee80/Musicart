@@ -62,7 +62,7 @@ const LoginForm = () => {
   
     return (
       <div className={styles.container}>
-
+        <p className={styles.responsiveHeader} style={{ textAlign: 'left' }}>Welcome</p>
         <div className={styles.formContainer}>
             <h2 className={styles.h2}>Sign in</h2>
             <p className={styles.label}>Enter your identifier or mobile number</p>
