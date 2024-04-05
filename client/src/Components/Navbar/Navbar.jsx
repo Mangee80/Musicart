@@ -118,13 +118,13 @@ function Header({ currentRoute }) {
             </>
           )}
 
-          {!isLoggedIn && currentRoute !== '' && (
+          {!isLoggedIn && currentRoute !== '' &&  (
             <div className={`${styles.viewCartButton} ${styles.visible}`} onClick={() => navigate('/login')}>
               <MdOutlineAddShoppingCart size={18}/> <p style={{marginLeft: '5px', marginTop: '3px'}}>View Cart <span>{totalItems}</span></p>
             </div>
           )}
 
-          {!['Invoice',''].includes(currentRoute) && (
+          {!['Invoice',''].includes(currentRoute) && currentRoute === '/detail' && (
             <div className={`${styles.viewCartButton} ${styles.visible}`} onClick={() => navigate('/cart')}>
               <MdOutlineAddShoppingCart size={18}/> <p style={{marginLeft: '5px', marginTop: '3px'}}>View Cart <span>{totalItems}</span></p>
             </div>

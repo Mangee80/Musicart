@@ -6,10 +6,10 @@ import Footer from '../Components/Footer/footer'
 
 export const Productdetailpage = () => {
   const currentroute = 'detail';
-  const currentRoute = '/';
+  const currentRoute = '/detail';
   return (
     <div style={{display: 'flex', flexDirection: 'column'}}>
-        <SearchBar />
+        <SearchBar currentRoute={currentRoute}/>
         <Header />
         <ProductDetail />
         <Footer currentPage={currentroute}/>
