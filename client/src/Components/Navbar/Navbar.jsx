@@ -71,7 +71,9 @@ function Header({ currentRoute }) {
     }
     return null;
   }
-  
+  const navigateToInvoicePage = () => {
+    navigate('/invoice');
+  };
   return (
     <div className={styles.header}>
       <div className={styles.headerAuthentication}>
@@ -97,7 +99,13 @@ function Header({ currentRoute }) {
               <img src={musicart} alt="musicartlogo" />
           </div>
           <h1 className={styles.h1}>Musicart</h1>
-          <p className={styles.routeText}>Home <span style={{marginLeft: '5px'}}>{currentRoute}</span></p>
+          <p className={styles.routeText}>
+            Home
+            {/* Renders the "View Invoice" span only if currentRoute is empty */}
+            {currentRoute === '' && <span style={{ marginLeft: '10px', cursor: 'pointer'}} onClick={navigateToInvoicePage}>Invoice</span>}
+            {/* Always renders the currentRoute span */}
+            {currentRoute !== '' && <span style={{ marginLeft: '5px' }}>{currentRoute}</span>}
+          </p>
         </div>
 
         <div style={{display: 'flex'}}>
