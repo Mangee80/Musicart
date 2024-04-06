@@ -77,7 +77,7 @@ function CheckoutPage() {
       setLoading(false);
     }
   };
-  const totalPrice = cartItems.reduce((total, item) => total + item.productId.Price, 0);
+  const totalPrice = cartItems.reduce((total, item) => total + item.productId.Price * item.quantity, 0);
 
   const handleBack = () => {
     navigate('/cart');
@@ -117,7 +117,7 @@ function CheckoutPage() {
               </select>
             </div>
           </div>
-          <div className={styles.labelField} style={{display:'flex', margin: '0.5rem 0rem', paddingBottom: '1.3rem', borderBottom: '2px solid rgba(225, 225, 225, 1)'}}>
+          <div className={styles.labelField} style={{display:'flex', margin: '0.5rem 0rem', paddingBottom: '1rem', borderBottom: '2px solid rgba(225, 225, 225, 1)'}}>
             <p className={styles.fieldLabel}>3. Review items and delivery</p>
             <div className={styles.fields} style={{display:'flex', flexDirection: 'column'}}>
               <div className={styles.gridContainer}>
@@ -139,9 +139,9 @@ function CheckoutPage() {
                       <p style={{fontSize: '1.3rem', fontWeight: '500'}}>{selectedItem.productId.Company}</p>
                       <h3 style={{fontSize: '1.3rem', fontWeight: '500'}}>{selectedItem.productId.model}</h3>
                     </div>
-                    <p style={{fontSize: '17px', color: 'rgba(162, 162, 162, 1)', marginTop: '0.4rem'}}>Colour : {selectedItem.productId.Colour}</p>
-                    <p className={styles.inStock}style={{fontSize: '17px', color: 'rgba(162, 162, 162, 1)', marginBottom: '0.4rem'}}>In Stock</p>
-                    <p style={{fontSize: '1rem', color: 'rgba(0, 0, 0, 1)'}}>Estimated delivery : <br/>Monday — FREE Standard Delivery</p>
+                    <p style={{fontSize: '0.88rem', color: 'rgba(162, 162, 162, 1)', marginTop: '0.4rem'}}>Colour : {selectedItem.productId.Colour}</p>
+                    <p className={styles.inStock} style={{fontSize: '1rem', color: 'rgba(162, 162, 162, 1)', marginBottom: '0.4rem'}}>In Stock</p>
+                    <p style={{fontSize: '1rem', marginTop: '0.3rem', color: 'rgba(0, 0, 0, 1)'}}>Estimated delivery : <br/>Monday — FREE Standard Delivery</p>
                   </div>
                 )}
               </div>

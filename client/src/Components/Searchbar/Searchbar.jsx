@@ -19,7 +19,7 @@ function SearchBar({ currentRoute }) {
 
   return (
     <div>
-      {currentRoute === 'login' || currentRoute === 'signup' || currentRoute === 'invoice' ||  currentRoute === 'checkout' ? (
+      {currentRoute === 'login' || currentRoute === 'thanks' || currentRoute === 'signup' || currentRoute === 'invoice' ||  currentRoute === 'checkout' ? (
         <div className={styles.header}>
             <div className={styles.img_container}>
                 <img src={musicart} alt="musicartlogo" />

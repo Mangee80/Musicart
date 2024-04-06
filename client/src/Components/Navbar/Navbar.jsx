@@ -71,8 +71,7 @@ function Header({ currentRoute }) {
     }
     return null;
   }
-  console.log(currentRoute);
-  console.log(isLoggedIn);
+  
   return (
     <div className={styles.header}>
       <div className={styles.headerAuthentication}>

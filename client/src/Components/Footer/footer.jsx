@@ -30,11 +30,11 @@ const Footer = ({ currentPage }) => {
         navigate(path);
     };
 
-    // Define footer content based on the current page
     let footerContent = null;
     switch (currentPage) {
         case 'home':
         case 'invoice':
+        case 'thanks':
             footerContent = (
                 <React.Fragment>
                     <div style={{display: 'flex', flexDirection: 'column',gap: '2px', alignItems:'center'}} onClick={() => handleClick('/home')}>
@@ -66,7 +66,7 @@ const Footer = ({ currentPage }) => {
         case 'login':
         case 'signup':
             footerContent = (
-                <p>Musicart | All rights reserved</p>
+                <p>Musicart <span style={{margin: '0rem 0.5rem'}}>|</span> All rights reserved</p>
             );
             break;
         case 'detail':
@@ -103,7 +103,7 @@ const Footer = ({ currentPage }) => {
     return (
         <>
             <div className="footerSection">
-                <p>Musicart | All rights reserved</p>
+                <p>Musicart <span style={{margin: '0rem 1rem'}}>|</span> All rights reserved</p>
             </div>
             <div className={`mobileFooter ${currentPage}-footer`}>
                 {footerContent}

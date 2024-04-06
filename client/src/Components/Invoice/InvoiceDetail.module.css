@@ -59,6 +59,7 @@
 }
   .fields {
     width: 30vw;
+    max-height: 36.7vh;
   }
   .gridContainer img {
     
@@ -68,6 +69,7 @@
     cursor: pointer;
     border: 2px solid rgba(46, 0, 82, 1);
     border-radius: 3px;
+    box-sizing: border-box;
   }
   
   .gridContainer img:hover,

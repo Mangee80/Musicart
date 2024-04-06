@@ -5,7 +5,9 @@ import { MdOutlineAddShoppingCart } from "react-icons/md";
 
 const ProductGrid = ({ musicGadgets }) => {
   const navigate = useNavigate();
-  const addToCart = async (productId) => {
+  const addToCart = async (event, productId) => {
+    
+    event.stopPropagation(); // Prevent the event from bubbling up
     try {
       const userId = localStorage.getItem('userID'); // Assuming you store the user ID in localStorage
       if (!userId) {
@@ -56,7 +58,15 @@ const ProductGrid = ({ musicGadgets }) => {
             </h3>
             <p className={styles.productPrice}><span style={{marginRight: '0.3rem'}}>Price -</span><span>₹ </span> {gadget.Price}</p>
             <p className={styles.productColor}>{gadget.Colour}<span style={{ margin: '0rem 0.5rem' }}>|</span>{gadget.HeadphoneType}</p>
-            <div className={styles.addToCart}onClick={() => addToCart(gadget._id)}><MdOutlineAddShoppingCart size={34} style={{ color: 'rgba(29, 112, 0, 1)', borderRadius: '50%', boxShadow: '0px 0px 10px black', padding: '7px', backgroundColor: 'white'}} /></div>
+            <div className={styles.addToCart} onClick={(e) => addToCart(e, gadget._id)}>
+              <MdOutlineAddShoppingCart size={34} style={{
+                color: 'rgba(29, 112, 0, 1)',
+                borderRadius: '50%',
+                boxShadow: '0px 0px 10px black',
+                padding: '7px',
+                backgroundColor: 'white'
+              }} />
+            </div>
           </div>
         </div>
       ))}
