@@ -32,6 +32,11 @@
   color: #333;
   font-weight: 500;
 }
+button {
+    border-radius: 0.5rem;
+    background-color: rgba(46, 0, 82, 1);
+    color: rgba(255, 255, 255, 1);
+}
 .productNameSpace {
    margin: 0 0.5rem; /* Adjust the margin value as needed */
 }

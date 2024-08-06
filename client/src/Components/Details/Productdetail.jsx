@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import styles from './ProductDetails.module.css';
+import ReviewComponent from '../Review/ShowReview'
 import { IoStar } from "react-icons/io5";
 import { IoStarHalf } from "react-icons/io5";
-
+import  Reviewform from "../Review/ReviewForm"
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 
@@ -100,67 +101,72 @@ const ProductDetail = () => {
       <button onClick= {handleBack} className={styles.backtoProduct}>Back to products</button>
       <IoArrowBack onClick= {handleBack} className={styles.backbutton}/>
       <p className={styles.featureHeading}>{product.featureHeading}</p>
-      <div className={styles.imageInfoContainer}>
-        <div>
-          <div className={styles.productMainImage}>
-            <img src={selectedImage} alt={product.model} />
-          </div>
-          <div className={styles.productImagesContainer}>
-            {product.images.map((image, index) => (
-              <img
-                key={index}
-                src={image}
-                alt={product.model}
-                className={selectedImage === image ? styles.selected : ''}
-                onClick={() => handleImageClick(image)}
-              />
-            ))}
-          </div>
-          <div className={styles.responsiveproductDetailsContainer}>
-            {/* Carousel Component */}
-            <Carousel
-              showArrows={false}
-              dynamicHeight={true}
-              showStatus={false} // Hides the current image counter
-              showIndicators={true} // Shows the dots at the bottom
-              showThumbs={false} // Hides thumbnail strip at the bottom
-              selectedItem={0} // Index of the image to start with
-              useKeyboardArrows={true} // Allows arrow key navigation
-              swipeable={true} // Allows swipe action on touch devices
-              emulateTouch={true} // Allows swipe action on mouse click and drag
-            >
+      <div style={{display: 'flex'}}>
+        <div className={styles.imageInfoContainer}>
+          <div>
+            <div className={styles.productMainImage}>
+              <img src={selectedImage} alt={product.model} />
+            </div>
+            <div className={styles.productImagesContainer}>
               {product.images.map((image, index) => (
-                <div key={index}>
-                  <img src={image} alt={product.model} />
-                </div>
+                <img
+                  key={index}
+                  src={image}
+                  alt={product.model}
+                  className={selectedImage === image ? styles.selected : ''}
+                  onClick={() => handleImageClick(image)}
+                />
               ))}
-            </Carousel>
+            </div>
+            <div className={styles.responsiveproductDetailsContainer}>
+              {/* Carousel Component */}
+              <Carousel
+                showArrows={false}
+                dynamicHeight={true}
+                showStatus={false} // Hides the current image counter
+                showIndicators={true} // Shows the dots at the bottom
+                showThumbs={false} // Hides thumbnail strip at the bottom
+                selectedItem={0} // Index of the image to start with
+                useKeyboardArrows={true} // Allows arrow key navigation
+                swipeable={true} // Allows swipe action on touch devices
+                emulateTouch={true} // Allows swipe action on mouse click and drag
+              >
+                {product.images.map((image, index) => (
+                  <div key={index}>
+                    <img src={image} alt={product.model} />
+                  </div>
+                ))}
+              </Carousel>
+            </div>
+          </div>
+          <div className={styles.productInfo}>
+            <p className={styles.productName}>{product.Company}<span>{product.model}</span></p>
+            <div className={styles.reviews}>
+              <div>
+                {renderStars(product.reviews.overallRating)}
+              </div>
+              <p style={{marginTop: '1px', marginLeft: '10px'}}>({product.reviews.totalReviews} Customer reviews)</p>
+            </div> 
+            <p className={styles.responsivefeatureHeading}>{product.featureHeading}</p>         
+            <p className={styles.prices} style={{ fontWeight: '500', marginTop: '5px',marginBottom: '5px'}}><strong>Price:</strong> ₹{product.Price}</p>
+            <p style={{fontSize: '1.1rem', fontWeight: '300', marginTop: '5px',marginBottom: '10px'}}>{product.Colour}<span style={{ margin: '0rem 0.5rem' }}>|</span>{product.HeadphoneType}</p>
+                      
+            <p>About this item</p>
+            <ul className={styles.detailsList}>
+              {product.details.map((detail, index) => (
+                <li key={index}>{detail}</li>
+              ))}
+            </ul>
+            <p style={{fontSize: '1.1rem', marginTop: '2rem',marginBottom: '5px'}}><span style={{fontWeight: '500'}}>Available</span> - In Stock</p>
+            <p style={{fontSize: '1.1rem', marginTop: '7px'}}><span style={{fontWeight: '500'}}>Brand</span> - {product.Company}</p>
+            <div className={styles.buttons}>
+              <button onClick={addToCart}>Add to cart</button>
+              <button style={{ backgroundColor: 'rgba(255, 184, 0, 1)' }} onClick={handleBuyNow}>Buy Now</button>            
+            </div>
           </div>
         </div>
-        <div className={styles.productInfo}>
-          <p className={styles.productName}>{product.Company}<span>{product.model}</span></p>
-          <div className={styles.reviews}>
-            <div>
-              {renderStars(product.reviews.overallRating)}
-            </div>
-            <p style={{marginTop: '1px', marginLeft: '10px'}}>({product.reviews.totalReviews} Customer reviews)</p>
-          </div> 
-          <p className={styles.responsivefeatureHeading}>{product.featureHeading}</p>         
-          <p style={{fontSize: '1.1rem', fontWeight: '500', marginTop: '5px',marginBottom: '5px'}}><strong>Price:</strong> {product.Price}</p>
-          <p style={{fontSize: '1.1rem', fontWeight: '300', marginTop: '5px',marginBottom: '10px'}}>{product.Colour}<span style={{ margin: '0rem 0.5rem' }}>|</span>{product.HeadphoneType}</p>
-                    
-          <p>About this item</p>
-          <ul className={styles.detailsList}>
-            {product.details.map((detail, index) => (
-              <li key={index}>{detail}</li>
-            ))}
-          </ul>
-          <p style={{fontSize: '1.1rem', marginTop: '2rem',marginBottom: '5px'}}><span style={{fontWeight: '500'}}>Available</span> - In Stock</p>
-          <p style={{fontSize: '1.1rem', marginTop: '7px'}}><span style={{fontWeight: '500'}}>Brand</span> - {product.Company}</p>
-          <div className={styles.buttons}>
-            <button onClick={addToCart}>Add to cart</button>
-            <button style={{ backgroundColor: 'rgba(255, 184, 0, 1)' }} onClick={handleBuyNow}>Buy Now</button>            
-          </div>
+        <div className={styles.review}>
+          <ReviewComponent /> <Reviewform />
         </div>
       </div>
     </div>

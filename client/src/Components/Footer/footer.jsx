@@ -37,26 +37,26 @@ const Footer = ({ currentPage }) => {
         case 'thanks':
             footerContent = (
                 <React.Fragment>
-                    <div style={{display: 'flex', flexDirection: 'column',gap: '2px', alignItems:'center'}} onClick={() => handleClick('/home')}>
-                        <GrHomeRounded size={23} color='rgba(46, 0, 82, 1)' style={{ fontWeight: 'bold' }}/>
+                    <div style={{display: 'flex', flexDirection: 'column',gap: '2px', alignItems:'center'}} onClick={() => handleClick('/')}>
+                        <GrHomeRounded size={30} color='rgba(46, 0, 82, 1)' style={{ fontWeight: 'bold' }}/>
                         <p>Home</p>
                     </div>
-                    <div style={{display: 'flex', flexDirection: 'column',gap: '2px', alignItems:'center'}} onClick={() => handleClick('/home')} onClick={() => handleClick('/cart')}>
-                        <MdOutlineAddShoppingCart size={23} color='rgba(46, 0, 82, 1)' style={{ fontWeight: 'bold' }}/>
+                    <div style={{display: 'flex', flexDirection: 'column',gap: '2px', alignItems:'center'}} onClick={() => handleClick('/cart')}>
+                        <MdOutlineAddShoppingCart size={35} color='rgba(46, 0, 82, 1)' style={{ fontWeight: 'bold' }}/>
                         <p>Cart</p>
                     </div>
-                    <div style={{display: 'flex', flexDirection: 'column',gap: '2px', alignItems:'center'}} onClick={() => handleClick('/home')} onClick={() => handleClick('/invoice')}>
-                        <LiaFileInvoiceSolid size={23} color='rgba(46, 0, 82, 1)' style={{ fontWeight: 'bold' }}/>
+                    <div style={{display: 'flex', flexDirection: 'column',gap: '2px', alignItems:'center'}} onClick={() => handleClick('/invoice')}>
+                        <LiaFileInvoiceSolid size={35} color='rgba(46, 0, 82, 1)' style={{ fontWeight: 'bold' }}/>
                         <p>Invoice</p>
                     </div>
                     {isLoggedIn ? (
-                        <div style={{display: 'flex', flexDirection: 'column',gap: '2px', alignItems:'center'}} onClick={() => handleClick('/home')} onClick={handleLogout}>
-                            <FaRegUser size={23} color='rgba(46, 0, 82, 1)' style={{ fontWeight: 'bold' }}/>
+                        <div style={{display: 'flex', flexDirection: 'column',gap: '2px', alignItems:'center'}} onClick={handleLogout}>
+                            <FaRegUser size={30} color='rgba(46, 0, 82, 1)' style={{ fontWeight: 'bold' }}/>
                             <p>Logout</p>
                         </div>
                     ) : (
-                        <div style={{display: 'flex', flexDirection: 'column',gap: '2px', alignItems:'center'}} onClick={() => handleClick('/home')} onClick={() => handleClick('/login')}>
-                            <FaRegUser size={23} color='rgba(46, 0, 82, 1)' style={{ fontWeight: 'bold' }}/>
+                        <div style={{display: 'flex', flexDirection: 'column',gap: '2px', alignItems:'center'}} onClick={() => handleClick('/login')}>
+                            <FaRegUser size={30} color='rgba(46, 0, 82, 1)' style={{ fontWeight: 'bold' }}/>
                             <p>Login</p>
                         </div>
                     )}
@@ -74,22 +74,22 @@ const Footer = ({ currentPage }) => {
         case 'checkout':
             footerContent = (
                 <React.Fragment>
-                    <div onClick={() => handleClick('/home')}>
-                        <GrHomeRounded />
+                    <div style={{display: 'flex', flexDirection: 'column',gap: '2px', alignItems:'center'}} onClick={() => handleClick('/')}>
+                        <GrHomeRounded size={30} color='rgba(46, 0, 82, 1)' style={{ fontWeight: 'bold' }}/>
                         <p>Home</p>
                     </div>
-                    <div onClick={() => handleClick('/cart')}>
-                        <MdOutlineAddShoppingCart />
+                    <div style={{display: 'flex', flexDirection: 'column',gap: '2px', alignItems:'center'}} onClick={() => handleClick('/cart')}>
+                        <MdOutlineAddShoppingCart size={35} color='rgba(46, 0, 82, 1)' style={{ fontWeight: 'bold' }}/>
                         <p>Cart</p>
                     </div>
                     {isLoggedIn ? (
-                        <div style={{display: 'flex', flexDirection: 'column',gap: '2px', alignItems:'center'}} onClick={() => handleClick('/home')} onClick={handleLogout}>
-                            <FaRegUser size={23} color='rgba(46, 0, 82, 1)' style={{ fontWeight: 'bold' }}/>
+                        <div style={{display: 'flex', flexDirection: 'column',gap: '2px', alignItems:'center'}} onClick={handleLogout}>
+                            <FaRegUser size={30} color='rgba(46, 0, 82, 1)' style={{ fontWeight: 'bold' }}/>
                             <p>Logout</p>
                         </div>
                     ) : (
-                        <div style={{display: 'flex', flexDirection: 'column',gap: '2px', alignItems:'center'}} onClick={() => handleClick('/home')} onClick={() => handleClick('/login')}>
-                            <FaRegUser size={23} color='rgba(46, 0, 82, 1)' style={{ fontWeight: 'bold' }}/>
+                        <div style={{display: 'flex', flexDirection: 'column',gap: '2px', alignItems:'center'}} onClick={() => handleClick('/login')}>
+                            <FaRegUser size={30} color='rgba(46, 0, 82, 1)' style={{ fontWeight: 'bold' }}/>
                             <p>Login</p>
                         </div>
                     )}

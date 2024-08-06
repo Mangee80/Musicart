@@ -57,12 +57,12 @@ const ProductGrid = ({ musicGadgets }) => {
               <span>{gadget.model}</span>
             </h3>
             <p className={styles.productPrice}><span style={{marginRight: '0.3rem'}}>Price -</span><span>₹ </span> {gadget.Price}</p>
-            <p className={styles.productColor}>{gadget.Colour}<span style={{ margin: '0rem 0.5rem' }}>|</span>{gadget.HeadphoneType}</p>
+            <p className={styles.productColor}>{gadget.Colour}<span>|</span>{gadget.HeadphoneType}</p>
             <div className={styles.addToCart} onClick={(e) => addToCart(e, gadget._id)}>
-              <MdOutlineAddShoppingCart size={34} style={{
+              <MdOutlineAddShoppingCart size={31} style={{
                 color: 'rgba(29, 112, 0, 1)',
                 borderRadius: '50%',
-                boxShadow: '0px 0px 10px black',
+                boxShadow: '0px 0px 15px black',
                 padding: '7px',
                 backgroundColor: 'white'
               }} />

@@ -1,0 +1,59 @@
+/* ReviewComponent.module.css */
+
+.reviewContainer {
+    border: 2.3px solid #ccc;
+    padding:  0.5rem 0.5rem 0rem 0.5rem ;
+    border-radius:  1rem 1rem 0rem 0rem;
+  }
+  
+  .userInfo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 0.5rem;
+  }
+  
+  .avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 12px;
+  }
+  
+  .userName {
+    font-weight: bold;
+    margin-right: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .totalRating {
+    font-size: 18px;
+  }
+  
+  .boldHeading {
+    font-weight: bold;
+  }
+  
+  .footer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 5px;
+    background-color: rgba(225, 215, 188, 0.573);
+    box-shadow: -10px 0 0 0 rgba(225, 215, 188, 0.573), 10px 0 0 0 rgba(225, 215, 188, 0.573);
+  }
+  
+  .reviewDate {
+    font-size: 12px;
+  }
+  
+  .certifiedUser {
+    
+    font-weight: 500;
+    font-size: 0.7rem;
+    font-family: cursive;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.2rem;}  

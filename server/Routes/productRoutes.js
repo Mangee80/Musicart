@@ -144,7 +144,49 @@ router.get('/search/:searchQuery', async (req, res) => {
   }
 });
 
+// Define adjectives based on ratings
+const adjectivesByRating = {
+  1: ["poor", "bad", "terrible"],
+  2: ["below average", "mediocre", "not good"],
+  3: ["average", "fair", "moderate"],
+  4: ["good", "great", "very good"],
+  5: ["excellent", "outstanding", "fabulous"]
+};
 
+// Route to add a review to a product
+router.post('/products/:productId/reviews', async (req, res) => {
+  const { productId } = req.params;
+  const { rating, comment, userId } = req.body;
+
+  try {
+      const product = await Product.findById(productId);
+      if (!product) {
+          return res.status(404).send({ message: 'Product not found' });
+      }
+
+      // Choose an adjective based on the rating
+      const adjectives = adjectivesByRating[rating];
+      const adjective = adjectives[Math.floor(Math.random() * adjectives.length)];
+
+      // Add the new review
+      const newReview = {
+          rating,
+          comment,
+          user: userId,
+          adjective // Adding the adjective to the review
+      };
+
+      product.reviews.reviews.push(newReview);
+      product.reviews.totalReviews = product.reviews.reviews.length;
+      product.reviews.overallRating = product.reviews.reviews.reduce((acc, review) => acc + review.rating, 0) / product.reviews.reviews.length;
+
+      await product.save();
+      res.status(201).send({ message: 'Review added', product: product });
+  } catch (err) {
+      console.error('Error adding review:', err);
+      res.status(500).send({ message: 'Error adding review' });
+  }
+});
 
 
 router.post('/addProducts', async (req, res) => {

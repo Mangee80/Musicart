@@ -22,9 +22,9 @@
         display: flex;
         justify-content: space-around;
         align-items: flex-end;
-        position: fixed;
+        position: sticky;
         bottom: 0;
-        width: 360px;
+        width: 100vw;
         padding: 5px 0;
         background-color: white;
         z-index: 20;

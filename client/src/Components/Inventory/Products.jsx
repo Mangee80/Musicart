@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router-dom';
 import './Products.css'
 
 import banner from '../../assets/banner.png';
-import FeedbackForm from '../ListAndGridView/FeedbackForm';
 import banner2 from '../../assets/banner2.png';
 import { BsGridFill } from "react-icons/bs";
 import { TfiViewListAlt } from "react-icons/tfi";
@@ -17,7 +16,6 @@ function ProductSection() {
   const [selectedSortOption, setSelectedSortOption] = useState('');
   const [products, setProducts] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
-  const [showForm, setShowForm] = useState(false);
   const navigate = useNavigate();
 
   // Function to handle search query change
@@ -71,11 +69,7 @@ function ProductSection() {
     });
   };
 
-  const toggleForm = () => {
-    setShowForm(!showForm);
-  };
-
-
+  
   // Function to fetch sorted products based on sort option
   const fetchSortedProducts = (products, sortOption) => {
     fetch('https://musicart-9bam.vercel.app/api/products/sort', {
@@ -134,45 +128,41 @@ function ProductSection() {
       />
 
       <div className='feturesSection'>
-        {/* View Buttons */}
-        <div className="view-buttons">
-          <div onClick={() => setViewMode('grid')}><BsGridFill /></div>
-          <div onClick={() => setViewMode('list')}><TfiViewListAlt /></div>
-        </div>
+        <div style={{display: 'flex',width: '80%'}}>
+          {/* View Buttons */}
+          <div className="view-buttons">
+            <div onClick={() => setViewMode('grid')}><BsGridFill /></div>
+            <div onClick={() => setViewMode('list')}><TfiViewListAlt /></div>
+          </div>
 
-        {/* Filter Section */}
-        <div className="filter-section">
-          {filters.map((filter, index) => (
-            <div key={index} className={`${filter.label.toLowerCase().replace(" ", "-")}`}>
-              <select onChange={(e) => handleFilterChange(filter.label.replace(/\s/g, ""), e.target.value)}>
-                <option value="">{`${filter.label}`}</option>
-                {filter.options.map((option, index) => (
-                  <option key={index} value={option}>{option}</option>
-                ))}
-              </select>
-            </div>
-          ))}
-        </div>
-
-        {/* Sort By Select Menu */}
-        <div className="sort-by">
-          <select onChange={(e) => handleSortChange(e.target.value)}>
-            <option value="" disabled selected>{sortBy.label}</option>
-            {sortBy.options.map((option, index) => (
-              <option value={option} key={index}>{option}</option>
+          {/* Filter Section */}
+          <div className="filter-section">
+            {filters.map((filter, index) => (
+              <div key={index} className={`${filter.label.toLowerCase().replace(" ", "-")}`}>
+                <select onChange={(e) => handleFilterChange(filter.label.replace(/\s/g, ""), e.target.value)}>
+                  <option value="">{`${filter.label}`}</option>
+                  {filter.options.map((option, index) => (
+                    <option key={index} value={option}>{option}</option>
+                  ))}
+                </select>
+              </div>
             ))}
-          </select>
+          </div>
         </div>
 
-
+        <div style={{width: '20%'}}>
+          {/* Sort By Select Menu */}
+          <div className="sort-by">
+            <select onChange={(e) => handleSortChange(e.target.value)}>
+              <option value="" disabled selected>{sortBy.label}</option>
+              {sortBy.options.map((option, index) => (
+                <option value={option} key={index}>{option}</option>
+              ))}
+            </select>
+          </div>
+        </div>
       </div> 
-      <div className="feedback" >
-        <div className="imgcontainer" onClick={toggleForm}>
-          <img src={feedback} alt="feedback" />
-        </div>
-        {showForm && <FeedbackForm onClose={toggleForm} />}
-      </div>
-
+      
       {/* Product Listing based on view mode */}
       <div className="product-list">
         {viewMode === 'grid' ? <ProductGrid musicGadgets={products} /> : <ProductList musicGadgets={products} />}

@@ -19,7 +19,7 @@ export const ProductList = ({musicGadgets}) => {
             <p className={styles.productPrice}>₹{gadget.Price}</p>
             <p className={styles.productColor}>{gadget.Colour}<span style={{ margin: '0rem 0.5rem' }}>|</span>{gadget.HeadphoneType}</p>
             <p className={styles.itemDetail}>{gadget.featureHeading}</p>
-            <button></button>
+            <button>View detail</button>
           </div>
         </li>
       ))}
