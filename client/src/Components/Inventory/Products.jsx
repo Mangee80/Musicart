@@ -2,46 +2,48 @@ import React, { useState, useEffect } from 'react';
 import ProductGrid from '../ListAndGridView/Gridview';
 import ProductList from '../ListAndGridView/Listview';
 import { useNavigate } from 'react-router-dom';
-import './Products.css'
+import './Products.css';
 
-import banner from '../../assets/banner.png';
-import banner2 from '../../assets/banner2.png';
+import banner from '../../assets/soundwave.png';
+import banner2 from '../../assets/banner2.png'; // ✅ girl image
+
+import headphone1 from '../../assets/h1.png';
+import headphone2 from '../../assets/h2.png';
+import headphone3 from '../../assets/h3.png';
+import headphone4 from '../../assets/h4.png';
+
 import { BsGridFill } from "react-icons/bs";
 import { TfiViewListAlt } from "react-icons/tfi";
 import { CiSearch } from "react-icons/ci";
-import feedback from "../../assets/feedback.png"
+
 function ProductSection() {
-  
   const [selectedFilters, setSelectedFilters] = useState({});
   const [selectedSortOption, setSelectedSortOption] = useState('');
   const [products, setProducts] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const navigate = useNavigate();
+  const [viewMode, setViewMode] = useState('grid');
 
-  // Function to handle search query change
   const handleSearchChange = (event) => {
     setSearchQuery(event.target.value);
-    navigate(`/?search=${encodeURIComponent(event.target.value)}`); // Update URL with search query using navigate
+    navigate(`/?search=${encodeURIComponent(event.target.value)}`);
   };
 
-   // Function to handle filter select change
   const handleFilterChange = (filterType, value) => {
     setSelectedFilters({ ...selectedFilters, [filterType]: value });
   };
+
   const handleSortChange = (option) => {
     setSelectedSortOption(option);
     fetchSortedProducts(products, option);
   };
-  // Function to fetch products based on selected filters and sorting option
-  // Function to fetch products based on selected filters, sorting option, and search query
+
   const fetchProducts = (filters) => {
-    // Get the search query from the URL
     const searchParams = new URLSearchParams(window.location.search);
     const searchQuery = searchParams.get('search');
-    
-    let url;
-    let method;
-    
+
+    let url, method;
+
     if (searchQuery) {
       url = `https://musicart-9bam.vercel.app/api/products/search/${encodeURIComponent(searchQuery)}`;
       method = 'GET';
@@ -55,71 +57,65 @@ function ProductSection() {
 
     fetch(url, {
       method: method,
-      headers: {
-        'Content-Type': 'application/json'
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: method === 'POST' ? JSON.stringify({ filters }) : undefined
     })
     .then(response => response.json())
-    .then(data => {
-      setProducts(data);
-    })
-    .catch(error => {
-      console.error('Error:', error);
-    });
+    .then(data => setProducts(data))
+    .catch(error => console.error('Error:', error));
   };
 
-  
-  // Function to fetch sorted products based on sort option
   const fetchSortedProducts = (products, sortOption) => {
     fetch('https://musicart-9bam.vercel.app/api/products/sort', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ sortOption })
     })
     .then(response => response.json())
-    .then(data => {
-      // Update products state with sorted products
-      setProducts(data);
-    })
-    .catch(error => {
-      console.error('Error:', error);
-    });
+    .then(data => setProducts(data))
+    .catch(error => console.error('Error:', error));
   };
 
- // Fetch all products when component mounts
- useEffect(() => {
+  useEffect(() => {
     if (selectedSortOption) {
       fetchSortedProducts(selectedSortOption);
     } else {
       fetchProducts(selectedFilters);
     }
-  }, [selectedFilters, selectedSortOption, searchQuery]); // Run effect whenever selectedFilters or selectedSortOption changes
+  }, [selectedFilters, selectedSortOption, searchQuery]);
 
-  // Define arrays for filter options
   const filters = [
     { label: "Headphone Type", options: ["Featured", "In-ear headphone", "On-ear headphone", "Over-ear headphone"] },
     { label: "Company", options: ["Featured", "JBL", "Sony", "Boat", "Zebronics", "Marshall", "Ptron"] },
     { label: "Colour", options: ["Featured", "Blue", "Black", "White", "Brown"] },
     { label: "Price", options: ["Featured", "₹0 - ₹1,000", "₹1,000 - ₹10,000", "₹10,000 - ₹20,000"] }
   ];
-  const sortBy = { label: "Sort by: Featured", options: ["Featured", "Price: Lowest", "Price: Highest", "Name: (A-Z)", "Name: (Z-A)"] };
 
-  const [viewMode, setViewMode] = useState('grid');
+  const sortBy = { label: "Sort by: Featured", options: ["Featured", "Price: Lowest", "Price: Highest", "Name: (A-Z)", "Name: (Z-A)"] };
 
   return (
     <div className="product-section">
+      
+      {/* 🔷 Banner Section */}
       <div className="container1">
-          <img src={banner} alt="banner" />
+        <img src={banner} alt="banner" />
+
+        <div className="banner-right-image">
+          <img src={banner2} alt="girl" />
+        </div>
+
+        <div className="headphone-circle-container">
+          <div className="headphone-circle"><img src={headphone1} alt="HP1" /></div>
+          <div className="headphone-circle"><img src={headphone2} alt="HP2" /></div>
+          <div className="headphone-circle"><img src={headphone3} alt="HP3" /></div>
+          <div className="headphone-circle"><img src={headphone4} alt="HP4" /></div>
+        </div>
+
+        <p className="bannerDetail">Grab upto 50% off on<br />Selected headphones</p>
       </div>
-      <div className="container2">
-          <img src={banner2} alt="banner2" />
-      </div>
-      <p className='bannerDetail'>Grab upto 50% off on Selected headphones</p>
-      {/* Searchbar */}
-      <CiSearch size={25} className="icon"/>
+
+      {/* 🔍 Search Bar */}
+      <CiSearch size={25} className="icon" />
       <input 
         type="text" 
         placeholder="Search by Product Name"
@@ -127,22 +123,21 @@ function ProductSection() {
         value={searchQuery} 
       />
 
+      {/* 🧩 Filter & Sort */}
       <div className='feturesSection'>
-        <div style={{display: 'flex',width: '80%'}}>
-          {/* View Buttons */}
+        <div style={{ display: 'flex', width: '80%' }}>
           <div className="view-buttons">
             <div onClick={() => setViewMode('grid')}><BsGridFill /></div>
             <div onClick={() => setViewMode('list')}><TfiViewListAlt /></div>
           </div>
 
-          {/* Filter Section */}
           <div className="filter-section">
             {filters.map((filter, index) => (
-              <div key={index} className={`${filter.label.toLowerCase().replace(" ", "-")}`}>
+              <div key={index}>
                 <select onChange={(e) => handleFilterChange(filter.label.replace(/\s/g, ""), e.target.value)}>
-                  <option value="">{`${filter.label}`}</option>
-                  {filter.options.map((option, index) => (
-                    <option key={index} value={option}>{option}</option>
+                  <option value="">{filter.label}</option>
+                  {filter.options.map((option, idx) => (
+                    <option key={idx} value={option}>{option}</option>
                   ))}
                 </select>
               </div>
@@ -150,8 +145,7 @@ function ProductSection() {
           </div>
         </div>
 
-        <div style={{width: '20%'}}>
-          {/* Sort By Select Menu */}
+        <div style={{ width: '20%' }}>
           <div className="sort-by">
             <select onChange={(e) => handleSortChange(e.target.value)}>
               <option value="" disabled selected>{sortBy.label}</option>
@@ -161,9 +155,9 @@ function ProductSection() {
             </select>
           </div>
         </div>
-      </div> 
-      
-      {/* Product Listing based on view mode */}
+      </div>
+
+      {/* 🧾 Product View */}
       <div className="product-list">
         {viewMode === 'grid' ? <ProductGrid musicGadgets={products} /> : <ProductList musicGadgets={products} />}
       </div>
