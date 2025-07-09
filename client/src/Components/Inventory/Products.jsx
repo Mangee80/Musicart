@@ -19,6 +19,7 @@ import { CiSearch } from "react-icons/ci";
 function ProductSection() {
   const [selectedFilters, setSelectedFilters] = useState({});
   const [selectedSortOption, setSelectedSortOption] = useState('');
+  const [sortLabel, setSortLabel] = useState('Sort');
   const [products, setProducts] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const navigate = useNavigate();
@@ -35,6 +36,7 @@ function ProductSection() {
 
   const handleSortChange = (option) => {
     setSelectedSortOption(option);
+    setSortLabel(option || 'Sort');
     fetchSortedProducts(products, option);
   };
 
@@ -114,45 +116,58 @@ function ProductSection() {
         <p className="bannerDetail">Grab upto 50% off on<br />Selected headphones</p>
       </div>
 
-      {/* 🔍 Search Bar */}
-      <CiSearch size={25} className="icon" />
-      <input 
-        type="text" 
-        placeholder="Search by Product Name"
-        onChange={handleSearchChange} 
-        value={searchQuery} 
-      />
-
       {/* 🧩 Filter & Sort */}
       <div className='feturesSection'>
-        <div style={{ display: 'flex', width: '80%' }}>
+        {/* Left: View Buttons */}
+        <div className="left-controls">
           <div className="view-buttons">
-            <div onClick={() => setViewMode('grid')}><BsGridFill /></div>
-            <div onClick={() => setViewMode('list')}><TfiViewListAlt /></div>
-          </div>
-
-          <div className="filter-section">
-            {filters.map((filter, index) => (
-              <div key={index}>
-                <select onChange={(e) => handleFilterChange(filter.label.replace(/\s/g, ""), e.target.value)}>
-                  <option value="">{filter.label}</option>
-                  {filter.options.map((option, idx) => (
-                    <option key={idx} value={option}>{option}</option>
-                  ))}
-                </select>
-              </div>
-            ))}
+            <div 
+              className={viewMode === 'grid' ? 'active' : ''}
+              onClick={() => setViewMode('grid')}
+            >
+              <BsGridFill />
+            </div>
+            <div 
+              className={viewMode === 'list' ? 'active' : ''}
+              onClick={() => setViewMode('list')}
+            >
+              <TfiViewListAlt />
+            </div>
           </div>
         </div>
-
-        <div style={{ width: '20%' }}>
-          <div className="sort-by">
-            <select onChange={(e) => handleSortChange(e.target.value)}>
-              <option value="" disabled selected>{sortBy.label}</option>
+        {/* Center: Search Bar */}
+        <div className="center-search">
+          <CiSearch size={22} className="icon-inline" />
+          <input 
+            type="text" 
+            placeholder="Search by Product Name"
+            onChange={handleSearchChange} 
+            value={searchQuery} 
+          />
+        </div>
+        {/* Right: Sort and Filters */}
+        <div className="right-controls">
+          <div className="sort-compact">
+            <span className="sort-icon" title="Sort">
+              <svg width="20" height="20" fill="currentColor" viewBox="0 0 20 20"><path d="M3 7h14M5 12h10M7 17h6" stroke="#7c3aed" strokeWidth="2" strokeLinecap="round"/></svg>
+            </span>
+            <select value={selectedSortOption} onChange={(e) => handleSortChange(e.target.value)}>
+              <option value="" disabled>{sortLabel}</option>
               {sortBy.options.map((option, index) => (
                 <option value={option} key={index}>{option}</option>
               ))}
             </select>
+          </div>
+          <div className="filters-group">
+            <span className="filters-heading">Filters</span>
+            {filters.map((filter, index) => (
+              <select key={index} onChange={(e) => handleFilterChange(filter.label.replace(/\s/g, ""), e.target.value)}>
+                <option value="">{filter.label}</option>
+                {filter.options.map((option, idx) => (
+                  <option key={idx} value={option}>{option}</option>
+                ))}
+              </select>
+            ))}
           </div>
         </div>
       </div>

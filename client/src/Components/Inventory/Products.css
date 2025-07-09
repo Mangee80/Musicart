@@ -105,58 +105,102 @@
   box-sizing: border-box;
 }
 
-/* 🔷 Filters & View Buttons */
+/* --- Modernized View Buttons --- */
+.view-buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.view-buttons div {
+  background: #f5f5f7;
+  border-radius: 0.7rem;
+  padding: 0.5rem 1.2rem;
+  font-size: 1.3rem;
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s, border 0.2s;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+  border: 1.5px solid transparent;
+  display: flex;
+  align-items: center;
+  color: #2E0052;
+}
+
+.view-buttons div.active,
+.view-buttons div:hover {
+  background: #e0d7fa;
+  border-color: #7c3aed;
+  color: #7c3aed;
+}
+
+/* --- Modernized Filter Section --- */
+.filter-section {
+  display: flex;
+  gap: 1.2rem;
+  background: #fff;
+  padding: 0.7rem 1.2rem;
+  border-radius: 1.2rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  align-items: center;
+}
+
+.filter-section select {
+  border-radius: 0.8rem;
+  border: 1.5px solid #e0e0e0;
+  background: #f5f5f7;
+  padding: 0.5rem 1.2rem;
+  font-size: 1rem;
+  outline: none;
+  transition: border 0.2s;
+}
+
+.filter-section select:focus {
+  border-color: #7c3aed;
+}
+
+/* --- Modernized Sort Dropdown --- */
+.sort-by {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  padding: 0.7rem 1.2rem;
+  border-radius: 1.2rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.sort-by select {
+  border-radius: 0.8rem;
+  border: 1.5px solid #e0e0e0;
+  background: #f5f5f7;
+  padding: 0.5rem 1.2rem;
+  font-size: 1rem;
+  outline: none;
+  margin-left: 0.5rem;
+  transition: border 0.2s;
+}
+
+.sort-by select:focus {
+  border-color: #7c3aed;
+}
+
+/* --- Modernized Features Section Layout --- */
 .feturesSection {
   display: flex;
   width: 100%;
   flex-direction: row;
-  justify-content: space-between;
-  margin-top: 0.3rem;
-}
-
-.view-buttons {
-  display: flex;
   justify-content: flex-start;
+  align-items: center;
+  margin-top: 1.2rem;
+  margin-bottom: 1.2rem;
+  gap: 1.2rem;
 }
 
-.view-buttons div {
-  padding: 0rem 0.2rem 0rem 0.5rem;
-  font-size: 1.3rem;
-  cursor: pointer;
-}
-
-/* 🔷 Filter Section */
+/* Tweak filter-section and sort-by for tighter row layout */
 .filter-section {
-  display: flex;
-  gap: 1rem;
-  margin-left: 4rem;
-  margin-top: 0px;
+  margin: 0 1.2rem 0 0;
 }
 
-.filter-section select {
-  width: auto;
-  text-indent: 5px;
-  padding: 3px;
-  border-radius: 10rem;
-  background-color: rgba(217, 217, 217, 1);
-}
-
-.filter-section select option {
-  background-color: white;
-  color: #333;
-}
-
-/* 🔷 Sort Dropdown */
 .sort-by {
-  display: flex;
-  justify-content: end;
-}
-
-.sort-by select {
-  width: auto;
-  text-indent: 1px;
-  padding: 3px;
-  border-radius: 8rem;
+  margin-left: 1.2rem;
 }
 
 /* 🔷 Product List */
@@ -239,4 +283,304 @@
     border-radius: 5.8px;
     font-size: 14.7px;
   }
+}
+
+/* --- Modern Inline Search Bar (adjusted) --- */
+.searchbar-inline {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border-radius: 1.2rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  padding: 0.5rem 1.2rem;
+  border: 1.5px solid #e0e0e0;
+  min-width: 220px;
+  height: 44px;
+  box-sizing: border-box;
+}
+
+.searchbar-inline input[type="text"] {
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 1rem;
+  padding: 0.3rem 0.7rem;
+  width: 160px;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.icon-inline {
+  color: #7c3aed;
+  margin-right: 0.3rem;
+  font-size: 1.2rem;
+}
+
+.feturesSection {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 1.2rem;
+  margin-bottom: 1.2rem;
+  gap: 1.1rem;
+  min-height: 48px;
+}
+
+.view-buttons {
+  display: flex;
+  gap: 0.5rem;
+  height: 44px;
+  align-items: center;
+}
+
+.view-buttons div {
+  background: #f5f5f7;
+  border-radius: 0.7rem;
+  padding: 0.5rem 1.2rem;
+  font-size: 1.3rem;
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s, border 0.2s;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+  border: 1.5px solid transparent;
+  display: flex;
+  align-items: center;
+  color: #2E0052;
+  height: 100%;
+}
+
+.view-buttons div.active,
+.view-buttons div:hover {
+  background: #e0d7fa;
+  border-color: #7c3aed;
+  color: #7c3aed;
+}
+
+.filter-section {
+  display: flex;
+  gap: 1.2rem;
+  background: #fff;
+  padding: 0.5rem 1.2rem;
+  border-radius: 1.2rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  align-items: center;
+  margin: 0;
+  height: 44px;
+  box-sizing: border-box;
+}
+
+.filter-section select {
+  border-radius: 0.8rem;
+  border: 1.5px solid #e0e0e0;
+  background: #f5f5f7;
+  padding: 0.5rem 1.2rem;
+  font-size: 1rem;
+  outline: none;
+  transition: border 0.2s;
+  height: 34px;
+  box-sizing: border-box;
+  margin: 0;
+  display: flex;
+  align-items: center;
+}
+
+.filter-section select:focus {
+  border-color: #7c3aed;
+}
+
+.sort-by {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  padding: 0.5rem 1.2rem;
+  border-radius: 1.2rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  margin: 0;
+  height: 44px;
+  box-sizing: border-box;
+}
+
+.sort-by select {
+  border-radius: 0.8rem;
+  border: 1.5px solid #e0e0e0;
+  background: #f5f5f7;
+  padding: 0.5rem 1.2rem;
+  font-size: 1rem;
+  outline: none;
+  margin-left: 0.5rem;
+  transition: border 0.2s;
+  height: 34px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+}
+
+.sort-by select:focus {
+  border-color: #7c3aed;
+}
+
+/* --- Layout Groups --- */
+.feturesSection {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.2rem;
+  min-height: 56px;
+  margin: 1.5rem 0 1.5rem 0;
+}
+
+.left-controls {
+  display: flex;
+  align-items: center;
+  min-width: 110px;
+}
+
+.center-search {
+  display: flex;
+  align-items: center;
+  flex: 1 1 340px;
+  justify-content: center;
+  background: #fff;
+  border-radius: 1.5rem;
+  box-shadow: 0 2px 12px rgba(44,0,82,0.10);
+  padding: 0.5rem 1.5rem;
+  border: 1.5px solid #e0e0e0;
+  max-width: 420px;
+  min-width: 260px;
+  margin: 0 1.2rem;
+}
+
+.center-search input[type="text"] {
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 1.1rem;
+  padding: 0.3rem 0.7rem;
+  width: 100%;
+  min-width: 160px;
+}
+
+.icon-inline {
+  color: #7c3aed;
+  margin-right: 0.5rem;
+  font-size: 1.3rem;
+}
+
+.right-controls {
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+}
+
+.sort-compact {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border-radius: 1.2rem;
+  box-shadow: 0 2px 8px rgba(44,0,82,0.08);
+  padding: 0.3rem 0.7rem 0.3rem 0.5rem;
+  border: 1.5px solid #e0e0e0;
+  height: 38px;
+  margin-right: 0.5rem;
+}
+
+.sort-icon {
+  display: flex;
+  align-items: center;
+  margin-right: 0.3rem;
+  color: #7c3aed;
+}
+
+.sort-compact select {
+  border: none;
+  background: transparent;
+  font-size: 1rem;
+  outline: none;
+  min-width: 110px;
+  color: #2E0052;
+  padding: 0.2rem 0.2rem;
+}
+
+.filters-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(124, 58, 237, 0.10);
+  border-radius: 2rem;
+  padding: 0.3rem 0.9rem;
+  box-shadow: 0 2px 8px rgba(44,0,82,0.10);
+  border: 1.5px solid #e0d7fa;
+}
+
+.filters-group select {
+  border-radius: 1.2rem;
+  border: 1.2px solid #d1c4e9;
+  background: #f5f5f7;
+  padding: 0.2rem 0.7rem;
+  font-size: 0.97rem;
+  outline: none;
+  min-width: 90px;
+  max-width: 120px;
+  height: 30px;
+  color: #2E0052;
+}
+
+.filters-group select:focus {
+  border-color: #7c3aed;
+}
+
+/* View Buttons (reuse previous modern styles, compact) */
+.view-buttons {
+  display: flex;
+  gap: 0.3rem;
+  height: 38px;
+  align-items: center;
+}
+
+.view-buttons div {
+  background: #f5f5f7;
+  border-radius: 0.7rem;
+  padding: 0.3rem 0.7rem;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s, border 0.2s;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+  border: 1.5px solid transparent;
+  display: flex;
+  align-items: center;
+  color: #2E0052;
+  height: 100%;
+}
+
+.view-buttons div.active,
+.view-buttons div:hover {
+  background: #e0d7fa;
+  border-color: #7c3aed;
+  color: #7c3aed;
+}
+
+/* --- View Buttons Separator --- */
+.view-separator {
+  width: 1.5px;
+  height: 22px;
+  background: #e0e0e0;
+  margin: 0 0.4rem;
+  border-radius: 2px;
+}
+
+/* --- Filters Heading --- */
+.filters-heading {
+  font-size: 0.98rem;
+  font-weight: 600;
+  color: #7c3aed;
+  margin-right: 0.7rem;
+  letter-spacing: 0.02em;
+  padding: 0.1rem 0.5rem 0.1rem 0;
+  border-right: 1.5px solid #e0d7fa;
+  display: flex;
+  align-items: center;
+  height: 100%;
 }
