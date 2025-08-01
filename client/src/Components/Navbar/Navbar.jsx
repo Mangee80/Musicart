@@ -21,36 +21,51 @@ function Header({ currentRoute }) {
 
   const [totalItems, setTotalItems] = useState(0);
 
-  useEffect(() => {
-    const fetchCartItems = async () => {
-      try {
-        const userID = localStorage.getItem('userID');
-        if (!userID) {
-          console.error('User ID not found');
-          return;
-        }
-
-        const response = await fetch('https://musicart-9bam.vercel.app/api/cart/user-cart', {
-          headers: {
-            'x-user-id': userID,
-          }
-        });
-
-        if (!response.ok) {
-          throw new Error('Failed to fetch cart items');
-        }
-
-        const items = await response.json();
-        const totalItemsCount = items.reduce((total, item) => total + item.quantity, 0);
-        setTotalItems(totalItemsCount);
-      } catch (error) {
-        console.error('Error fetching cart items:', error);
+  const fetchCartItems = async () => {
+    try {
+      const userID = localStorage.getItem('userID');
+      if (!userID) {
+        setTotalItems(0);
+        return;
       }
+
+      const response = await fetch('http://localhost:5000/api/cart/user-cart', {
+        headers: {
+          'x-user-id': userID,
+        }
+      });
+
+      if (!response.ok) {
+        console.log('Cart is empty or user not found');
+        setTotalItems(0);
+        return;
+      }
+
+      const items = await response.json();
+      const totalItemsCount = items.reduce((total, item) => total + (item.quantity || 1), 0);
+      setTotalItems(totalItemsCount);
+    } catch (error) {
+      console.log('Error fetching cart items:', error);
+      setTotalItems(0);
+    }
+  };
+
+  useEffect(() => {
+    // Fetch cart items only when component mounts and when userData changes
+    fetchCartItems();
+
+    // Optional: Set up a longer interval (30 seconds) for periodic updates
+    const interval = setInterval(fetchCartItems, 30000);
+
+    return () => clearInterval(interval);
+  }, [userData]); // Only re-run when userData changes
+
+  // Make fetchCartItems available globally for other components
+  useEffect(() => {
+    window.updateCartCount = fetchCartItems;
+    return () => {
+      delete window.updateCartCount;
     };
-
-    const interval = setInterval(fetchCartItems, 1000); // Fetch cart items every second
-
-    return () => clearInterval(interval); // Clear interval on component unmount
   }, []);
 
   const isLoggedIn = userData !== null;
@@ -112,7 +127,11 @@ function Header({ currentRoute }) {
           {isLoggedIn && currentRoute === '' && (
             <>
               <div className={`${styles.viewCartButton}`} onClick={() => navigate('/cart')}>
-                <MdOutlineAddShoppingCart size={18}/> <p style={{marginLeft: '5px', marginTop: '3px'}}>View Cart <span>{totalItems}</span></p>
+                <MdOutlineAddShoppingCart size={18}/> 
+                <p style={{marginLeft: '5px', marginTop: '3px'}}>
+                  View Cart 
+                  {totalItems > 0 && <span style={{backgroundColor: '#ff4444', color: 'white', borderRadius: '50%', padding: '2px 6px', fontSize: '12px', marginLeft: '5px'}}>{totalItems}</span>}
+                </p>
               </div>
               <div className={styles.userAvatar} onClick={() => setShowDropdown(!showDropdown)}>
                 {getUserInitials()}
@@ -128,13 +147,21 @@ function Header({ currentRoute }) {
 
           {!isLoggedIn && currentRoute !== '' &&  currentRoute !== '/detail' && (
             <div className={`${styles.viewCartButton} ${styles.visible}`} onClick={() => navigate('/login')}>
-              <MdOutlineAddShoppingCart size={18}/> <p style={{marginLeft: '5px', marginTop: '3px'}}>View Cart <span>{totalItems}</span></p>
+              <MdOutlineAddShoppingCart size={18}/> 
+              <p style={{marginLeft: '5px', marginTop: '3px'}}>
+                View Cart 
+                {totalItems > 0 && <span style={{backgroundColor: '#ff4444', color: 'white', borderRadius: '50%', padding: '2px 6px', fontSize: '12px', marginLeft: '5px'}}>{totalItems}</span>}
+              </p>
             </div>
           )}
 
           {!['Invoice',''].includes(currentRoute) && (
             <div className={`${styles.viewCartButton} ${styles.visible}`} onClick={() => navigate('/cart')}>
-              <MdOutlineAddShoppingCart size={18}/> <p style={{marginLeft: '5px', marginTop: '3px'}}>View Cart <span>{totalItems}</span></p>
+              <MdOutlineAddShoppingCart size={18}/> 
+              <p style={{marginLeft: '5px', marginTop: '3px'}}>
+                View Cart 
+                {totalItems > 0 && <span style={{backgroundColor: '#ff4444', color: 'white', borderRadius: '50%', padding: '2px 6px', fontSize: '12px', marginLeft: '5px'}}>{totalItems}</span>}
+              </p>
             </div>
           )}
         </div>

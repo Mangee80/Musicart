@@ -55,14 +55,14 @@ router.post('/filter', async (req, res) => {
     // Add conditions for price range
     if (filters.filters.Price && filters.filters.Price !== 'Featured') {
       switch (filters.filters.Price) {
-        case '₹0 - ₹1,000':
-          query.Price = { $gte: 0, $lte: 1000 };
-          break;
-        case '₹1,000 - ₹10,000':
-          query.Price = { $gte: 1000, $lte: 10000 };
+        case '₹0 - ₹10,000':
+          query.Price = { $gte: 0, $lte: 10000 };
           break;
         case '₹10,000 - ₹20,000':
           query.Price = { $gte: 10000, $lte: 20000 };
+          break;
+        case '₹20,000 - ₹35,000':
+          query.Price = { $gte: 20000, $lte: 35000 };
           break;
         // Add more cases for additional price ranges if needed
         default:
@@ -202,5 +202,118 @@ router.post('/addProducts', async (req, res) => {
       res.status(500).json({ error: 'Internal Server Error' });
     }
   });
+
+// TEMPORARY: Seed demo products endpoint (remove after testing)
+router.post('/seed-products', async (req, res) => {
+  try {
+    const demoProducts = [
+      {
+        Company: "Sony",
+        model: "WH-1000XM5",
+        Price: 29999,
+        Colour: "Black",
+        HeadphoneType: "Over-ear headphone",
+        imageUrl: "https://m.media-amazon.com/images/I/61vph3i6bKL._SL1500_.jpg",
+        featureHeading: "Industry-leading Noise Cancellation",
+        details: [
+          "Up to 30 hours battery life",
+          "Touch controls",
+          "Adaptive Sound Control",
+          "Quick charge (10 min = 5 hours)"
+        ],
+        reviews: { reviews: [], totalReviews: 0, overallRating: 0 },
+        images: [
+          "https://m.media-amazon.com/images/I/61vph3i6bKL._SL1500_.jpg",
+          "https://m.media-amazon.com/images/I/61vph3i6bKL._AC_SL1000_.jpg"
+        ]
+      },
+      {
+        Company: "JBL",
+        model: "Tune 230NC",
+        Price: 5499,
+        Colour: "Blue",
+        HeadphoneType: "In-ear headphone",
+        imageUrl: "https://m.media-amazon.com/images/I/61+Q6Rh3OQL._SL1500_.jpg",
+        featureHeading: "Pure Bass, Active Noise Cancelling",
+        details: [
+          "40 hours playtime",
+          "IPX4 water resistant",
+          "4 mics for perfect calls",
+          "Fast Pair with Google"
+        ],
+        reviews: { reviews: [], totalReviews: 0, overallRating: 0 },
+        images: [
+          "https://m.media-amazon.com/images/I/61+Q6Rh3OQL._SL1500_.jpg",
+          "https://m.media-amazon.com/images/I/61+Q6Rh3OQL._AC_SL1000_.jpg"
+        ]
+      },
+      {
+        Company: "Marshall",
+        model: "Major IV",
+        Price: 12999,
+        Colour: "Brown",
+        HeadphoneType: "On-ear headphone",
+        imageUrl: "https://m.media-amazon.com/images/I/71l5U5Z3pEL._SL1500_.jpg",
+        featureHeading: "Iconic Sound, 80+ Hours Playtime",
+        details: [
+          "Wireless charging",
+          "Foldable design",
+          "Multi-directional control knob",
+          "Classic Marshall look"
+        ],
+        reviews: { reviews: [], totalReviews: 0, overallRating: 0 },
+        images: [
+          "https://m.media-amazon.com/images/I/71l5U5Z3pEL._SL1500_.jpg",
+          "https://m.media-amazon.com/images/I/71l5U5Z3pEL._AC_SL1000_.jpg"
+        ]
+      },
+      {
+        Company: "Boat",
+        model: "Rockerz 450 Pro",
+        Price: 1999,
+        Colour: "White",
+        HeadphoneType: "Over-ear headphone",
+        imageUrl: "https://m.media-amazon.com/images/I/61u48FEsQKL._SL1500_.jpg",
+        featureHeading: "70 Hours Playback, ASAP Charge",
+        details: [
+          "Dual connectivity (Bluetooth + AUX)",
+          "40mm drivers",
+          "Lightweight design",
+          "Voice assistant support"
+        ],
+        reviews: { reviews: [], totalReviews: 0, overallRating: 0 },
+        images: [
+          "https://m.media-amazon.com/images/I/61u48FEsQKL._SL1500_.jpg",
+          "https://m.media-amazon.com/images/I/61u48FEsQKL._AC_SL1000_.jpg"
+        ]
+      },
+      {
+        Company: "Ptron",
+        model: "Bassbuds Duo",
+        Price: 899,
+        Colour: "Black",
+        HeadphoneType: "In-ear headphone",
+        imageUrl: "https://m.media-amazon.com/images/I/61l7L4dCwUL._SL1500_.jpg",
+        featureHeading: "True Wireless, Deep Bass",
+        details: [
+          "32 hours playtime",
+          "Touch controls",
+          "Voice assistant",
+          "Lightweight & ergonomic"
+        ],
+        reviews: { reviews: [], totalReviews: 0, overallRating: 0 },
+        images: [
+          "https://m.media-amazon.com/images/I/61l7L4dCwUL._SL1500_.jpg",
+          "https://m.media-amazon.com/images/I/61l7L4dCwUL._AC_SL1000_.jpg"
+        ]
+      }
+    ];
+    await Product.insertMany(demoProducts);
+    res.json({ message: 'Demo products seeded successfully!' });
+  } catch (error) {
+    console.error('Seed error:', error);
+    res.status(500).json({ error: 'Failed to seed demo products.' });
+  }
+});
   
 module.exports = router;

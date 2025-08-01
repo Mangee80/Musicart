@@ -47,28 +47,31 @@ function ProductSection() {
     let url, method;
 
     if (searchQuery) {
-      url = `https://musicart-9bam.vercel.app/api/products/search/${encodeURIComponent(searchQuery)}`;
+      url = `http://localhost:5000/api/products/search/${encodeURIComponent(searchQuery)}`;
       method = 'GET';
     } else if (Object.keys(filters).length > 0) {
-      url = 'https://musicart-9bam.vercel.app/api/products/filter';
+      url = 'http://localhost:5000/api/products/filter';
       method = 'POST';
     } else {
-      url = 'https://musicart-9bam.vercel.app/api/products/all';
+      url = 'http://localhost:5000/api/products/all';
       method = 'GET';
     }
 
     fetch(url, {
       method: method,
       headers: { 'Content-Type': 'application/json' },
-      body: method === 'POST' ? JSON.stringify({ filters }) : undefined
+      body: method === 'POST' ? JSON.stringify({ filters: filters }) : undefined
     })
     .then(response => response.json())
-    .then(data => setProducts(data))
+    .then(data => {
+      console.log('Fetched products:', data);
+      setProducts(data);
+    })
     .catch(error => console.error('Error:', error));
   };
 
   const fetchSortedProducts = (products, sortOption) => {
-    fetch('https://musicart-9bam.vercel.app/api/products/sort', {
+    fetch('http://localhost:5000/api/products/sort', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ sortOption })
@@ -87,10 +90,10 @@ function ProductSection() {
   }, [selectedFilters, selectedSortOption, searchQuery]);
 
   const filters = [
-    { label: "Headphone Type", options: ["Featured", "In-ear headphone", "On-ear headphone", "Over-ear headphone"] },
-    { label: "Company", options: ["Featured", "JBL", "Sony", "Boat", "Zebronics", "Marshall", "Ptron"] },
-    { label: "Colour", options: ["Featured", "Blue", "Black", "White", "Brown"] },
-    { label: "Price", options: ["Featured", "₹0 - ₹1,000", "₹1,000 - ₹10,000", "₹10,000 - ₹20,000"] }
+    { label: "Headphone Type", options: ["Featured", "In-Ear", "On-Ear", "Over-Ear"] },
+    { label: "Company", options: ["Featured", "Sony", "Bose", "Apple", "Sennheiser", "Audio-Technica", "JBL", "Samsung", "Beats", "Shure", "Beyerdynamic", "Marshall", "Skullcandy"] },
+    { label: "Colour", options: ["Featured", "Black", "White", "Blue", "Purple", "Red", "Clear", "Grey", "Brown"] },
+    { label: "Price", options: ["Featured", "₹0 - ₹10,000", "₹10,000 - ₹20,000", "₹20,000 - ₹35,000"] }
   ];
 
   const sortBy = { label: "Sort by: Featured", options: ["Featured", "Price: Lowest", "Price: Highest", "Name: (A-Z)", "Name: (Z-A)"] };

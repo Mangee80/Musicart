@@ -11,6 +11,17 @@ router.get('/user-cart', async (req, res) => {
     
     // Fetch cart items associated with the user ID
     const cart = await Cart.findOne({ user: userID }).populate('items.productId');
+    
+    // If cart doesn't exist, return empty array
+    if (!cart) {
+      return res.json([]);
+    }
+    
+    // If cart exists but has no items, return empty array
+    if (!cart.items || cart.items.length === 0) {
+      return res.json([]);
+    }
+    
     res.json(cart.items);
   } catch (error) {
     console.error('Error fetching cart items:', error);
