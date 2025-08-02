@@ -47,13 +47,13 @@ function ProductSection() {
     let url, method;
 
     if (searchQuery) {
-      url = `http://localhost:5000/api/products/search/${encodeURIComponent(searchQuery)}`;
+      url = `https://musicart-9bam.vercel.app/api/products/search/${encodeURIComponent(searchQuery)}`;
       method = 'GET';
     } else if (Object.keys(filters).length > 0) {
-      url = 'http://localhost:5000/api/products/filter';
+      url = 'https://musicart-9bam.vercel.app/api/products/filter';
       method = 'POST';
     } else {
-      url = 'http://localhost:5000/api/products/all';
+      url = 'https://musicart-9bam.vercel.app/api/products/all';
       method = 'GET';
     }
 
@@ -71,7 +71,7 @@ function ProductSection() {
   };
 
   const fetchSortedProducts = (products, sortOption) => {
-    fetch('http://localhost:5000/api/products/sort', {
+    fetch('https://musicart-9bam.vercel.app/api/products/sort', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ sortOption })
@@ -91,9 +91,9 @@ function ProductSection() {
 
   const filters = [
     { label: "Headphone Type", options: ["Featured", "In-Ear", "On-Ear", "Over-Ear"] },
-    { label: "Company", options: ["Featured", "Sony", "Bose", "Apple", "Sennheiser", "Audio-Technica", "JBL", "Samsung", "Beats", "Shure", "Beyerdynamic", "Marshall", "Skullcandy"] },
-    { label: "Colour", options: ["Featured", "Black", "White", "Blue", "Purple", "Red", "Clear", "Grey", "Brown"] },
-    { label: "Price", options: ["Featured", "₹0 - ₹10,000", "₹10,000 - ₹20,000", "₹20,000 - ₹35,000"] }
+    { label: "Company", options: ["Featured", "Sony", "Bose", "Apple", "Sennheiser", "Audio-Technica", "JBL"] },
+    { label: "Colour", options: ["Featured", "Black", "White", "Blue"] },
+    { label: "Price", options: ["Featured", "₹0 - ₹10,000", "₹10,000 - ₹20,000", "₹20,000 - ₹35,000", "₹35,000+"] }
   ];
 
   const sortBy = { label: "Sort by: Featured", options: ["Featured", "Price: Lowest", "Price: Highest", "Name: (A-Z)", "Name: (Z-A)"] };

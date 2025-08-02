@@ -29,7 +29,7 @@ function Header({ currentRoute }) {
         return;
       }
 
-      const response = await fetch('http://localhost:5000/api/cart/user-cart', {
+      const response = await fetch('https://musicart-9bam.vercel.app/api/cart/user-cart', {
         headers: {
           'x-user-id': userID,
         }
@@ -124,6 +124,7 @@ function Header({ currentRoute }) {
         </div>
 
         <div style={{display: 'flex'}}>
+          {/* Show cart button and user avatar when logged in and on home page */}
           {isLoggedIn && currentRoute === '' && (
             <>
               <div className={`${styles.viewCartButton}`} onClick={() => navigate('/cart')}>
@@ -145,7 +146,8 @@ function Header({ currentRoute }) {
             </>
           )}
 
-          {!isLoggedIn && currentRoute !== '' &&  currentRoute !== '/detail' && (
+          {/* Show cart button for non-logged in users on other pages (except detail page) */}
+          {!isLoggedIn && currentRoute !== '' && currentRoute !== '/detail' && currentRoute !== 'Invoice' && (
             <div className={`${styles.viewCartButton} ${styles.visible}`} onClick={() => navigate('/login')}>
               <MdOutlineAddShoppingCart size={18}/> 
               <p style={{marginLeft: '5px', marginTop: '3px'}}>
@@ -155,7 +157,8 @@ function Header({ currentRoute }) {
             </div>
           )}
 
-          {!['Invoice',''].includes(currentRoute) && (
+          {/* Show cart button for logged in users on other pages (except Invoice and home) */}
+          {isLoggedIn && currentRoute !== '' && currentRoute !== 'Invoice' && (
             <div className={`${styles.viewCartButton} ${styles.visible}`} onClick={() => navigate('/cart')}>
               <MdOutlineAddShoppingCart size={18}/> 
               <p style={{marginLeft: '5px', marginTop: '3px'}}>
