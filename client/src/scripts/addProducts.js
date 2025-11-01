@@ -2,7 +2,7 @@ import productsData from '../data/products.json';
 
 const addAllProducts = async () => {
   try {
-    const response = await fetch('http://localhost:5000/api/addProducts', {
+    const response = await fetch('http://localhost:5000/api/products/addProducts', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

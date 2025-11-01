@@ -3,6 +3,7 @@ import ProductGrid from '../ListAndGridView/Gridview';
 import ProductList from '../ListAndGridView/Listview';
 import { useNavigate } from 'react-router-dom';
 import './Products.css';
+import { API_BASE_URL } from '../../config/apiConfig';
 
 import banner from '../../assets/soundwave.png';
 import banner2 from '../../assets/banner2.png'; // ✅ girl image
@@ -47,13 +48,13 @@ function ProductSection() {
     let url, method;
 
     if (searchQuery) {
-      url = `https://musicart-9bam.vercel.app/api/products/search/${encodeURIComponent(searchQuery)}`;
+      url = `${API_BASE_URL}/api/products/search/${encodeURIComponent(searchQuery)}`;
       method = 'GET';
     } else if (Object.keys(filters).length > 0) {
-      url = 'https://musicart-9bam.vercel.app/api/products/filter';
+      url = `${API_BASE_URL}/api/products/filter`;
       method = 'POST';
     } else {
-      url = 'https://musicart-9bam.vercel.app/api/products/all';
+      url = `${API_BASE_URL}/api/products/all`;
       method = 'GET';
     }
 
@@ -71,7 +72,7 @@ function ProductSection() {
   };
 
   const fetchSortedProducts = (products, sortOption) => {
-    fetch('https://musicart-9bam.vercel.app/api/products/sort', {
+    fetch(`${API_BASE_URL}/api/products/sort`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ sortOption })

@@ -22,7 +22,19 @@ router.get('/user-cart', async (req, res) => {
       return res.json([]);
     }
     
-    res.json(cart.items);
+    // Filter out items where productId is null or undefined (deleted products)
+    const validItems = cart.items.filter(item => item.productId !== null && item.productId !== undefined);
+    
+    // 🔧 AUTOMATIC CLEANUP: If there were invalid items, remove them from database permanently
+    if (validItems.length < cart.items.length) {
+      const removedCount = cart.items.length - validItems.length;
+      // Keep only valid items in the cart (update database)
+      cart.items = cart.items.filter(item => item.productId !== null && item.productId !== undefined);
+      await cart.save();
+      console.log(`✅ Auto-cleaned ${removedCount} deleted product(s) from cart for user ${userID}`);
+    }
+    
+    res.json(validItems);
   } catch (error) {
     console.error('Error fetching cart items:', error);
     res.status(500).json({ error: 'Internal Server Error' });

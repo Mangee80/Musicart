@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { MdOutlineAddShoppingCart } from "react-icons/md";
+import { API_BASE_URL } from '../../config/apiConfig';
 
 const ProductGrid = ({ musicGadgets }) => {
   const navigate = useNavigate();
@@ -12,12 +13,17 @@ const ProductGrid = ({ musicGadgets }) => {
         navigate('/login')
         return;
       }
-      const response = await fetch('https://musicart-9bam.vercel.app/api/cart/add-to-cart', {
+      const response = await fetch(`${API_BASE_URL}/api/cart/add-to-cart`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ productId, quantity: 1, userId })
       });
-      if (!response.ok) {
+      if (response.ok) {
+        // 🔄 Refresh navbar cart count after adding item
+        if (window.updateCartCount) {
+          window.updateCartCount();
+        }
+      } else {
         console.error('Failed to add product to cart');
       }
     } catch (error) {

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import invoice from '../../assets/invoice.png';
 import invoiceicon from '../../assets/invoiceicon.png';
 import styles from './Style.module.css';
+import { API_BASE_URL } from '../../config/apiConfig';
 
 function InvoiceList() {
   const [checkouts, setCheckouts] = useState([]);
@@ -14,7 +15,7 @@ function InvoiceList() {
     const fetchCheckouts = async () => {
       try {
         const userID = localStorage.getItem('userID'); // Get the user ID from localStorage
-        const response = await fetch(`https://musicart-9bam.vercel.app/api/checkout/checkouts/${userID}`);
+        const response = await fetch(`${API_BASE_URL}/api/checkout/checkouts/${userID}`);
         if (!response.ok) {
           throw new Error('Failed to fetch checkouts');
         }

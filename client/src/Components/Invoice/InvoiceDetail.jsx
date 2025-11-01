@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import styles from './InvoiceDetail.module.css'
+import { API_BASE_URL } from '../../config/apiConfig';
 
 function InvoiceDetails() {
   const { id } = useParams();
@@ -17,7 +18,7 @@ function InvoiceDetails() {
   useEffect(() => {
     const fetchInvoice = async () => {
       try {
-        const response = await fetch(`https://musicart-9bam.vercel.app/api/checkout/invoice/${id}`);
+        const response = await fetch(`${API_BASE_URL}/api/checkout/invoice/${id}`);
         if (!response.ok) {
           throw new Error('Failed to fetch invoice');
         }

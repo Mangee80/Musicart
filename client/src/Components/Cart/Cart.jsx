@@ -3,6 +3,7 @@ import styles from './Cart.module.css';
 import { BiShoppingBag } from "react-icons/bi";
 import { IoArrowBack } from "react-icons/io5";
 import { useNavigate } from 'react-router-dom';
+import { API_BASE_URL } from '../../config/apiConfig';
 
 const CartItem = ({ item, onUpdateQuantity }) => {
   const handleQuantityChange = (event) => {
@@ -80,7 +81,7 @@ const Cart = () => {
   };
   useEffect(() => {
     // Fetch items from the backend and setItems
-    fetch('https://musicart-9bam.vercel.app/api/cart/user-cart', {
+    fetch(`${API_BASE_URL}/api/cart/user-cart`, {
       headers: {
         'x-user-id': localStorage.getItem('userID')
       }
@@ -96,6 +97,11 @@ const Cart = () => {
           setItems([]); // Ensure items is set to an empty array to avoid errors in rendering
         }
         setLoading(false);
+        
+        // 🔄 Refresh navbar cart count after cart loads
+        if (window.updateCartCount) {
+          window.updateCartCount();
+        }
       })
       .catch(error => {
         console.error('Error fetching cart items:', error);
@@ -111,7 +117,7 @@ const Cart = () => {
         return;
       }
   
-      const response = await fetch('https://musicart-9bam.vercel.app/api/cart/update-cart-item', {
+      const response = await fetch(`${API_BASE_URL}/api/cart/update-cart-item`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -122,12 +128,17 @@ const Cart = () => {
       if (response.ok) {
         // Update the quantity in the frontend
         const updatedItems = items.map(item => {
-          if (item.productId._id === productId) { // Adjusted to access the product ID
+          if (item.productId._id === productId) {
             return { ...item, quantity: newQuantity };
           }
           return item;
         });
         setItems(updatedItems);
+        
+        // 🔄 Refresh navbar cart count after quantity update
+        if (window.updateCartCount) {
+          window.updateCartCount();
+        }
       } else {
         console.error('Failed to update cart item quantity');
       }

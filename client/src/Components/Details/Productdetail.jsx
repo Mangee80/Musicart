@@ -21,7 +21,7 @@ const ProductDetail = () => {
   };  
   
   useEffect(() => {
-    fetch(`https://musicart-9bam.vercel.app/api/products/product/${id}`)
+    fetch(`${API_BASE_URL}/api/products/product/${id}`)
           .then(response => {
               if (!response.ok) {
                   throw new Error('Network response was not ok');
@@ -66,7 +66,7 @@ const ProductDetail = () => {
       }
 
       // Construct the fetch request to add item to cart
-      const response = await fetch('https://musicart-9bam.vercel.app/api/cart/add-to-cart', {
+      const response = await fetch(`${API_BASE_URL}/api/cart/add-to-cart`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -77,6 +77,10 @@ const ProductDetail = () => {
       if (response.ok) {
         // If item added to cart successfully, you can provide feedback to the user
         console.log('Item added to cart successfully');
+        // 🔄 Refresh navbar cart count after adding item
+        if (window.updateCartCount) {
+          window.updateCartCount();
+        }
       } else {
         console.error('Failed to add product to cart');
       }

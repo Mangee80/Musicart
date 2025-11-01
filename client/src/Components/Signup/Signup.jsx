@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styles from './Signup.module.css';
 import { useNavigate } from "react-router";
+import { API_BASE_URL } from '../../config/apiConfig';
 
 
 const RegisterForm = () => {
@@ -28,7 +29,7 @@ const RegisterForm = () => {
     }
 
     try {
-      const response = await fetch("https://musicart-9bam.vercel.app/api/auth/register", {
+      const response = await fetch(`${API_BASE_URL}/api/auth/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

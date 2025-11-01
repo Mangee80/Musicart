@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styles from './Checkout.module.css';
 import { useNavigate } from 'react-router-dom';
 import { IoArrowBack } from "react-icons/io5";
+import { API_BASE_URL } from '../../config/apiConfig';
 function CheckoutPage() {
   const [cartItems, setCartItems] = useState([]); // State to store cart items
   const [selectedItem, setSelectedItem] = useState(null); // State to store the selected item for details
@@ -20,7 +21,7 @@ function CheckoutPage() {
 
     const fetchCartItems = async () => {
       try {
-        const response = await fetch('https://musicart-9bam.vercel.app/api/cart/user-cart', {
+        const response = await fetch(`${API_BASE_URL}/api/cart/user-cart`, {
           method: 'GET',
           headers: {
             'x-user-id': userID, // Include the user ID in the request headers
@@ -53,7 +54,7 @@ function CheckoutPage() {
     const userId = localStorage.getItem('userID');
 
     try {
-      const response = await fetch('https://musicart-9bam.vercel.app/api/checkout/checkout', {
+      const response = await fetch(`${API_BASE_URL}/api/checkout/checkout`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

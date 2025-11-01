@@ -3,6 +3,7 @@ import styles from './Navbar.module.css';
 import { PiPhoneCallThin } from "react-icons/pi";
 import musicart from '../../assets/musicart.png'
 import { useNavigate } from 'react-router-dom';
+import { API_BASE_URL } from '../../config/apiConfig';
 
 import { MdOutlineAddShoppingCart } from "react-icons/md";
 
@@ -29,7 +30,7 @@ function Header({ currentRoute }) {
         return;
       }
 
-      const response = await fetch('https://musicart-9bam.vercel.app/api/cart/user-cart', {
+      const response = await fetch(`${API_BASE_URL}/api/cart/user-cart`, {
         headers: {
           'x-user-id': userID,
         }
@@ -42,7 +43,10 @@ function Header({ currentRoute }) {
       }
 
       const items = await response.json();
-      const totalItemsCount = items.reduce((total, item) => total + (item.quantity || 1), 0);
+      
+      // Calculate TOTAL QUANTITY (sum of all item quantities)
+      // Example: 2 products with quantity 3 and 2 = total 5
+      const totalItemsCount = items.reduce((total, item) => total + (item.quantity || 0), 0);
       setTotalItems(totalItemsCount);
     } catch (error) {
       console.log('Error fetching cart items:', error);
