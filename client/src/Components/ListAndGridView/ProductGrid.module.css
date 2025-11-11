@@ -67,43 +67,82 @@
 /* Media query for 360px * 800px */
 @media screen and (max-width: 600px) {
   .productGrid {
-    grid-template-columns: repeat(2, minmax(45%, 1fr)); /* Two items per row */
-    gap: 1.3rem; /* Adjust gap between grid items */
-    row-gap: 1.3rem;
-    padding: 1.5rem 0.3rem;
+    grid-template-columns: repeat(2, 1fr) !important; /* Exactly 2 equal columns */
+    gap: 0.7rem !important; /* Gap between cards */
+    row-gap: 1rem;
+    padding: 1rem 0.8rem !important; /* Padding from sides */
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    display: grid !important;
   }
+  
   .productCard {
     position: relative;
     display: flex;
     flex-direction: column;
     border: 1px solid rgba(206, 206, 206, 1);
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    min-width: 0;
+    margin: 0;
   }
+  
   .productImage {
-    width: 100%; /* Adjust width for smaller screens */
-    height: 100%; /* Adjust height for smaller screens */
-    border-width: 1rem; /* Adjust border width for smaller screens */
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 1;
+    min-height: 140px;
+    max-height: 200px;
+    border-width: 0.7rem;
+    box-sizing: border-box;
+    margin: 0;
+  }
+  
+  .productImage img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
   }
 
   .productColor {
-    font-size: 0.8rem;
+    font-size: 0.85rem;
   }
-  .productColor span{
+  
+  .productColor span {
     margin: 0rem 0.2rem;
   }
+  
   .productInfo {
-    padding: 8px; /* Adjust padding for smaller screens */
+    padding: 10px 8px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  .productName {
+    font-size: 0.95rem;
+    word-wrap: break-word;
   }
   
   .productName span {
-    font-size: 1.1rem;
+    font-size: 0.95rem;
   }
+  
   .productNameSpace {
     margin: 0px 3px;
   }
+  
+  .productPrice {
+    font-size: 0.95rem;
+  }
+  
   .addToCart {
     position: absolute;
-    bottom: 5.8rem; /* Adjust as needed */
-    left: 75%; /* Adjust as needed */
+    bottom: 4.5rem;
+    left: auto;
+    right: 0.5rem;
     z-index: 5;
   }
 }

@@ -7,6 +7,7 @@ import { IoStarHalf } from "react-icons/io5";
 import  Reviewform from "../Review/ReviewForm"
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
+import { API_BASE_URL } from '../../config/apiConfig';
 
 import { IoArrowBack } from "react-icons/io5";
 import { useNavigate } from 'react-router-dom';

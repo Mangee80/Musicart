@@ -15,11 +15,11 @@ const ReviewComponent = ({ review }) => {
         </div>
         <div className={styles.totalRating}>★★★★☆</div>
       </div>
-      <div style={{display: 'flex'}}>
-        <div style={{flex:'1'}} className={styles.boldHeading}>Cool</div>
+      <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem'}}>
+        <div className={styles.boldHeading}>Cool</div>
         <span className={styles.certifiedUser}><VscVerified style={{ fontWeight: 700, fontSize: '1rem' }} size={18}  /> Verified User</span>
       </div>
-      <div className={styles.detailedReview}>{review}</div>
+      <div className={styles.detailedReview}>{review || "Great product! Excellent quality and fast delivery. Highly recommended!"}</div>
       <div className={styles.footer}>
         <span className={styles.reviewDate}>May 8, 2024</span>
         <div className={styles.likeDislike}>

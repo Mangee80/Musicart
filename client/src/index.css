@@ -28,11 +28,21 @@ article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
 	display: block;
 }
+html {
+    height: 100%;
+    min-height: 100vh;
+}
+
 body {
 	line-height: 1;
-}
-body {
+    min-height: 100vh;
     font-family: 'Roboto', sans-serif;
+}
+
+#root {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 ol, ul {
 	list-style: none;

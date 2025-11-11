@@ -7,11 +7,12 @@ export const Loginpage = () => {
   
   const currentroute = 'login';
   return (
-    <div style={{display: 'flex', flexDirection: 'column'}}>
+    <div style={{display: 'flex', flexDirection: 'column', minHeight: '100vh', position: 'relative'}}>
         <SearchBar currentRoute={currentroute}/>
         <Header />
-        <LoginForm />
-        
+        <div style={{flex: 1}}>
+          <LoginForm />
+        </div>
         <Footer currentPage={currentroute}/>
     </div>
   )

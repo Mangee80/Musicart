@@ -13,11 +13,45 @@ function Header({ currentRoute }) {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const storedUserData = localStorage.getItem('MusicCartUsername');
-    if (storedUserData) {
-      setUserData({ name: storedUserData });
-    }
-  }, []);
+    const checkUserData = () => {
+      const storedUserData = localStorage.getItem('MusicCartUsername');
+      if (storedUserData) {
+        setUserData({ name: storedUserData });
+      } else {
+        setUserData(null);
+      }
+    };
+    
+    // Check on mount
+    checkUserData();
+    
+    // Listen for storage changes (when localStorage is updated from other tabs/components)
+    const handleStorageChange = (e) => {
+      if (e.key === 'MusicCartUsername' || e.key === null) {
+        checkUserData();
+      }
+    };
+    
+    window.addEventListener('storage', handleStorageChange);
+    
+    // Also check periodically (in case of same-tab navigation without reload)
+    const interval = setInterval(checkUserData, 1000);
+    
+    // Close dropdown when clicking outside
+    const handleClickOutside = (event) => {
+      if (showDropdown && !event.target.closest(`.${styles.userAvatar}`)) {
+        setShowDropdown(false);
+      }
+    };
+    
+    document.addEventListener('click', handleClickOutside);
+    
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+      clearInterval(interval);
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, [showDropdown]);
 
 
   const [totalItems, setTotalItems] = useState(0);
@@ -140,12 +174,26 @@ function Header({ currentRoute }) {
               </div>
               <div className={styles.userAvatar} onClick={() => setShowDropdown(!showDropdown)}>
                 {getUserInitials()}
-                {showDropdown && (
-                  <div className={styles.dropdownMenu}>
-                    <p>{userData.name}</p>
-                    <p onClick={handleLogout}>Logout</p>
-                  </div>
-                )}
+                <div className={`${styles.dropdownMenu} ${showDropdown ? '' : styles.hidden}`} onClick={(e) => e.stopPropagation()}>
+                  <p style={{fontWeight: '500', marginBottom: '5px'}}>{userData.name}</p>
+                  <p 
+                    onClick={handleLogout} 
+                    style={{
+                      cursor: 'pointer', 
+                      color: '#F44336', 
+                      fontWeight: '500',
+                      padding: '5px 10px',
+                      borderRadius: '5px',
+                      width: '100%',
+                      textAlign: 'center',
+                      transition: 'background-color 0.2s'
+                    }}
+                    onMouseEnter={(e) => e.target.style.backgroundColor = '#ffebee'}
+                    onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}
+                  >
+                    Logout
+                  </p>
+                </div>
               </div>
             </>
           )}

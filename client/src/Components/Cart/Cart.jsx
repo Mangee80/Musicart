@@ -79,6 +79,14 @@ const Cart = () => {
   const handleBack = () => {
     navigate('/');
   };
+
+  const handleCheckout = () => {
+    if (items.length === 0 || totalQuantity === 0) {
+      alert('Your cart is empty! Please add items to your cart before proceeding to checkout.');
+      return;
+    }
+    navigate('/checkout');
+  };
   useEffect(() => {
     // Fetch items from the backend and setItems
     fetch(`${API_BASE_URL}/api/cart/user-cart`, {
@@ -201,7 +209,7 @@ const Cart = () => {
             </div>
             <div className={styles.cartTotal}>
               <p>Total Amount <span style={{marginLeft: '5rem'}}>₹{totalPrice + 50}</span></p>
-              <button className={styles.checkoutButton} onClick={() => navigate('/checkout')}>PLACE ORDER</button>
+              <button className={styles.checkoutButton} onClick={handleCheckout}>PLACE ORDER</button>
             </div>
           </div>
         </div>
@@ -218,7 +226,7 @@ const Cart = () => {
         <div className={styles.cartTotal}>
           
           <p style={{fontSize: '1.6rem', fontWeight: '400', marginTop: '0.8rem'}}>Total Amount <span style={{marginLeft: '1rem', fontWeight: 'bold'}}>₹{totalPrice + 45}</span></p>
-          <button className={styles.checkoutButton} onClick={() => navigate('/checkout')}>PLACE ORDER</button>
+          <button className={styles.checkoutButton} onClick={handleCheckout}>PLACE ORDER</button>
         </div>
       </div>
     </>

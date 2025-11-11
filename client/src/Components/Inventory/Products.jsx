@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ProductGrid from '../ListAndGridView/Gridview';
 import ProductList from '../ListAndGridView/Listview';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import './Products.css';
 import { API_BASE_URL } from '../../config/apiConfig';
 
@@ -24,6 +24,7 @@ function ProductSection() {
   const [products, setProducts] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const navigate = useNavigate();
+  const location = useLocation();
   const [viewMode, setViewMode] = useState('grid');
 
   const handleSearchChange = (event) => {
@@ -42,13 +43,13 @@ function ProductSection() {
   };
 
   const fetchProducts = (filters) => {
-    const searchParams = new URLSearchParams(window.location.search);
-    const searchQuery = searchParams.get('search');
+    const searchParams = new URLSearchParams(location.search);
+    const urlSearchQuery = searchParams.get('search');
 
     let url, method;
 
-    if (searchQuery) {
-      url = `${API_BASE_URL}/api/products/search/${encodeURIComponent(searchQuery)}`;
+    if (urlSearchQuery) {
+      url = `${API_BASE_URL}/api/products/search/${encodeURIComponent(urlSearchQuery)}`;
       method = 'GET';
     } else if (Object.keys(filters).length > 0) {
       url = `${API_BASE_URL}/api/products/filter`;
@@ -81,6 +82,13 @@ function ProductSection() {
     .then(data => setProducts(data))
     .catch(error => console.error('Error:', error));
   };
+
+  // Sync search query from URL on mount and when URL changes
+  useEffect(() => {
+    const searchParams = new URLSearchParams(location.search);
+    const urlSearchQuery = searchParams.get('search') || '';
+    setSearchQuery(urlSearchQuery);
+  }, [location.search]);
 
   useEffect(() => {
     if (selectedSortOption) {
@@ -122,7 +130,7 @@ function ProductSection() {
 
       {/* 🧩 Filter & Sort */}
       <div className='feturesSection'>
-        {/* Left: View Buttons */}
+        {/* Top Row: View Buttons + Filters + Sort (Mobile) */}
         <div className="left-controls">
           <div className="view-buttons">
             <div 
@@ -138,19 +146,20 @@ function ProductSection() {
               <TfiViewListAlt />
             </div>
           </div>
-        </div>
-        {/* Center: Search Bar */}
-        <div className="center-search">
-          <CiSearch size={22} className="icon-inline" />
-          <input 
-            type="text" 
-            placeholder="Search by Product Name"
-            onChange={handleSearchChange} 
-            value={searchQuery} 
-          />
-        </div>
-        {/* Right: Sort and Filters */}
-        <div className="right-controls">
+          {/* Filters in between View Buttons and Sort */}
+          <div className="filters-group">
+            <span className="filters-heading">Filters</span>
+            <div className="filters-scrollable">
+              {filters.map((filter, index) => (
+                <select key={index} onChange={(e) => handleFilterChange(filter.label.replace(/\s/g, ""), e.target.value)}>
+                  <option value="">{filter.label}</option>
+                  {filter.options.map((option, idx) => (
+                    <option key={idx} value={option}>{option}</option>
+                  ))}
+                </select>
+              ))}
+            </div>
+          </div>
           <div className="sort-compact">
             <span className="sort-icon" title="Sort">
               <svg width="20" height="20" fill="currentColor" viewBox="0 0 20 20"><path d="M3 7h14M5 12h10M7 17h6" stroke="#7c3aed" strokeWidth="2" strokeLinecap="round"/></svg>
@@ -162,22 +171,21 @@ function ProductSection() {
               ))}
             </select>
           </div>
-          <div className="filters-group">
-            <span className="filters-heading">Filters</span>
-            {filters.map((filter, index) => (
-              <select key={index} onChange={(e) => handleFilterChange(filter.label.replace(/\s/g, ""), e.target.value)}>
-                <option value="">{filter.label}</option>
-                {filter.options.map((option, idx) => (
-                  <option key={idx} value={option}>{option}</option>
-                ))}
-              </select>
-            ))}
-          </div>
+        </div>
+        {/* Center: Search Bar (Desktop Only) */}
+        <div className="center-search">
+          <CiSearch size={22} className="icon-inline" />
+          <input 
+            type="text" 
+            placeholder="Search by Product Name"
+            onChange={handleSearchChange} 
+            value={searchQuery} 
+          />
         </div>
       </div>
 
       {/* 🧾 Product View */}
-      <div className="product-list">
+      <div className="product-list-wrapper">
         {viewMode === 'grid' ? <ProductGrid musicGadgets={products} /> : <ProductList musicGadgets={products} />}
       </div>
 

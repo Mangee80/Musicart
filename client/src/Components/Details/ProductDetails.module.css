@@ -106,8 +106,11 @@
 }
 
 .review {
-  height: 10rem;
   width: 18rem;
+  margin-left: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 }
 .responsiveproductDetailsContainer, .responsivefeatureHeading {
   display: none;

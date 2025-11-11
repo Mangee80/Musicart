@@ -15,6 +15,24 @@ function Reviewform() {
       setReviewText('');
     }, 2000); 
   }
+
+  const handleSubmit = () => {
+    if (reviewText.trim() || rating > 0) {
+      setShowPopup(true);
+      setTimeout(() => {
+        setShowPopup(false);
+        setRating(0);
+        setReviewText('');
+      }, 2000);
+    }
+  }
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      handleSubmit();
+    }
+  }
   // const handleStarClick = async (value) => {
   //   try {
   //     setRating(value);
@@ -61,7 +79,10 @@ function Reviewform() {
             <span
               key={star}
               className={`${styles.star} ${rating >= star ? styles.selected : ''}`}
-              onClick={() => handleStarClick(star)}
+              onClick={() => {
+                setRating(star);
+                handleStarClick();
+              }}
             >
               ★
             </span>
@@ -72,7 +93,8 @@ function Reviewform() {
           <textarea
             value={reviewText}
             onChange={(e) => setReviewText(e.target.value)}
-            placeholder="Write your review here..."
+            onKeyDown={handleKeyDown}
+            placeholder="Write your review here... (Press Enter to submit)"
             className={styles.textarea}
           />
         </div>

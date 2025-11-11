@@ -1,6 +1,9 @@
 .product-section {
   padding: 0.8rem 2.3rem 0rem 2.3rem;
   position: relative;
+  width: 100%;
+  box-sizing: border-box;
+  overflow-x: hidden;
 }
 
 /* 🔷 Banner Container */
@@ -205,16 +208,14 @@
 
 /* 🔷 Product List */
 .product-list {
-  height: auto;
-  width: 100%;
-}
-
-.product-list {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 2rem;
   padding: 2rem 0;
   background: #f8f6fc;
+  height: auto;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .product-card {
@@ -239,6 +240,15 @@
   max-width: 160px;
   border-radius: 0.8rem;
   margin-bottom: 1rem;
+  box-sizing: border-box;
+}
+
+/* Mobile override for images */
+@media screen and (max-width: 600px) {
+  .product-card img {
+    max-width: 100% !important;
+    width: 100% !important;
+  }
 }
 
 .product-card .product-title {
@@ -276,11 +286,17 @@
 /* 🔷 Responsive Styles */
 @media screen and (max-width: 600px) {
   .product-section {
-    padding: 0.5rem;
+    padding: 0.5rem 0rem !important;
+    width: 100% !important;
+    max-width: 100vw !important;
+    box-sizing: border-box !important;
+    overflow-x: hidden !important;
+    margin: 0 !important;
   }
 
   .container1 {
     height: 6rem;
+    border-radius: 0.8rem;
   }
 
   .banner-right-image {
@@ -290,62 +306,401 @@
   }
 
   .bannerDetail {
-    font-size: 1.3rem;
+    font-size: 1.1rem;
     top: 50%;
-    left: 1.3rem;
-    padding: 0.4rem 0.7rem;
+    left: 1rem;
+    padding: 0.3rem 0.6rem;
     width: auto;
-    background-color: rgba(255, 255, 255, 0.8);
+    max-width: 60%;
+    background-color: rgba(255, 255, 255, 0.85);
     transform: translateY(-50%);
+    line-height: 1.3;
   }
 
   .icon {
     display: none;
   }
 
+  /* Hide the center search bar on mobile */
+  .center-search {
+    display: none !important;
+  }
+
+  /* Hide old search bar if exists */
   .product-section input[type="text"] {
     display: none;
   }
 
+  /* Mobile Layout for Features Section */
   .feturesSection {
-    width: 100%;
-    flex-direction: row-reverse;
-    justify-content: initial;
-    padding: 1.3rem 0rem;
+    width: 100% !important;
+    max-width: 100% !important;
+    flex-direction: column !important;
+    justify-content: flex-start;
+    align-items: stretch;
+    padding: 0.8rem 0rem;
+    margin: 0.8rem 0;
     border-bottom: 2px solid rgba(187, 186, 186, 1);
+    gap: 0.8rem;
+    min-height: auto;
+    box-sizing: border-box !important;
+    overflow-x: hidden !important;
+    overflow-y: visible;
   }
 
-  .view-buttons {
+  /* Top Row: View Buttons + Filters + Sort */
+  .left-controls {
+    display: flex !important;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    gap: 0.4rem;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    padding-left: 0.3rem;
+  }
+  
+  .left-controls::-webkit-scrollbar {
+    height: 0;
     display: none;
   }
 
-  .filter-section {
-    overflow-x: auto;
+  .view-buttons {
+    display: flex !important;
+    gap: 0.4rem;
+    height: 38px;
+    align-items: center;
+    flex-shrink: 0;
+    margin-right: 0.5rem;
+  }
+
+  .view-buttons div {
+    background: #f5f5f7;
+    border-radius: 0.7rem;
+    padding: 0.4rem 0.8rem;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background 0.2s, box-shadow 0.2s, border 0.2s;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+    border: 1.5px solid transparent;
+    display: flex;
+    align-items: center;
+    color: #2E0052;
+    height: 36px;
+  }
+
+  .view-buttons div.active,
+  .view-buttons div:hover {
+    background: #e0d7fa;
+    border-color: #7c3aed;
+    color: #7c3aed;
+  }
+
+  /* Right Controls - Sort and Filters in separate rows */
+  .right-controls {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.8rem;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow-x: hidden;
+  }
+
+  /* Sort as Icon Only on Mobile - Top Row with View Buttons */
+  .sort-compact {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(44,0,82,0.08);
+    padding: 0;
+    border: 1.5px solid #e0e0e0;
+    height: 36px;
+    width: 36px;
+    min-width: 36px;
+    flex-shrink: 0;
+    position: relative;
+    margin-left: 0.3rem;
+  }
+
+  .sort-compact select {
+    position: absolute;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    z-index: 2;
+    top: 0;
+    left: 0;
+  }
+
+  .sort-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #7c3aed;
+    pointer-events: none;
+    width: 100%;
+    height: 100%;
+  }
+
+  .sort-icon svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  /* Filters Group - Now in left-controls between view buttons and sort */
+  .left-controls .filters-group {
+    display: flex !important;
+    align-items: center;
+    background: rgba(124, 58, 237, 0.10);
+    border-radius: 1.2rem;
+    padding: 0.4rem 0.5rem;
+    box-shadow: 0 1px 4px rgba(44,0,82,0.08);
+    border: 1.5px solid #e0d7fa;
+    overflow: hidden !important;
     white-space: nowrap;
-    width: 70vw;
-    margin-left: 3rem;
+    flex: 1 1 auto;
+    min-width: 0;
+    max-width: calc(100% - 120px);
+    box-sizing: border-box !important;
+    margin: 0 !important;
+    position: relative;
+    height: 36px;
+  }
+  
+  /* Inner scrollable container for filters (excluding "Filters" text) */
+  .left-controls .filters-group .filters-scrollable {
+    display: flex !important;
+    align-items: center;
+    gap: 0.4rem;
+    overflow-x: auto !important;
+    overflow-y: hidden;
+    white-space: nowrap;
+    flex: 1 1 auto;
+    min-width: 0;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: #7c3aed rgba(124, 58, 237, 0.1);
+    padding-left: 0.5rem;
+  }
+  
+  .left-controls .filters-group .filters-scrollable::-webkit-scrollbar {
+    height: 3px;
+    display: none;
   }
 
-  .headphone-type select {
-    width: 10.4rem;
-    text-indent: 0.5rem;
+  .left-controls .filters-group .filters-scrollable::-webkit-scrollbar-track {
+    background: transparent;
   }
 
-  .filter-section select {
-    padding: 3px;
-    border-radius: 8px;
-    font-size: 1rem;
+  .left-controls .filters-group .filters-scrollable::-webkit-scrollbar-thumb {
+    background: #7c3aed;
+    border-radius: 10px;
+  }
+  
+  /* Keep old filters-group for backward compatibility (if used elsewhere) */
+  .filters-group {
+    display: flex !important;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(124, 58, 237, 0.10);
+    border-radius: 1.5rem;
+    padding: 0.5rem 0.8rem;
+    box-shadow: 0 2px 8px rgba(44,0,82,0.10);
+    border: 1.5px solid #e0d7fa;
+    overflow-x: auto !important;
+    overflow-y: hidden;
+    white-space: nowrap;
+    box-sizing: border-box !important;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: #7c3aed rgba(124, 58, 237, 0.1);
   }
 
-  .sort-by {
-    justify-content: flex-start;
+  .filters-group::-webkit-scrollbar {
+    height: 4px;
   }
 
-  .sort-by select {
-    width: 5rem;
-    padding: 4.3px;
-    border-radius: 5.8px;
-    font-size: 14.7px;
+  .filters-group::-webkit-scrollbar-track {
+    background: rgba(124, 58, 237, 0.1);
+    border-radius: 10px;
+  }
+
+  .filters-group::-webkit-scrollbar-thumb {
+    background: #7c3aed;
+    border-radius: 10px;
+  }
+
+  .filters-heading {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #7c3aed;
+    margin-right: 0.5rem;
+    padding-right: 0.5rem;
+    border-right: 1.5px solid #e0d7fa;
+    flex-shrink: 0 !important;
+    white-space: nowrap;
+  }
+
+  .left-controls .filters-group .filters-scrollable select,
+  .left-controls .filters-group select,
+  .filters-group select {
+    border-radius: 0.8rem;
+    border: 1px solid #d1c4e9;
+    background: #ffffff;
+    padding: 0.3rem 0.5rem;
+    font-size: 0.7rem;
+    outline: none;
+    min-width: 70px;
+    max-width: 85px;
+    width: auto;
+    height: 28px;
+    color: #2E0052;
+    flex-shrink: 0 !important;
+    white-space: nowrap;
+    cursor: pointer;
+    box-sizing: border-box;
+    margin: 0;
+    font-weight: 500;
+  }
+  
+  .left-controls .filters-group .filters-scrollable select:hover,
+  .left-controls .filters-group select:hover {
+    border-color: #7c3aed;
+    background: #f8f5ff;
+  }
+  
+  .left-controls .filters-heading {
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: #7c3aed;
+    margin-right: 0;
+    padding-right: 0.4rem;
+    border-right: 1.5px solid #e0d7fa;
+    flex-shrink: 0 !important;
+    white-space: nowrap;
+    position: relative;
+    background: transparent;
+    z-index: 1;
+    padding-left: 0;
+    pointer-events: none;
+    line-height: 1;
+  }
+
+  .filters-group select:focus {
+    border-color: #7c3aed;
+  }
+
+  /* Product List Wrapper */
+  .product-list-wrapper {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    overflow-x: hidden !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* Product List Grid - Mobile (actual grid from Gridview) - STRONG OVERRIDES */
+  .product-section .product-list-wrapper .product-list,
+  .product-list-wrapper .product-list,
+  .product-section .product-list,
+  div.product-list {
+    gap: 0.7rem !important;
+    padding: 1rem 0.8rem !important;
+    grid-template-columns: 1fr 1fr !important;
+    grid-auto-columns: 1fr !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    display: grid !important;
+    margin: 0 !important;
+    background: transparent !important;
+    column-gap: 0.7rem !important;
+    row-gap: 1rem !important;
+  }
+  
+  /* Ensure grid items take full width */
+  .product-list > *,
+  .product-list > div {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Product Cards - Mobile - STRONG OVERRIDES */
+  .product-list .product-card,
+  .product-section .product-card,
+  div.product-card {
+    padding: 0.6rem !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+    margin: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    border: 1px solid rgba(206, 206, 206, 1) !important;
+    border-radius: 0.5rem;
+    background: white;
+    align-items: stretch !important;
+  }
+
+  .product-list .product-card img,
+  .product-card img,
+  .product-section .product-card img {
+    max-width: 100% !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 140px !important;
+    max-height: 180px !important;
+    aspect-ratio: 1;
+    object-fit: cover;
+    display: block;
+    border-radius: 0.3rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .product-list .product-card .product-title,
+  .product-card .product-title {
+    font-size: 0.9rem !important;
+    word-wrap: break-word;
+    margin-bottom: 0.3rem;
+    line-height: 1.3;
+    font-weight: 600;
+  }
+
+  .product-list .product-card .product-price,
+  .product-card .product-price {
+    font-size: 1rem !important;
+    font-weight: bold;
+    margin-bottom: 0.3rem;
+    color: #7c3aed;
+  }
+  
+  .product-list .product-card button,
+  .product-card button {
+    font-size: 0.85rem !important;
+    padding: 0.5rem 0.8rem !important;
+    width: 100% !important;
+    margin-top: 0.5rem;
+    border-radius: 0.4rem;
+    justify-content: center;
+  }
+
+  .headphone-circle-container {
+    display: none !important;
+  }
+
+  .headphone-circle {
+    display: none !important;
   }
 }
 

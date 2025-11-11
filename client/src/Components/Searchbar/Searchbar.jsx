@@ -1,16 +1,25 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { CiSearch } from "react-icons/ci";
 import styles from './Search.module.css';
 import musicart from '../../assets/musicart.png'
 
 function SearchBar({ currentRoute }) {
   const navigate = useNavigate();
+  const location = useLocation();
   const [searchQuery, setSearchQuery] = useState('');
 
+  // Sync search query from URL
+  useEffect(() => {
+    const searchParams = new URLSearchParams(location.search);
+    const urlSearchQuery = searchParams.get('search') || '';
+    setSearchQuery(urlSearchQuery);
+  }, [location.search]);
+
   const handleSearchChange = (event) => {
-    setSearchQuery(event.target.value);
-    navigate(`/?search=${encodeURIComponent(event.target.value)}`);
+    const value = event.target.value;
+    setSearchQuery(value);
+    navigate(`/?search=${encodeURIComponent(value)}`);
   };
 
   const handleSearchBarFocus = () => {
@@ -35,6 +44,7 @@ function SearchBar({ currentRoute }) {
             onFocus={handleSearchBarFocus}
             onChange={handleSearchChange}
             value={searchQuery}
+            style={{ color: '#000', backgroundColor: 'white' }}
           />
         </div>
       )}

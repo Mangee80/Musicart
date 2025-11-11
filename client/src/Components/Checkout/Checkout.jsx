@@ -29,15 +29,24 @@ function CheckoutPage() {
         });
         if (!response.ok) throw new Error('Failed to fetch');
         const data = await response.json();
+        
+        // Check if cart is empty
+        if (!data || data.length === 0) {
+          alert('Your cart is empty! Please add items to your cart before proceeding to checkout.');
+          navigate('/cart');
+          return;
+        }
+        
         setCartItems(data);
       } catch (error) {
-        setError('Failed to load cart items');
+        alert('Failed to load cart items');
+        navigate('/cart');
       }
     
     };
 
     fetchCartItems();
-  }, []);
+  }, [navigate]);
   
   
   
@@ -78,7 +87,9 @@ function CheckoutPage() {
       setLoading(false);
     }
   };
-  const totalPrice = cartItems.reduce((total, item) => total + item.productId.Price * item.quantity, 0);
+  const totalPrice = cartItems && cartItems.length > 0 
+    ? cartItems.reduce((total, item) => total + (item.productId?.Price || 0) * (item.quantity || 0), 0)
+    : 0;
 
   const handleBack = () => {
     navigate('/cart');
@@ -132,34 +143,18 @@ function CheckoutPage() {
                   />
                 ))}
               </div>
-              <div>
-                {selectedItem && (
-                  <div className={styles.itemDetails}>
-                    
-                    <div style={{display: 'flex', gap: '10px', marginBottom: '0.3rem'}}>
-                      <p style={{fontSize: '1.3rem', fontWeight: '500'}}>{selectedItem.productId.Company}</p>
-                      <h3 style={{fontSize: '1.3rem', fontWeight: '500'}}>{selectedItem.productId.model}</h3>
-                    </div>
-                    <p style={{fontSize: '0.88rem', color: 'rgba(162, 162, 162, 1)', marginTop: '0.4rem'}}>Colour : {selectedItem.productId.Colour}</p>
-                    <p className={styles.inStock} style={{fontSize: '1rem', color: 'rgba(162, 162, 162, 1)', marginBottom: '0.4rem'}}>In Stock</p>
-                    <p style={{fontSize: '1rem', marginTop: '0.3rem', color: 'rgba(0, 0, 0, 1)'}}>Estimated delivery : <br/>Monday — FREE Standard Delivery</p>
+              {selectedItem && (
+                <div className={styles.itemDetails}>
+                  <div style={{display: 'flex', gap: '10px', marginBottom: '0.3rem'}}>
+                    <p style={{fontSize: '1.3rem', fontWeight: '500'}}>{selectedItem.productId.Company}</p>
+                    <h3 style={{fontSize: '1.3rem', fontWeight: '500'}}>{selectedItem.productId.model}</h3>
                   </div>
-                )}
-              </div>
+                  <p style={{fontSize: '0.88rem', color: 'rgba(162, 162, 162, 1)', marginTop: '0.4rem'}}>Colour : {selectedItem.productId.Colour}</p>
+                  <p className={styles.inStock} style={{fontSize: '1rem', color: 'rgba(162, 162, 162, 1)', marginBottom: '0.4rem'}}>In Stock</p>
+                  <p style={{fontSize: '1rem', marginTop: '0.3rem', color: 'rgba(0, 0, 0, 1)'}}>Estimated delivery : <br/>Monday — FREE Standard Delivery</p>
+                </div>
+              )}
             </div>
-          </div>
-          
-          <div className={styles.bottomPlaceOrder}>
-             <button 
-                onClick={handlePlaceOrder}
-                disabled={loading}
-              >
-              Place your order 
-              </button>
-             <div>
-                <p style={{fontSize: '1rem', color: 'rgba(181, 43, 0, 1)'}}>Order Total : ₹{totalPrice} </p>
-                <p style={{fontSize: '13px', color: 'rgba(0, 0, 0, 1)'}}>By placing your order, you agree to Musicart privacy notice and conditions of use.</p>
-             </div>
           </div>  
         </div>
         <div className={styles.sidePlaceOrder} style={{borderRadius: '0.5rem', height: 'auto', maxHeight: '43vh'}}>

@@ -43,9 +43,13 @@ const RegisterForm = () => {
   
       const responseData = await response.json();
       console.log(responseData);
-      window.localStorage.setItem("user",responseData.user)
-      window.localStorage.setItem("token",responseData.token)
-      navigate("/");
+      // Store all required authentication data (same as login)
+      window.localStorage.setItem("user", responseData.user);
+      window.localStorage.setItem("userID", responseData.userID);
+      window.localStorage.setItem("MusicCartUsername", responseData.MusicCartUsername);
+      window.localStorage.setItem("token", responseData.token);
+      // Reload page to update navbar state
+      window.location.href = "/";
   
     } catch (error) {
       alert("There was a problem with the request, please try again");

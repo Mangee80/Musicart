@@ -94,6 +94,7 @@ router.post('/register', async (req, res) => {
             status: 'SUCCESS',
             message: 'User registered successfully',
             token,
+            userID: newUser._id,
             user: responseIdentifier, // Send either email or mobile in the response
             MusicCartUsername: newUser.name
         });

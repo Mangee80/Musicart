@@ -7,11 +7,12 @@ import Footer from '../Components/Footer/footer'
 export const Signuppage = () => {
   const currentroute = 'signup';
   return (
-    <div style={{display: 'flex', flexDirection: 'column'}}>
+    <div style={{display: 'flex', flexDirection: 'column', minHeight: '100vh', position: 'relative'}}>
         <SearchBar currentRoute={currentroute}/>
         <Header />
-        <RegisterForm />
-        
+        <div style={{flex: 1}}>
+          <RegisterForm />
+        </div>
         <Footer currentPage={currentroute}/>
     </div>
   )
